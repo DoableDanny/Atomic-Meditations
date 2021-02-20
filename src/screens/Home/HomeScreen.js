@@ -3,11 +3,16 @@ import {FlatList, TouchableOpacity, View, Text, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {theme} from '../../lib/theme/theme';
+import Footer from './Footer';
 
-const MeditationModule = ({item, navigation}) => {
+const MeditationModule = ({item, navigation, listLength}) => {
+  console.log(listLength);
   return (
     <TouchableOpacity
-      style={styles.meditationModule}
+      style={[
+        styles.meditationModule,
+        item.id == listLength && {marginBottom: 80},
+      ]}
       onPress={() =>
         !item.isLocked &&
         navigation.navigate('Meditation', {currentMeditation: item})
@@ -29,6 +34,7 @@ const HomeScreen = ({navigation, route}) => {
       item={item}
       navigation={navigation}
       navigation={navigation}
+      listLength={meditations.length}
     />
   );
 
@@ -39,6 +45,7 @@ const HomeScreen = ({navigation, route}) => {
         renderItem={renderMeditationModule}
         keyExtractor={(item) => item.id}
       />
+      <Footer />
     </View>
   );
 };
