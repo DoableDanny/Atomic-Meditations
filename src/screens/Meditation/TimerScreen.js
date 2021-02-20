@@ -1,28 +1,34 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import BackgroundTimer from 'react-native-background-timer';
-import TrackPlayer from 'react-native-track-player';
+
+import useTrackPlayer from '../../lib/custom hooks/useTrackPlayer';
 
 const TimerScreen = ({clockify, alarmRingSeconds, setHeaderMsg}) => {
   const [seconds, setSeconds] = useState(0);
 
+  const {playSound, stopSound, setUpTrackPlayer} = useTrackPlayer();
+
   const startTimer = () => {
-    let i = 0;
     BackgroundTimer.runBackgroundTimer(() => {
       setSeconds((prevSecs) => prevSecs + 1);
-    }, 50);
+    }, 8);
   };
 
-  const ringAlarm = () => {};
-
-  // TrackPlayer.setupPlayer().then(() => {
-  //   // The player is ready to be used
-  //   console.log('Player set up');
-  // });
+  const setUpTrackPlayerAndPlaySound = async () => {
+    await setUpTrackPlayer;
+    playSound();
+  };
 
   useEffect(() => {
     if (seconds === alarmRingSeconds) {
-      // ringAlarm();
+      try {
+        playSound();
+      } catch (e) {
+        console.log(e);
+        // Track player may need re-setting up if long meditation (just to be safe)
+        setUpTrackPlayerAndPlaySound();
+      }
 
       setHeaderMsg('Goal time reached, great job!');
 
