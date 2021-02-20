@@ -3,20 +3,28 @@ import {TouchableOpacity, Text, StyleSheet, View} from 'react-native';
 
 import {theme} from '../../lib/theme/theme';
 
-const FooterBtn = ({title, borderRight}) => {
+const FooterBtn = ({title, borderRight, handlePress}) => {
   return (
     <TouchableOpacity
-      style={[styles.footerBtn, borderRight && styles.borderRight]}>
+      style={[styles.footerBtn, borderRight && styles.borderRight]}
+      onPress={handlePress}>
       <Text style={styles.footerBtnTitle}>{title}</Text>
     </TouchableOpacity>
   );
 };
 
-const Footer = () => {
+const Footer = ({navigation}) => {
   return (
     <View style={styles.footerWrapper}>
-      <FooterBtn title="Settings" borderRight />
-      <FooterBtn title="Stats" />
+      <FooterBtn
+        title="Settings"
+        borderRight
+        handlePress={() => navigation.navigate('Settings')}
+      />
+      <FooterBtn
+        title="Stats"
+        handlePress={() => navigation.navigate('Stats')}
+      />
     </View>
   );
 };

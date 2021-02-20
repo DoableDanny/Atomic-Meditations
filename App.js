@@ -6,6 +6,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {theme} from './src/lib/theme/theme';
 import HomeScreen from './src/screens/Home/HomeScreen';
 import MeditationScreen from './src/screens/Meditation/MeditationScreen';
+import SettingsScreen from './src/screens/Settings/SettingsScreen';
+import StatsScreen from './src/screens/Stats/StatsScreen';
 import useMeditations from './src/lib/custom hooks/useMeditations';
 
 const App = () => {
@@ -35,6 +37,8 @@ const App = () => {
           options={{title: 'Atomic Meditations'}}
         />
         <Stack.Screen name="Meditation" component={MeditationScreen} />
+        <Stack.Screen name="Settings" component={SettingsScreen} />
+        <Stack.Screen name="Stats" component={StatsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
