@@ -2,9 +2,15 @@ import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import BackgroundTimer from 'react-native-background-timer';
 
+import Button from '../../lib/components/Button';
 import useTrackPlayer from '../../lib/custom hooks/useTrackPlayer';
 
-const TimerScreen = ({clockify, alarmRingSeconds, setHeaderMsg}) => {
+const TimerScreen = ({
+  clockify,
+  alarmRingSeconds,
+  setHeaderMsg,
+  navigation,
+}) => {
   const [seconds, setSeconds] = useState(0);
 
   const {playSound, stopSound, setUpTrackPlayer} = useTrackPlayer();
@@ -57,9 +63,14 @@ const TimerScreen = ({clockify, alarmRingSeconds, setHeaderMsg}) => {
         <Text style={styles.time}>{clockify(seconds).displaySecs}</Text>
       </View>
 
-      {/* {seconds >= 120 && (
-        <Button title="Done" handlePress={() => navigation.navigate('Home')} />
-      )} */}
+      <View style={styles.doneBtnWrapper}>
+        {seconds >= 120 && (
+          <Button
+            title="Done"
+            handlePress={() => navigation.navigate('Home')}
+          />
+        )}
+      </View>
     </>
   );
 };
@@ -73,6 +84,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     padding: 8,
     letterSpacing: 4,
+  },
+  doneBtnWrapper: {
+    position: 'absolute',
+    bottom: 16,
   },
 });
 

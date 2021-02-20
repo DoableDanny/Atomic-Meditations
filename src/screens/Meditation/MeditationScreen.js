@@ -52,6 +52,7 @@ const MeditationScreen = ({navigation, route}) => {
           clockify={clockify}
           alarmRingSeconds={alarmRingSeconds}
           setHeaderMsg={setHeaderMsg}
+          navigation={navigation}
         />
       )}
     </View>
