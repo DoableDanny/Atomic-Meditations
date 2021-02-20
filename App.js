@@ -4,8 +4,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import {theme} from './src/lib/theme/theme';
-import HomeScreen from './src/screens/HomeScreen';
-import MeditationScreen from './src/screens/MeditationScreen';
+import HomeScreen from './src/screens/Home/HomeScreen';
+import MeditationScreen from './src/screens/Meditation/MeditationScreen';
 import useMeditations from './src/lib/custom hooks/useMeditations';
 
 const App = () => {

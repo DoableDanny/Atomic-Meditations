@@ -2,7 +2,7 @@ import React from 'react';
 import {FlatList, TouchableOpacity, View, Text, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import {theme} from '../lib/theme/theme';
+import {theme} from '../../lib/theme/theme';
 
 const MeditationModule = ({item, navigation}) => {
   return (
