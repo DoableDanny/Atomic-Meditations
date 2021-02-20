@@ -14,11 +14,11 @@ const styles = StyleSheet.create({
   btn: {
     backgroundColor: theme.lightBlue,
     paddingHorizontal: 110,
-    paddingVertical: 20,
+    paddingVertical: 16,
     borderRadius: 12,
   },
   text: {
-    fontSize: 26,
+    fontSize: 25,
     textAlign: 'center',
   },
 });

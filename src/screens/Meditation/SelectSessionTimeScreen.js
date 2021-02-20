@@ -1,14 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Button from '../../lib/components/Button';
 import {theme} from '../../lib/theme/theme';
 
-const AdjustTimeBtn = ({title, handlePress}) => {
+const AdjustTimeBtn = ({iconName, iconNum, handlePress}) => {
   return (
     <TouchableOpacity onPress={handlePress} style={styles.adjustTimeBtn}>
-      <Text style={styles.adjustTimePlusOrMinus}>{title}</Text>
+      <Icon name={iconName} size={30} />
+      {iconNum === 2 && <Icon name={iconName} size={30} />}
     </TouchableOpacity>
   );
 };
@@ -20,16 +22,6 @@ const SelectSessionTimeScreen = ({
   setHeaderMsg,
   clockify,
 }) => {
-  // First screen => timerOn = false
-  // Select time for alarm => setAlarmSeconds
-
-  // Begin Button pressed => timerOn = true
-  // Display seconds left, counting up
-  // When seconds left = 2 mins, display done btn
-  // "Day 2 is now unlocked, good job."
-  // When seconds left = alarm seconds, ring alarm
-  // "Session complete, but feel free to continue..."
-
   // ADJUST TIME FUNCTIONS
   const plusOneHour = () => {
     setAlarmRingSeconds((prevSecs) => prevSecs + 3600);
@@ -77,24 +69,41 @@ const SelectSessionTimeScreen = ({
   return (
     <>
       <View style={styles.timeWrapper}>
-        <View style={styles.timeAndSelectWrapper}>
-          <AdjustTimeBtn title="+" handlePress={plusOneHour} />
+        {/* <View style={styles.timeAndSelectWrapper}>
           <Text style={styles.time}>
             {clockify(alarmRingSeconds).displayHours} Hrs
           </Text>
-          <AdjustTimeBtn title="-" handlePress={minusOneHour} />
         </View>
         <View style={styles.timeAndSelectWrapper}>
           <Text style={styles.time}>:</Text>
-        </View>
+        </View> */}
         <View style={styles.timeAndSelectWrapper}>
-          <AdjustTimeBtn title="++" handlePress={plusTenMins} />
-          <AdjustTimeBtn title="+" handlePress={plusOneMin} />
+          <AdjustTimeBtn
+            iconName="keyboard-arrow-up"
+            iconNum={2}
+            handlePress={plusTenMins}
+          />
+          <AdjustTimeBtn
+            iconName="keyboard-arrow-up"
+            handlePress={plusOneMin}
+          />
           <Text style={styles.time}>
-            {clockify(alarmRingSeconds).displayMins} Mins
+            {alarmRingSeconds > 3540 &&
+              `${clockify(alarmRingSeconds).displayHours} ${
+                alarmRingSeconds < 7200 ? 'Hr' : 'Hrs'
+              } : `}
+            {clockify(alarmRingSeconds).displayMins}{' '}
+            {clockify(alarmRingSeconds).displayMins === '01' ? 'Min' : 'Mins'}
           </Text>
-          <AdjustTimeBtn title="-" handlePress={minusOneMin} />
-          <AdjustTimeBtn title="--" handlePress={minusTenMins} />
+          <AdjustTimeBtn
+            iconName="keyboard-arrow-down"
+            handlePress={minusOneMin}
+          />
+          <AdjustTimeBtn
+            iconName="keyboard-arrow-down"
+            iconNum={2}
+            handlePress={minusTenMins}
+          />
         </View>
       </View>
 
@@ -116,26 +125,21 @@ const styles = StyleSheet.create({
   timeAndSelectWrapper: {
     alignItems: 'center',
     justifyContent: 'center',
-    // backgroundColor: 'pink',
     marginBottom: 32,
   },
   time: {
     fontSize: 30,
     textAlign: 'center',
-    // backgroundColor: 'red',
     padding: 8,
     letterSpacing: 4,
   },
   adjustTimeBtn: {
     margin: 8,
+    backgroundColor: theme.lightGreen,
     alignItems: 'center',
     justifyContent: 'center',
-    flexDirection: 'row',
-    // backgroundColor: theme.lightGreen,
-  },
-  adjustTimePlusOrMinus: {
-    fontSize: 25,
-    letterSpacing: 4,
+    padding: 6,
+    borderRadius: 8,
   },
   beginBtnWrapper: {
     position: 'absolute',
