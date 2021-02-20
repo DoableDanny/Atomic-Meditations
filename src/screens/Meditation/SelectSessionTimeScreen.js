@@ -23,16 +23,6 @@ const SelectSessionTimeScreen = ({
   clockify,
 }) => {
   // ADJUST TIME FUNCTIONS
-  const plusOneHour = () => {
-    setAlarmRingSeconds((prevSecs) => prevSecs + 3600);
-  };
-  const minusOneHour = () => {
-    setAlarmRingSeconds((prevSecs) => {
-      if (prevSecs > 3600) return prevSecs - 3600;
-
-      return prevSecs;
-    });
-  };
 
   const plusOneMin = () => {
     setAlarmRingSeconds((prevSecs) => prevSecs + 60);
@@ -68,65 +58,40 @@ const SelectSessionTimeScreen = ({
 
   return (
     <>
-      <View style={styles.timeWrapper}>
-        {/* <View style={styles.timeAndSelectWrapper}>
-          <Text style={styles.time}>
-            {clockify(alarmRingSeconds).displayHours} Hrs
-          </Text>
-        </View>
-        <View style={styles.timeAndSelectWrapper}>
-          <Text style={styles.time}>:</Text>
-        </View> */}
-        <View style={styles.timeAndSelectWrapper}>
-          <AdjustTimeBtn
-            iconName="keyboard-arrow-up"
-            iconNum={2}
-            handlePress={plusTenMins}
-          />
-          <AdjustTimeBtn
-            iconName="keyboard-arrow-up"
-            handlePress={plusOneMin}
-          />
-          <Text style={styles.time}>
-            {alarmRingSeconds > 3540 &&
-              `${clockify(alarmRingSeconds).displayHours} ${
-                alarmRingSeconds < 7200 ? 'Hr' : 'Hrs'
-              } : `}
-            {clockify(alarmRingSeconds).displayMins}{' '}
-            {clockify(alarmRingSeconds).displayMins === '01' ? 'Min' : 'Mins'}
-          </Text>
-          <AdjustTimeBtn
-            iconName="keyboard-arrow-down"
-            handlePress={minusOneMin}
-          />
-          <AdjustTimeBtn
-            iconName="keyboard-arrow-down"
-            iconNum={2}
-            handlePress={minusTenMins}
-          />
-        </View>
+      <View>
+        <AdjustTimeBtn
+          iconName="keyboard-arrow-up"
+          iconNum={2}
+          handlePress={plusTenMins}
+        />
+        <AdjustTimeBtn iconName="keyboard-arrow-up" handlePress={plusOneMin} />
+        <Text style={styles.time}>
+          {alarmRingSeconds > 3540 &&
+            `${clockify(alarmRingSeconds).displayHours} ${
+              alarmRingSeconds < 7200 ? 'Hr' : 'Hrs'
+            } : `}
+          {clockify(alarmRingSeconds).displayMins}{' '}
+          {clockify(alarmRingSeconds).displayMins === '01' ? 'Min' : 'Mins'}
+        </Text>
+        <AdjustTimeBtn
+          iconName="keyboard-arrow-down"
+          handlePress={minusOneMin}
+        />
+        <AdjustTimeBtn
+          iconName="keyboard-arrow-down"
+          iconNum={2}
+          handlePress={minusTenMins}
+        />
       </View>
 
       <View style={styles.beginBtnWrapper}>
         <Button title="Begin" handlePress={handlePressBegin} />
       </View>
-
-      {/* {seconds >= 120 && (
-        <Button title="Done" handlePress={() => navigation.navigate('Home')} />
-      )} */}
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  timeWrapper: {
-    flexDirection: 'row',
-  },
-  timeAndSelectWrapper: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 32,
-  },
   time: {
     fontSize: 30,
     textAlign: 'center',

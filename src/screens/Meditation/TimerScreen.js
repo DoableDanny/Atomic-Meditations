@@ -56,6 +56,10 @@ const TimerScreen = ({clockify, alarmRingSeconds, setHeaderMsg}) => {
         <Text style={styles.time}>{clockify(seconds).displayMins} : </Text>
         <Text style={styles.time}>{clockify(seconds).displaySecs}</Text>
       </View>
+
+      {/* {seconds >= 120 && (
+        <Button title="Done" handlePress={() => navigation.navigate('Home')} />
+      )} */}
     </>
   );
 };
