@@ -5,6 +5,7 @@ import BackgroundTimer from 'react-native-background-timer';
 import Button from '../../lib/components/Button';
 import useTrackPlayer from '../../lib/custom hooks/useTrackPlayer';
 
+// Need to add a stop sound btn
 const TimerScreen = ({
   clockify,
   alarmRingSeconds,
