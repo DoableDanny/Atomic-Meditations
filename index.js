@@ -7,6 +7,10 @@ import App from './App';
 import {name as appName} from './app.json';
 import TrackPlayer from 'react-native-track-player';
 
+import {configurePushNotification} from './src/lib/functions/pushNotification';
+
 AppRegistry.registerComponent(appName, () => App);
 
 TrackPlayer.registerPlaybackService(() => require('./service.js'));
+
+configurePushNotification();

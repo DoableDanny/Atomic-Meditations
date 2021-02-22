@@ -6,7 +6,6 @@ import {theme} from '../../lib/theme/theme';
 import Footer from './Footer';
 
 const MeditationModule = ({item, navigation, listLength}) => {
-  console.log(listLength);
   return (
     <TouchableOpacity
       style={[
