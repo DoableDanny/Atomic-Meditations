@@ -1,19 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+// import {TouchableOpacity} from 'react-native-gesture-handler';
+// import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import AdjustTimeBtn from '../../lib/components/AdjustTimeBtn';
 import Button from '../../lib/components/Button';
 import {theme} from '../../lib/theme/theme';
 
-const AdjustTimeBtn = ({iconName, iconNum, handlePress}) => {
-  return (
-    <TouchableOpacity onPress={handlePress} style={styles.adjustTimeBtn}>
-      <Icon name={iconName} size={30} />
-      {iconNum === 2 && <Icon name={iconName} size={30} />}
-    </TouchableOpacity>
-  );
-};
+// const AdjustTimeBtn = ({iconName, iconNum, handlePress}) => {
+//   return (
+//     <TouchableOpacity onPress={handlePress} style={styles.adjustTimeBtn}>
+//       <Icon name={iconName} size={30} />
+//       {iconNum === 2 && <Icon name={iconName} size={30} />}
+//     </TouchableOpacity>
+//   );
+// };
 
 const SelectSessionTimeScreen = ({
   setIsTimerOn,
@@ -97,14 +98,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     padding: 8,
     letterSpacing: 4,
-  },
-  adjustTimeBtn: {
-    margin: 8,
-    backgroundColor: theme.lightGreen,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 6,
-    borderRadius: 8,
   },
   beginBtnWrapper: {
     position: 'absolute',
