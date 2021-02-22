@@ -13,12 +13,13 @@ const Button = ({title, handlePress}) => {
 const styles = StyleSheet.create({
   btn: {
     backgroundColor: theme.lightBlue,
-    paddingHorizontal: 110,
-    paddingVertical: 16,
     borderRadius: 12,
+    paddingVertical: 14,
+    paddingHorizontal: 14,
+    minWidth: 240,
   },
   text: {
-    fontSize: 25,
+    fontSize: 21,
     textAlign: 'center',
   },
 });

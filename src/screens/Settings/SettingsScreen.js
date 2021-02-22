@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   },
   heading: {
     textAlign: 'center',
-    fontSize: 22,
+    fontSize: 21,
   },
   description: {
     textAlign: 'center',
@@ -127,6 +127,7 @@ const styles = StyleSheet.create({
   },
   timesContainer: {
     flexDirection: 'row',
+    marginBottom: 16,
   },
   timeSelectWrapper: {
     alignItems: 'center',
