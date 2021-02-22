@@ -1,11 +1,5 @@
 import React, {useState} from 'react';
-import {
-  TouchableOpacity,
-  Text,
-  StyleSheet,
-  View,
-  TextInput,
-} from 'react-native';
+import {TouchableOpacity, Text, StyleSheet, View, Alert} from 'react-native';
 
 import {theme} from '../../lib/theme/theme';
 import {localNotificationSchedule} from '../../lib/functions/pushNotification';
@@ -26,10 +20,9 @@ const SettingsScreen = () => {
   const [hours, setHours] = useState(12);
   const [mins, setMins] = useState(30);
   const [location, setLocation] = useState('bedroom');
-  // Get current year, month and day
-  // Get time from user
-  // Put all these values into new Date to create new obj
-  // Submit the date obj to notification
+
+  let displayHours = hours < 10 ? `0${hours}` : hours;
+  let displayMins = mins < 10 ? `0${mins}` : mins;
 
   const addOneHour = () => {
     if (hours === 23) setHours(0);
@@ -66,16 +59,28 @@ const SettingsScreen = () => {
     const day = dateObj.getDate();
 
     const userDateObj = new Date(year, month, day, hours, mins);
+    // Reminder will be sent 5 mins before meditation session time
+    userDateObj.setMinutes(userDateObj.getMinutes() - 5);
+
+    // Check if that time has already passed today. If has, add 1 to day. getTime() returns the number of millisecs since 1970/01/01.
+    if (dateObj.getTime() > userDateObj.getTime()) {
+      userDateObj.setDate(userDateObj.getDate() + 1);
+    }
 
     localNotificationSchedule(userDateObj);
+
+    Alert.alert(
+      'Success!',
+      `You wil be sent a reminder 5 minutes before ${displayHours}:${displayMins} every day. Let's build this habit!`,
+    );
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.optionWrapper}>
-        <Text style={styles.heading}>Set a Notification</Text>
+        <Text style={styles.heading}>Set a Daily Reminder</Text>
         <Text style={styles.description}>
-          What time will you meditate? We'll send you a notification 5 mins
+          What time will you meditate? We'll send you a daily reminder 5 mins
           before it's time.
         </Text>
         <View style={styles.timesContainer}>
@@ -98,7 +103,7 @@ const SettingsScreen = () => {
           onChangeText={(text) => setLocation(text)}
           value={location}
         /> */}
-        <Button title="Set Notificaion" handlePress={setNotification} />
+        <Button title="Set Reminder" handlePress={setNotification} />
       </View>
 
       {/* <Button title="Notify" onPress={localNotificationSchedule} /> */}
