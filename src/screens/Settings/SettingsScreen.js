@@ -1,15 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {TouchableOpacity, Text, StyleSheet, View, Alert} from 'react-native';
+import {ScrollView, Text, StyleSheet, View, Alert} from 'react-native';
 import PushNotification from 'react-native-push-notification';
 
 import Button from '../../lib/components/Button';
 import AdjustTimeModule from './components/AdjustTimeModule';
 import {theme} from '../../lib/theme/theme';
 import {setLocalNotificationSchedule} from '../../lib/functions/pushNotificationConfig';
-
-// TODO
-// Delete old reminder notification before setting new. Just delete the correct one with an ID. Deleting all is not great idea!
-// Get rid of 5 mins before, just set for a specific time.
 
 const NOTIFICATION_TITLE = `Get ready, it's meditation time in 5 mins...`;
 
@@ -76,11 +72,6 @@ const SettingsScreen = () => {
     );
   };
 
-  function hello() {
-    PushNotification.getScheduledLocalNotifications();
-    PushNotification.cancelAllLocalNotifications();
-  }
-
   // Get all scheduled notifications. If none scheduled, returns []
   const getAndSetScheduledLocalNotifications = () => {
     PushNotification.getScheduledLocalNotifications((notificationsArray) => {
@@ -107,7 +98,7 @@ const SettingsScreen = () => {
   console.log(notificationsArray);
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.optionWrapper}>
         <Text style={styles.heading}>Set a Daily Reminder</Text>
         <Text style={styles.description}>
@@ -139,7 +130,16 @@ const SettingsScreen = () => {
             : 'You currently have no reminders set.'}
         </Text>
       </View>
-    </View>
+
+      <View style={styles.optionWrapper}>
+        <Text style={styles.heading}>Purchase The Full App</Text>
+        <Text style={styles.description}>
+          The first 3 days are free. The full app costs just ***** and helps to
+          support the developer!
+        </Text>
+        <Button title="Purchase Full App" />
+      </View>
+    </ScrollView>
   );
 };
 
