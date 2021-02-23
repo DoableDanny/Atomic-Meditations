@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 
 import {Text, View, StyleSheet} from 'react-native';
 
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   headerBody: {
-    fontSize: 20,
+    fontSize: 19,
   },
 });
 
