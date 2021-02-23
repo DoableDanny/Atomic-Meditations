@@ -39,7 +39,7 @@ export const configurePushNotification = () => {
 
   PushNotification.createChannel(
     {
-      channelId: 'channel-id', // (required)
+      channelId: '5-min-reminder', // (required)
       channelName: 'My channel', // (required)
       channelDescription: 'A channel to categorise your notifications', // (optional) default: undefined.
       playSound: false, // (optional) default: true
@@ -51,9 +51,10 @@ export const configurePushNotification = () => {
   );
 };
 
-export const localNotificationSchedule = (date) => {
+// Set daily reminder
+export const setLocalNotificationSchedule = (date) => {
   PushNotification.localNotificationSchedule({
-    channelId: 'channel-id',
+    channelId: '5-min-reminder',
     title: `Get ready, it's meditation time in 5 mins...`,
     message: `It's almost time to meditate for at least 2 minutes. 2 mins is easy, let's keep this habit going!`,
     // date: new Date(Date.now() + 10 * 1000), // in 60 secs

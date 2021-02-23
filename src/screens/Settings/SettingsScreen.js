@@ -1,25 +1,22 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {TouchableOpacity, Text, StyleSheet, View, Alert} from 'react-native';
+import PushNotification from 'react-native-push-notification';
 
-import {theme} from '../../lib/theme/theme';
-import {localNotificationSchedule} from '../../lib/functions/pushNotification';
-import AdjustTimeBtn from '../../lib/components/AdjustTimeBtn';
 import Button from '../../lib/components/Button';
+import AdjustTimeModule from './components/AdjustTimeModule';
+import {theme} from '../../lib/theme/theme';
+import {setLocalNotificationSchedule} from '../../lib/functions/pushNotificationConfig';
 
-const AdjustTimeModule = ({time, addOne, minusOne}) => {
-  return (
-    <View style={styles.timeSelectWrapper}>
-      <AdjustTimeBtn iconName="keyboard-arrow-up" handlePress={addOne} />
-      <Text style={styles.timeText}>{time}</Text>
-      <AdjustTimeBtn iconName="keyboard-arrow-down" handlePress={minusOne} />
-    </View>
-  );
-};
+// TODO
+// Delete old reminder notification before setting new. Just delete the correct one with an ID. Deleting all is not great idea!
+// Get rid of 5 mins before, just set for a specific time.
+
+const NOTIFICATION_TITLE = `Get ready, it's meditation time in 5 mins...`;
 
 const SettingsScreen = () => {
   const [hours, setHours] = useState(12);
   const [mins, setMins] = useState(30);
-  const [location, setLocation] = useState('bedroom');
+  const [notificationsArray, setNotificationsArray] = useState([]);
 
   let displayHours = hours < 10 ? `0${hours}` : hours;
   let displayMins = mins < 10 ? `0${mins}` : mins;
@@ -67,13 +64,47 @@ const SettingsScreen = () => {
       userDateObj.setDate(userDateObj.getDate() + 1);
     }
 
-    localNotificationSchedule(userDateObj);
+    // Delete all old scheduled notifications
+    PushNotification.cancelAllLocalNotifications();
+
+    setLocalNotificationSchedule(userDateObj);
 
     Alert.alert(
       'Success!',
       `You wil be sent a reminder 5 minutes before ${displayHours}:${displayMins} every day. Let's build this habit!`,
+      [{text: 'Cool', onPress: () => getAndSetScheduledLocalNotifications()}],
     );
   };
+
+  function hello() {
+    PushNotification.getScheduledLocalNotifications();
+    PushNotification.cancelAllLocalNotifications();
+  }
+
+  // Get all scheduled notifications. If none scheduled, returns []
+  const getAndSetScheduledLocalNotifications = () => {
+    PushNotification.getScheduledLocalNotifications((notificationsArray) => {
+      setNotificationsArray(notificationsArray);
+    });
+  };
+
+  const getTime = (date) => {
+    const dateObj = new Date(date);
+    const hours = dateObj.getHours();
+    const mins = dateObj.getMinutes();
+
+    return `${formatInteger(hours)} : ${formatInteger(mins)}`;
+  };
+
+  const formatInteger = (int) => {
+    return int < 10 ? `0${int}` : int;
+  };
+
+  useEffect(() => {
+    getAndSetScheduledLocalNotifications();
+  }, []);
+
+  console.log(notificationsArray);
 
   return (
     <View style={styles.container}>
@@ -81,7 +112,7 @@ const SettingsScreen = () => {
         <Text style={styles.heading}>Set a Daily Reminder</Text>
         <Text style={styles.description}>
           What time will you meditate? We'll send you a daily reminder 5 mins
-          before it's time.
+          before it's time so you can get yourself ready.
         </Text>
         <View style={styles.timesContainer}>
           <AdjustTimeModule
@@ -95,18 +126,19 @@ const SettingsScreen = () => {
             minusOne={minusOneMin}
           />
         </View>
-        {/* <Text style={styles.description}>
-          Where will you meditate? For example, "bedroom" or "living room".
+        <Button title="Set New Reminder" handlePress={setNotification} />
+        <Text style={styles.description}>
+          {notificationsArray.length > 0
+            ? notificationsArray.map(
+                (notification) =>
+                  notification.title === NOTIFICATION_TITLE &&
+                  `We'll remind you at ${getTime(
+                    notification.date,
+                  )} every day. You're welcome!`,
+              )
+            : 'You currently have no reminders set.'}
         </Text>
-        <TextInput
-          style={styles.textInput}
-          onChangeText={(text) => setLocation(text)}
-          value={location}
-        /> */}
-        <Button title="Set Reminder" handlePress={setNotification} />
       </View>
-
-      {/* <Button title="Notify" onPress={localNotificationSchedule} /> */}
     </View>
   );
 };
@@ -133,22 +165,6 @@ const styles = StyleSheet.create({
   timesContainer: {
     flexDirection: 'row',
     marginBottom: 16,
-  },
-  timeSelectWrapper: {
-    alignItems: 'center',
-    margin: 4,
-  },
-  timeText: {
-    fontSize: 18,
-    marginVertical: 16,
-  },
-  textInput: {
-    height: 40,
-    borderColor: 'black',
-    borderWidth: 1,
-    borderRadius: 8,
-    minWidth: 260,
-    padding: 8,
   },
 });
 

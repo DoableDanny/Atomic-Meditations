@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     paddingVertical: 14,
     paddingHorizontal: 14,
-    minWidth: 240,
+    minWidth: 250,
   },
   text: {
     fontSize: 21,
