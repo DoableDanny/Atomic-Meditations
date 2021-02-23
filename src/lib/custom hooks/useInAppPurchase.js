@@ -1,5 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import {useState, useEffect} from 'react';
+import {Alert} from 'react-native';
 
-const useInAppPurchase = () => {};
+import RNIap, {
+  finishTransaction,
+  purchaseErrorListener,
+  purchaseUpdatedListener,
+} from 'react-native-iap';
 
-export default useInAppPurchase;
+// Play store item Ids
+const itemSKUs = Platform.select({
+  android: ['full_app'],
+});
+
+export default function useInAppPurchase() {}

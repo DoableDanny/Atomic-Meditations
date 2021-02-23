@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, {useState} from 'react';
+import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
@@ -11,7 +11,6 @@ import StatsScreen from './src/screens/Stats/StatsScreen';
 import useMeditations from './src/lib/custom hooks/useMeditations';
 
 const App = () => {
-  const [selectedMeditation, setSelectedMeditation] = useState(null);
   const Stack = createStackNavigator();
 
   const {meditations} = useMeditations();
