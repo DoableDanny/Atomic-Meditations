@@ -4,11 +4,11 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {theme} from '../theme/theme';
 
-const AdjustTimeBtn = ({iconName, iconNum, handlePress}) => {
+const AdjustTimeBtn = ({iconName, twoArrows, handlePress}) => {
   return (
     <TouchableOpacity onPress={handlePress} style={styles.adjustTimeBtn}>
       <Icon name={iconName} size={30} />
-      {iconNum === 2 && <Icon name={iconName} size={30} />}
+      {twoArrows && <Icon name={iconName} size={30} />}
     </TouchableOpacity>
   );
 };

@@ -59,13 +59,19 @@ const SelectSessionTimeScreen = ({
 
   return (
     <>
-      <View>
-        <AdjustTimeBtn
-          iconName="keyboard-arrow-up"
-          iconNum={2}
-          handlePress={plusTenMins}
-        />
-        <AdjustTimeBtn iconName="keyboard-arrow-up" handlePress={plusOneMin} />
+      <View style={{alignItems: 'center'}}>
+        <View style={styles.adjustTimeBtnsModule}>
+          <AdjustTimeBtn
+            iconName="keyboard-arrow-up"
+            twoArrows
+            handlePress={plusTenMins}
+          />
+          <AdjustTimeBtn
+            iconName="keyboard-arrow-up"
+            handlePress={plusOneMin}
+          />
+        </View>
+
         <Text style={styles.time}>
           {alarmRingSeconds > 3540 &&
             `${clockify(alarmRingSeconds).displayHours} ${
@@ -74,17 +80,18 @@ const SelectSessionTimeScreen = ({
           {clockify(alarmRingSeconds).displayMins}{' '}
           {clockify(alarmRingSeconds).displayMins === '01' ? 'Min' : 'Mins'}
         </Text>
-        <AdjustTimeBtn
-          iconName="keyboard-arrow-down"
-          handlePress={minusOneMin}
-        />
-        <AdjustTimeBtn
-          iconName="keyboard-arrow-down"
-          iconNum={2}
-          handlePress={minusTenMins}
-        />
+        <View style={styles.adjustTimeBtnsModule}>
+          <AdjustTimeBtn
+            iconName="keyboard-arrow-down"
+            handlePress={minusOneMin}
+          />
+          <AdjustTimeBtn
+            iconName="keyboard-arrow-down"
+            twoArrows
+            handlePress={minusTenMins}
+          />
+        </View>
       </View>
-
       <View style={styles.beginBtnWrapper}>
         <Button title="Begin" handlePress={handlePressBegin} />
       </View>
@@ -93,12 +100,16 @@ const SelectSessionTimeScreen = ({
 };
 
 const styles = StyleSheet.create({
+  adjustTimeBtnsModule: {
+    width: 100,
+  },
   time: {
     fontSize: 30,
     textAlign: 'center',
     padding: 8,
     letterSpacing: 4,
   },
+
   beginBtnWrapper: {
     position: 'absolute',
     bottom: 16,
