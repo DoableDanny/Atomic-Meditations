@@ -5,7 +5,12 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {theme} from '../../lib/theme/theme';
 import Footer from './Footer';
 
-const MeditationModule = ({item, navigation, listLength}) => {
+const MeditationModule = ({
+  item,
+  navigation,
+  listLength,
+  meditationsUnlocked,
+}) => {
   return (
     <TouchableOpacity
       style={[
@@ -13,27 +18,26 @@ const MeditationModule = ({item, navigation, listLength}) => {
         item.id == listLength && {marginBottom: 80},
       ]}
       onPress={() =>
-        !item.isLocked &&
+        item.id <= meditationsUnlocked + 1 &&
         navigation.navigate('Meditation', {currentMeditation: item})
       }>
-      {item.isLocked ? (
-        <Icon name="lock-outline" size={40} color="rgba(0, 0, 0, 0.5)" />
-      ) : (
+      {item.id <= meditationsUnlocked + 1 ? (
         <Text style={styles.text}>{item.title}</Text>
+      ) : (
+        <Icon name="lock-outline" size={40} color="rgba(0, 0, 0, 0.5)" />
       )}
     </TouchableOpacity>
   );
 };
 
-const HomeScreen = ({navigation, route}) => {
-  const {meditations} = route.params;
-
+const HomeScreen = ({navigation, meditations, meditationsUnlocked}) => {
   const renderMeditationModule = ({item}) => (
     <MeditationModule
       item={item}
       navigation={navigation}
       navigation={navigation}
       listLength={meditations.length}
+      meditationsUnlocked={meditationsUnlocked}
     />
   );
 

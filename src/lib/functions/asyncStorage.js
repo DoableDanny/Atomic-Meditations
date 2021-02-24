@@ -1,14 +1,28 @@
-// THINK I SHOULD TURN THIS INTO A HOOK?
-// ON App COMPONENT MOUNT CAN GET ALL DATA FROM STORAGE AND SET STATES
+// 1.
+// MEDITATIONS SCREEN -> AFTER 2 MINS, UNLOCK NEXT DAY.
+// DoneBtn pressed -> Get stored time, add current and save.
+// -> Get sessions, add 1 and save.
+// -> Save current date
+// -> If current date = yesterday + 1, add 1 to streak and save
+// -> If current streak > longest streak, + 1 and save
+// STATS SCREEN -> If streak !== 0 and if lastMed !== today || today - 1, reset streak to 0 and save
+// 2.
+// ON App COMPONENT MOUNT CAN GET ALL DATA (multiGet) FROM STORAGE AND SET STATES (apart from streak?)
 // THIS CAN BE PASSED DOWN TO CORRECT SCREENS?
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// ALL STORAGE KEYS SHOULD BE LISTED IN THIS FILE e.g.
-// const MY_KEY_1 = '@val_1'
+export const STORAGE_KEYS = {
+  MEDITATIONS_UNLOCKED: '@meditations_unlocked',
+  TOTAL_SESSIONS: '@total_sessions',
+  TOTAL_TIME: '@total_time',
+  CURRENT_STREAK: '@current_streak',
+  LONGEST_STREAK: '@longest_streak',
+  LAST_MEDITATION_DATE: '@last_meditation_date',
+};
 
 // Storing new string data or updating.
-const storeStringData = async (value) => {
+export const storeStringData = async (value) => {
   try {
     await AsyncStorage.setItem('@storage_Key', value);
   } catch (e) {
@@ -26,12 +40,10 @@ const storeObjectData = async (value) => {
 };
 
 // getItem returns a promise that either resolves to stored value when data is found for given key, or returns null otherwise.
-const getStringData = async () => {
+export const getStringData = async (key) => {
   try {
-    const value = await AsyncStorage.getItem('@storage_Key');
-    if (value !== null) {
-      // value previously stored
-    }
+    const value = await AsyncStorage.getItem(key);
+    return value;
   } catch (e) {
     console.log(e);
   }
@@ -47,7 +59,7 @@ const getObjectData = async () => {
 };
 
 // Delete an item from storage
-const removeValue = async (key) => {
+export const removeValue = async (key) => {
   try {
     await AsyncStorage.removeItem(key);
   } catch (e) {
@@ -58,17 +70,18 @@ const removeValue = async (key) => {
 };
 
 // Fetches multiple key-value pairs for given array of keys in a batch.
-const getMultiple = async (keysArray) => {
+export const getMultiple = async (keysArray) => {
   let values;
   try {
     values = await AsyncStorage.multiGet(keysArray);
   } catch (e) {
     console.log(e);
   }
-  console.log(values);
-
   // example console.log output:
   // [ ['@MyApp_user', 'myUserValue'], ['@MyApp_key', 'myKeyValue'] ]
+
+  // Convert array of arrays to object
+  return Object.fromEntries(values);
 };
 
 // Set multiple key-values. Input example: [ ['@MyApp_user', 'value_1'], ['@MyApp_key', 'value_2'] ]
@@ -83,7 +96,7 @@ const multiSet = async (keyValuePairsArray) => {
 };
 
 // Remove multiple key-value entries. Input example: ['@MyApp_USER_1', '@MyApp_USER_2']
-removeMultiple = async (arrayOfKeys) => {
+const removeMultiple = async (arrayOfKeys) => {
   try {
     await AsyncStorage.multiRemove(arrayOfKeys);
   } catch (e) {

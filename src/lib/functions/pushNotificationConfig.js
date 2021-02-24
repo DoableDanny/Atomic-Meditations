@@ -1,6 +1,7 @@
 import PushNotification from 'react-native-push-notification';
 
 // CONFIGURE PUSH NOTIFICATIONS
+
 export const configurePushNotification = () => {
   PushNotification.configure({
     // (optional) Called when Token is generated (iOS and Android)

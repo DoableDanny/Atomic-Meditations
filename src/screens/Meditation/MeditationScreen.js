@@ -6,13 +6,22 @@ import {theme} from '../../lib/theme/theme';
 import SelectSessionTimeScreen from './SelectSessionTimeScreen';
 import TimerScreen from './TimerScreen';
 
-const MeditationScreen = ({navigation, route}) => {
+const MeditationScreen = ({
+  navigation,
+  route,
+  unlockNextMeditation,
+  meditationsUnlocked,
+  totalMeditationsInApp,
+  updateTotalSessionsStat,
+}) => {
   const [isTimerOn, setIsTimerOn] = useState(false);
   // User input session time
   const [alarmRingSeconds, setAlarmRingSeconds] = useState(120);
   const [headerMsg, setHeaderMsg] = useState(
     'I would like the alarm to ring in...',
   );
+
+  console.log('meds unlocked', meditationsUnlocked);
 
   const {currentMeditation} = route.params;
 
@@ -53,6 +62,11 @@ const MeditationScreen = ({navigation, route}) => {
           alarmRingSeconds={alarmRingSeconds}
           setHeaderMsg={setHeaderMsg}
           navigation={navigation}
+          currentMeditation={currentMeditation}
+          meditationsUnlocked={meditationsUnlocked}
+          unlockNextMeditation={unlockNextMeditation}
+          totalMeditationsInApp={totalMeditationsInApp}
+          updateTotalSessionsStat={updateTotalSessionsStat}
         />
       )}
     </View>

@@ -6,15 +6,22 @@ import Button from '../../lib/components/Button';
 import useTrackPlayer from '../../lib/custom hooks/useTrackPlayer';
 
 // Need to add a stop sound btn
+
 const TimerScreen = ({
   clockify,
   alarmRingSeconds,
   setHeaderMsg,
   navigation,
+  currentMeditation,
+  meditationsUnlocked,
+  unlockNextMeditation,
+  totalMeditationsInApp,
+  updateTotalSessionsStat,
 }) => {
   const [seconds, setSeconds] = useState(0);
-
   const {playSound, stopSound, setUpTrackPlayer} = useTrackPlayer();
+
+  console.log('totalmedsinapp', totalMeditationsInApp);
 
   const startTimer = () => {
     BackgroundTimer.runBackgroundTimer(() => {
@@ -37,15 +44,25 @@ const TimerScreen = ({
         setUpTrackPlayerAndPlaySound();
       }
 
-      setHeaderMsg('Goal time reached, great job!');
+      // setHeaderMsg('Goal time reached, great job!');
 
-      setTimeout(() => {
-        setHeaderMsg('Feel free to continue meditating...');
-      }, 4000);
+      // setTimeout(() => {
+      //   setHeaderMsg('Feel free to continue meditating...');
+      // }, 4000);
 
-      setTimeout(() => {
-        setHeaderMsg('');
-      }, 8000);
+      // setTimeout(() => {
+      //   setHeaderMsg('');
+      // }, 8000);
+
+      // Check if should unlock next meditation
+      if (
+        parseInt(currentMeditation.id) > meditationsUnlocked &&
+        meditationsUnlocked < totalMeditationsInApp - 1
+      ) {
+        unlockNextMeditation(currentMeditation.id);
+      }
+
+      updateTotalSessionsStat();
     }
   }, [seconds]);
 
