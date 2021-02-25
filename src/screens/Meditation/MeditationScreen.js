@@ -15,6 +15,7 @@ const MeditationScreen = ({
   updateTotalSessionsStat,
   updateMeditationCompletionTime,
   updateTotalTimeStat,
+  updateLastMeditationDateStat,
 }) => {
   const [isTimerOn, setIsTimerOn] = useState(false);
   // User input session time
@@ -69,6 +70,7 @@ const MeditationScreen = ({
           updateTotalSessionsStat={updateTotalSessionsStat}
           updateMeditationCompletionTime={updateMeditationCompletionTime}
           updateTotalTimeStat={updateTotalTimeStat}
+          updateLastMeditationDateStat={updateLastMeditationDateStat}
         />
       )}
     </View>

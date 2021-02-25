@@ -27,6 +27,8 @@ const App = () => {
     updateTotalSessionsStat,
     totalTimeStat,
     updateTotalTimeStat,
+    lastMeditationDateStat,
+    updateLastMeditationDateStat,
   } = useStats();
 
   console.log('totalSessions', totalSessionsStat);
@@ -75,6 +77,7 @@ const App = () => {
               updateTotalSessionsStat={updateTotalSessionsStat}
               updateMeditationCompletionTime={updateMeditationCompletionTime}
               updateTotalTimeStat={updateTotalTimeStat}
+              updateLastMeditationDateStat={updateLastMeditationDateStat}
             />
           )}
         </Stack.Screen>
@@ -87,6 +90,7 @@ const App = () => {
               {...props}
               totalTimeStat={totalTimeStat}
               totalSessionsStat={totalSessionsStat}
+              lastMeditationDateStat={lastMeditationDateStat}
             />
           )}
         </Stack.Screen>

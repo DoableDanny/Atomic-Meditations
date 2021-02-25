@@ -19,6 +19,7 @@ const TimerScreen = ({
   updateTotalSessionsStat,
   updateMeditationCompletionTime,
   updateTotalTimeStat,
+  updateLastMeditationDateStat,
 }) => {
   const [seconds, setSeconds] = useState(0);
   const {playSound, stopSound, setUpTrackPlayer} = useTrackPlayer();
@@ -38,6 +39,7 @@ const TimerScreen = ({
   const updateUserStats = () => {
     updateTotalSessionsStat();
     updateTotalTimeStat(currentMeditation.id, seconds);
+    updateLastMeditationDateStat();
   };
 
   useEffect(() => {
