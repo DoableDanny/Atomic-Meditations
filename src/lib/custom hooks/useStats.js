@@ -1,11 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {
   STORAGE_KEYS,
   getMultiple,
   storeStringData,
 } from '../functions/asyncStorage';
-
-import {meditations} from './useMeditations';
 
 const {TOTAL_SESSIONS, TOTAL_TIME, LAST_MEDITATION_DATE} = STORAGE_KEYS;
 

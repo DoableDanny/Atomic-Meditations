@@ -1,10 +1,11 @@
-import {ThemeProvider} from '@react-navigation/native';
 import React from 'react';
-import {TouchableOpacity, Text, StyleSheet, View} from 'react-native';
+import {Text, StyleSheet, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 
 import {theme} from '../../lib/theme/theme';
 import {hoursAndMinsString} from '../../lib/functions/displayHoursAndMins';
+
+// Need to add streak and longest streak stats
 
 const StatRow = ({statKey, statValue}) => {
   return (

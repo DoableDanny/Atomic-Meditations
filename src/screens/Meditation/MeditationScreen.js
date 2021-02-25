@@ -45,7 +45,7 @@ const MeditationScreen = ({
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>{currentMeditation.title}</Text>
+        <Text style={styles.headerTitle}>Day {currentMeditation.id}</Text>
         <Text style={styles.headerBody}>{headerMsg}</Text>
       </View>
 

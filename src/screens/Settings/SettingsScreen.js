@@ -7,6 +7,12 @@ import AdjustTimeModule from './components/AdjustTimeModule';
 import {theme} from '../../lib/theme/theme';
 import {setLocalNotificationSchedule} from '../../lib/functions/pushNotificationConfig';
 
+// Need a cancelReminderBtn
+
+// Need a resetWholeAppBtn
+// Need a resetMeditationsBtn
+// Need a resetStatsBtn
+
 const NOTIFICATION_TITLE = `Get ready, it's meditation time in 5 mins...`;
 
 const SettingsScreen = () => {
