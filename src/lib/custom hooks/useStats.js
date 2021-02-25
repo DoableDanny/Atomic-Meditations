@@ -5,22 +5,24 @@ import {
   storeStringData,
 } from '../functions/asyncStorage';
 
-// App.js -> useStats componentDidMount -> getAllStatsAndSetStates
-// -> pass states to necessary screens
+import {meditations} from './useMeditations';
 
-// TimerScreen time up -> add one to unlockedMeditations state and save
-
-const {TOTAL_SESSIONS} = STORAGE_KEYS;
+const {TOTAL_SESSIONS, TOTAL_TIME} = STORAGE_KEYS;
 
 const useStats = () => {
-  // Initially just day 1 unlocked
   const [totalSessionsStat, setTotalSessionsStat] = useState(0);
+  const [totalTimeStat, setTotalTimeStat] = useState(0);
 
   // Initial loading of stats data from async storage and setting of state.
   useEffect(() => {
-    getMultiple([TOTAL_SESSIONS]).then((data) => {
+    getMultiple([TOTAL_SESSIONS, TOTAL_TIME]).then((data) => {
+      // If not null then set state.
       data[TOTAL_SESSIONS] &&
         setTotalSessionsStat(parseInt(data[TOTAL_SESSIONS]));
+
+      data[TOTAL_TIME] && setTotalTimeStat(parseInt(data[TOTAL_TIME]));
+
+      console.log(data);
     });
   }, []);
 
@@ -31,9 +33,20 @@ const useStats = () => {
     });
   };
 
+  const updateTotalTimeStat = (id, seconds) => {
+    setTotalTimeStat((prev) => {
+      console.log('totalTime: ', prev);
+
+      storeStringData(TOTAL_TIME, prev + seconds);
+      return prev + seconds;
+    });
+  };
+
   return {
     totalSessionsStat,
     updateTotalSessionsStat,
+    totalTimeStat,
+    updateTotalTimeStat,
   };
 };
 

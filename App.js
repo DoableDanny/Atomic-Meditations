@@ -22,11 +22,14 @@ const App = () => {
     updateMeditationCompletionTime,
   } = useMeditations();
 
-  const {totalSessionsStat, updateTotalSessionsStat} = useStats();
+  const {
+    totalSessionsStat,
+    updateTotalSessionsStat,
+    totalTimeStat,
+    updateTotalTimeStat,
+  } = useStats();
 
   console.log('totalSessions', totalSessionsStat);
-
-  console.log('meds', meditations);
 
   return (
     <NavigationContainer>
@@ -71,12 +74,16 @@ const App = () => {
               totalMeditationsInApp={meditations.length}
               updateTotalSessionsStat={updateTotalSessionsStat}
               updateMeditationCompletionTime={updateMeditationCompletionTime}
+              updateTotalTimeStat={updateTotalTimeStat}
             />
           )}
         </Stack.Screen>
 
         <Stack.Screen name="Settings" component={SettingsScreen} />
-        <Stack.Screen name="Stats" component={StatsScreen} />
+
+        <Stack.Screen name="Stats">
+          {(props) => <StatsScreen {...props} totalTimeStat={totalTimeStat} />}
+        </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );

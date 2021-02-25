@@ -4,6 +4,7 @@ import {TouchableOpacity, Text, StyleSheet, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 
 import {theme} from '../../lib/theme/theme';
+import {hoursAndMinsString} from '../../lib/functions/displayHoursAndMins';
 
 const StatRow = ({statKey, statValue}) => {
   return (
@@ -15,12 +16,15 @@ const StatRow = ({statKey, statValue}) => {
   );
 };
 
-const SettingsScreen = () => {
+const SettingsScreen = ({totalTimeStat}) => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.statsBlock}>
         <StatRow statKey="Total Sessions" statValue="11" />
-        <StatRow statKey="Total Time" statValue="18 hours" />
+        <StatRow
+          statKey="Total Time"
+          statValue={hoursAndMinsString(totalTimeStat)}
+        />
         <StatRow statKey="Average Time" statValue="6 mins" />
       </View>
       <View style={styles.statsBlock}>

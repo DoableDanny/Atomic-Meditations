@@ -30,8 +30,6 @@ const useMeditations = () => {
 
       data[MEDITATIONS_UNLOCKED] &&
         setMeditationsUnlocked(parseInt(data[MEDITATIONS_UNLOCKED]));
-
-      console.log(data);
     });
   }, []);
 
