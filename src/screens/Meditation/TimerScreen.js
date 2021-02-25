@@ -25,7 +25,7 @@ const TimerScreen = ({
   const startTimer = () => {
     BackgroundTimer.runBackgroundTimer(() => {
       setSeconds((prevSecs) => prevSecs + 1);
-    }, 8);
+    }, 1);
   };
 
   const setUpTrackPlayerAndPlaySound = async () => {

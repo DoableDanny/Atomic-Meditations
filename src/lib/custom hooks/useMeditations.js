@@ -11,7 +11,6 @@ const initialState = [];
 for (let i = 1; i <= 60; i++) {
   initialState.push({
     id: i.toString(),
-    title: `Day ${i}`,
     completionTime: 0, // seconds
   });
 }
