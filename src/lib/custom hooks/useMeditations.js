@@ -4,6 +4,7 @@ import {
   getMultiple,
   storeStringData,
   removeValue,
+  storeObjectData,
 } from '../functions/asyncStorage';
 
 const initialState = [];
@@ -11,18 +12,11 @@ for (let i = 1; i <= 60; i++) {
   initialState.push({
     id: i.toString(),
     title: `Day ${i}`,
-    isLocked: i === 1 ? false : true,
+    completionTime: 0, // seconds
   });
 }
 
-// removeValue(STORAGE_KEYS.MEDITATIONS_UNLOCKED);
-
-// Need to get MEDITATIONS_UNLOCKED from storage.
-// Check if current meditation is greater than MEDITATIONS_UNLOCKED
-// If yes, add 1 and setAndSave
-// If no, move on to next thing.
-
-const {MEDITATIONS_UNLOCKED} = STORAGE_KEYS;
+const {MEDITATIONS, MEDITATIONS_UNLOCKED} = STORAGE_KEYS;
 
 const useMeditations = () => {
   const [meditations, setMeditations] = useState(initialState);
@@ -31,22 +25,51 @@ const useMeditations = () => {
 
   // Initial loading of stats data from async storage and setting of state.
   useEffect(() => {
-    getMultiple([MEDITATIONS_UNLOCKED]).then((data) => {
+    getMultiple([MEDITATIONS, MEDITATIONS_UNLOCKED]).then((data) => {
       // If not null, then setState values
+      data[MEDITATIONS] && setMeditations(JSON.parse(data[MEDITATIONS]));
+
       data[MEDITATIONS_UNLOCKED] &&
-        setMeditationsUnlocked(data[MEDITATIONS_UNLOCKED]);
+        setMeditationsUnlocked(parseInt(data[MEDITATIONS_UNLOCKED]));
+
+      console.log(data);
     });
   }, []);
 
   const unlockNextMeditation = (id) => {
-    setMeditationsUnlocked(parseInt(id));
-    storeStringData(MEDITATIONS_UNLOCKED, id);
+    if (
+      parseInt(id) > meditationsUnlocked &&
+      meditationsUnlocked < meditations.length - 1
+    ) {
+      setMeditationsUnlocked(parseInt(id));
+      storeStringData(MEDITATIONS_UNLOCKED, id);
+    }
+  };
+
+  const updateMeditationCompletionTime = (currentMeditation, time) => {
+    if (currentMeditation.completionTime < time) {
+      currentMeditation.completionTime = time;
+
+      let meditationsCopy = [...meditations];
+
+      meditationsCopy.splice(currentMeditation.id - 1, 1, currentMeditation);
+
+      setAndStoreMeditations(meditationsCopy);
+
+      console.log('updatedMeds', meditationsCopy);
+    }
+  };
+
+  const setAndStoreMeditations = (meditations) => {
+    setMeditations(meditations);
+    storeObjectData(MEDITATIONS, meditations);
   };
 
   return {
     meditations,
     unlockNextMeditation,
     meditationsUnlocked,
+    updateMeditationCompletionTime,
   };
 };
 

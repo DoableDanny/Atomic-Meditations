@@ -19,11 +19,14 @@ const App = () => {
     meditations,
     meditationsUnlocked,
     unlockNextMeditation,
+    updateMeditationCompletionTime,
   } = useMeditations();
 
   const {totalSessionsStat, updateTotalSessionsStat} = useStats();
 
   console.log('totalSessions', totalSessionsStat);
+
+  console.log('meds', meditations);
 
   return (
     <NavigationContainer>
@@ -67,6 +70,7 @@ const App = () => {
               meditationsUnlocked={meditationsUnlocked}
               totalMeditationsInApp={meditations.length}
               updateTotalSessionsStat={updateTotalSessionsStat}
+              updateMeditationCompletionTime={updateMeditationCompletionTime}
             />
           )}
         </Stack.Screen>

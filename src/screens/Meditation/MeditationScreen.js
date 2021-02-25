@@ -13,6 +13,7 @@ const MeditationScreen = ({
   meditationsUnlocked,
   totalMeditationsInApp,
   updateTotalSessionsStat,
+  updateMeditationCompletionTime,
 }) => {
   const [isTimerOn, setIsTimerOn] = useState(false);
   // User input session time
@@ -20,8 +21,6 @@ const MeditationScreen = ({
   const [headerMsg, setHeaderMsg] = useState(
     'I would like the alarm to ring in...',
   );
-
-  console.log('meds unlocked', meditationsUnlocked);
 
   const {currentMeditation} = route.params;
 
@@ -67,6 +66,7 @@ const MeditationScreen = ({
           unlockNextMeditation={unlockNextMeditation}
           totalMeditationsInApp={totalMeditationsInApp}
           updateTotalSessionsStat={updateTotalSessionsStat}
+          updateMeditationCompletionTime={updateMeditationCompletionTime}
         />
       )}
     </View>

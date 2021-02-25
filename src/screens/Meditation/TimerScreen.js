@@ -17,11 +17,10 @@ const TimerScreen = ({
   unlockNextMeditation,
   totalMeditationsInApp,
   updateTotalSessionsStat,
+  updateMeditationCompletionTime,
 }) => {
   const [seconds, setSeconds] = useState(0);
   const {playSound, stopSound, setUpTrackPlayer} = useTrackPlayer();
-
-  console.log('totalmedsinapp', totalMeditationsInApp);
 
   const startTimer = () => {
     BackgroundTimer.runBackgroundTimer(() => {
@@ -34,7 +33,17 @@ const TimerScreen = ({
     playSound();
   };
 
+  // Called when user presses doneBtn
+  const updateUserStats = () => {
+    updateTotalSessionsStat();
+  };
+
   useEffect(() => {
+    // After 2 mins, check whether to unlock next day and unlock.
+    if (seconds === 120) {
+      unlockNextMeditation(currentMeditation.id);
+    }
+
     if (seconds === alarmRingSeconds) {
       try {
         playSound();
@@ -53,16 +62,6 @@ const TimerScreen = ({
       // setTimeout(() => {
       //   setHeaderMsg('');
       // }, 8000);
-
-      // Check if should unlock next meditation
-      if (
-        parseInt(currentMeditation.id) > meditationsUnlocked &&
-        meditationsUnlocked < totalMeditationsInApp - 1
-      ) {
-        unlockNextMeditation(currentMeditation.id);
-      }
-
-      updateTotalSessionsStat();
     }
   }, [seconds]);
 
@@ -85,7 +84,11 @@ const TimerScreen = ({
         {seconds >= 120 && (
           <Button
             title="Done"
-            handlePress={() => navigation.navigate('Home')}
+            handlePress={() => {
+              updateUserStats();
+              updateMeditationCompletionTime(currentMeditation, seconds);
+              navigation.navigate('Home');
+            }}
           />
         )}
       </View>

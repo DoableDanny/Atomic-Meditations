@@ -19,7 +19,7 @@ const SettingsScreen = () => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.statsBlock}>
-        <StatRow statKey="Total Sessions" statValue="18" />
+        <StatRow statKey="Total Sessions" statValue="11" />
         <StatRow statKey="Total Time" statValue="18 hours" />
         <StatRow statKey="Average Time" statValue="6 mins" />
       </View>

@@ -35,7 +35,6 @@ const HomeScreen = ({navigation, meditations, meditationsUnlocked}) => {
     <MeditationModule
       item={item}
       navigation={navigation}
-      navigation={navigation}
       listLength={meditations.length}
       meditationsUnlocked={meditationsUnlocked}
     />

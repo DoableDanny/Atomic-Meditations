@@ -19,7 +19,8 @@ const useStats = () => {
   // Initial loading of stats data from async storage and setting of state.
   useEffect(() => {
     getMultiple([TOTAL_SESSIONS]).then((data) => {
-      data[TOTAL_SESSIONS] && setTotalSessionsStat(data[TOTAL_SESSIONS]);
+      data[TOTAL_SESSIONS] &&
+        setTotalSessionsStat(parseInt(data[TOTAL_SESSIONS]));
     });
   }, []);
 

@@ -13,6 +13,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const STORAGE_KEYS = {
+  MEDITATIONS: '@meditations',
   MEDITATIONS_UNLOCKED: '@meditations_unlocked',
   TOTAL_SESSIONS: '@total_sessions',
   TOTAL_TIME: '@total_time',
@@ -22,18 +23,20 @@ export const STORAGE_KEYS = {
 };
 
 // Storing new string data or updating.
-export const storeStringData = async (value) => {
+export const storeStringData = async (key, value) => {
   try {
-    await AsyncStorage.setItem('@storage_Key', value);
+    await AsyncStorage.setItem(key, value.toString());
   } catch (e) {
     console.log(e);
   }
+
+  console.log(`Saved`);
 };
 
-const storeObjectData = async (value) => {
+export const storeObjectData = async (key, value) => {
   try {
     const jsonValue = JSON.stringify(value);
-    await AsyncStorage.setItem('@storage_Key', jsonValue);
+    await AsyncStorage.setItem(key, jsonValue);
   } catch (e) {
     console.log(e);
   }
