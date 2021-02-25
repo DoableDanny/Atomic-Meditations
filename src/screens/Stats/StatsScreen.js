@@ -25,7 +25,10 @@ const SettingsScreen = ({totalSessionsStat, totalTimeStat}) => {
           statKey="Total Time"
           statValue={hoursAndMinsString(totalTimeStat)}
         />
-        <StatRow statKey="Average Time" statValue="6 mins" />
+        <StatRow
+          statKey="Average Time"
+          statValue={hoursAndMinsString(totalTimeStat / totalSessionsStat)}
+        />
       </View>
       <View style={styles.statsBlock}>
         <StatRow statKey="Current Streak" statValue="1 day" />
