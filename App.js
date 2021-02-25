@@ -82,7 +82,13 @@ const App = () => {
         <Stack.Screen name="Settings" component={SettingsScreen} />
 
         <Stack.Screen name="Stats">
-          {(props) => <StatsScreen {...props} totalTimeStat={totalTimeStat} />}
+          {(props) => (
+            <StatsScreen
+              {...props}
+              totalTimeStat={totalTimeStat}
+              totalSessionsStat={totalSessionsStat}
+            />
+          )}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>

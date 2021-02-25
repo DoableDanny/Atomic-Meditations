@@ -16,11 +16,11 @@ const StatRow = ({statKey, statValue}) => {
   );
 };
 
-const SettingsScreen = ({totalTimeStat}) => {
+const SettingsScreen = ({totalSessionsStat, totalTimeStat}) => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.statsBlock}>
-        <StatRow statKey="Total Sessions" statValue="11" />
+        <StatRow statKey="Total Sessions" statValue={totalSessionsStat} />
         <StatRow
           statKey="Total Time"
           statValue={hoursAndMinsString(totalTimeStat)}
