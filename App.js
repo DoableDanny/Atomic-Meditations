@@ -29,9 +29,9 @@ const App = () => {
     updateTotalTimeStat,
     lastMeditationDateStat,
     updateLastMeditationDateStat,
+    currentStreakStat,
+    updateCurrentStreakStat,
   } = useStats();
-
-  console.log('totalSessions', totalSessionsStat);
 
   return (
     <NavigationContainer>
@@ -78,6 +78,8 @@ const App = () => {
               updateMeditationCompletionTime={updateMeditationCompletionTime}
               updateTotalTimeStat={updateTotalTimeStat}
               updateLastMeditationDateStat={updateLastMeditationDateStat}
+              updateCurrentStreakStat={updateCurrentStreakStat}
+              lastMeditationDateStat={lastMeditationDateStat}
             />
           )}
         </Stack.Screen>
@@ -91,6 +93,7 @@ const App = () => {
               totalTimeStat={totalTimeStat}
               totalSessionsStat={totalSessionsStat}
               lastMeditationDateStat={lastMeditationDateStat}
+              currentStreakStat={currentStreakStat}
             />
           )}
         </Stack.Screen>

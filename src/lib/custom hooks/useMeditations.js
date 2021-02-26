@@ -52,8 +52,6 @@ const useMeditations = () => {
       meditationsCopy.splice(currentMeditation.id - 1, 1, currentMeditation);
 
       setAndStoreMeditations(meditationsCopy);
-
-      console.log('updatedMeds', meditationsCopy);
     }
   };
 

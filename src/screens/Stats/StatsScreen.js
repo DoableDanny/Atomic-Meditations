@@ -21,6 +21,7 @@ const SettingsScreen = ({
   totalSessionsStat,
   totalTimeStat,
   lastMeditationDateStat,
+  currentStreakStat,
 }) => {
   return (
     <ScrollView style={styles.container}>
@@ -32,11 +33,18 @@ const SettingsScreen = ({
         />
         <StatRow
           statKey="Average Time"
-          statValue={hoursAndMinsString(totalTimeStat / totalSessionsStat)}
+          statValue={hoursAndMinsString(
+            totalTimeStat ? totalTimeStat / totalSessionsStat : 0,
+          )}
         />
       </View>
       <View style={styles.statsBlock}>
-        <StatRow statKey="Current Streak" statValue="1 day" />
+        <StatRow
+          statKey="Current Streak"
+          statValue={`${currentStreakStat} ${
+            currentStreakStat === 1 ? 'day' : 'days'
+          }`}
+        />
         <StatRow statKey="Longest Streak" statValue="3 days" />
         <StatRow statKey="Last Meditation" statValue={lastMeditationDateStat} />
       </View>
