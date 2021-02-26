@@ -13,16 +13,13 @@ const TimerScreen = ({
   setHeaderMsg,
   navigation,
   currentMeditation,
-  meditationsUnlocked,
   unlockNextMeditation,
-  totalMeditationsInApp,
   lastMeditationDateStat,
   updateTotalSessionsStat,
   updateMeditationCompletionTime,
   updateTotalTimeStat,
   updateLastMeditationDateStat,
   updateCurrentStreakStat,
-  currentStreakStat,
 }) => {
   const [seconds, setSeconds] = useState(0);
   const {playSound, stopSound, setUpTrackPlayer} = useTrackPlayer();

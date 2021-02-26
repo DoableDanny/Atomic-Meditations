@@ -10,15 +10,12 @@ const MeditationScreen = ({
   navigation,
   route,
   unlockNextMeditation,
-  meditationsUnlocked,
-  totalMeditationsInApp,
   updateTotalSessionsStat,
   updateMeditationCompletionTime,
   updateTotalTimeStat,
   updateLastMeditationDateStat,
   updateCurrentStreakStat,
   lastMeditationDateStat,
-  currentStreakStat,
 }) => {
   const [isTimerOn, setIsTimerOn] = useState(false);
   // User input session time
@@ -67,16 +64,13 @@ const MeditationScreen = ({
           setHeaderMsg={setHeaderMsg}
           navigation={navigation}
           currentMeditation={currentMeditation}
-          meditationsUnlocked={meditationsUnlocked}
           unlockNextMeditation={unlockNextMeditation}
-          totalMeditationsInApp={totalMeditationsInApp}
           updateTotalSessionsStat={updateTotalSessionsStat}
           updateMeditationCompletionTime={updateMeditationCompletionTime}
           updateTotalTimeStat={updateTotalTimeStat}
           updateLastMeditationDateStat={updateLastMeditationDateStat}
           updateCurrentStreakStat={updateCurrentStreakStat}
           lastMeditationDateStat={lastMeditationDateStat}
-          currentStreakStat={currentStreakStat}
         />
       )}
     </View>

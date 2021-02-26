@@ -33,7 +33,6 @@ const App = () => {
     updateCurrentStreakStat,
     shouldResetCurrentStreakStat,
     resetCurrentStreakStat,
-    updateLongestStreakStat,
     longestStreakStat,
   } = useStats();
 
@@ -57,34 +56,18 @@ const App = () => {
             />
           )}
         </Stack.Screen>
-        {/* <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          initialParams={{meditations}}
-          options={{title: 'Atomic Meditations'}}
-        /> */}
-        {/* <Stack.Screen
-          name="Meditation"
-          component={MeditationScreen}
-          initialParams={{
-            meditationsUnlocked,
-            totalSessions,
-          }}
-        /> */}
+
         <Stack.Screen name="Meditation">
           {(props) => (
             <MeditationScreen
               {...props}
               unlockNextMeditation={unlockNextMeditation}
-              meditationsUnlocked={meditationsUnlocked}
-              totalMeditationsInApp={meditations.length}
               updateTotalSessionsStat={updateTotalSessionsStat}
               updateMeditationCompletionTime={updateMeditationCompletionTime}
               updateTotalTimeStat={updateTotalTimeStat}
               updateLastMeditationDateStat={updateLastMeditationDateStat}
               updateCurrentStreakStat={updateCurrentStreakStat}
               lastMeditationDateStat={lastMeditationDateStat}
-              currentStreakStat={currentStreakStat}
             />
           )}
         </Stack.Screen>
