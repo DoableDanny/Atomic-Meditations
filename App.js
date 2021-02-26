@@ -31,6 +31,8 @@ const App = () => {
     updateLastMeditationDateStat,
     currentStreakStat,
     updateCurrentStreakStat,
+    shouldResetCurrentStreakStat,
+    resetCurrentStreakStat,
   } = useStats();
 
   return (
@@ -95,6 +97,8 @@ const App = () => {
               totalSessionsStat={totalSessionsStat}
               lastMeditationDateStat={lastMeditationDateStat}
               currentStreakStat={currentStreakStat}
+              shouldResetCurrentStreakStat={shouldResetCurrentStreakStat}
+              resetCurrentStreakStat={resetCurrentStreakStat}
             />
           )}
         </Stack.Screen>

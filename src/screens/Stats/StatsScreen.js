@@ -1,11 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Text, StyleSheet, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 
 import {theme} from '../../lib/theme/theme';
 import {hoursAndMinsString} from '../../lib/functions/displayHoursAndMins';
-
-// Need to add streak and longest streak stats
 
 const StatRow = ({statKey, statValue}) => {
   return (
@@ -22,7 +20,16 @@ const SettingsScreen = ({
   totalTimeStat,
   lastMeditationDateStat,
   currentStreakStat,
+  shouldResetCurrentStreakStat,
+  resetCurrentStreakStat,
 }) => {
+  // If last meditation was not today or yesterday, reset current streak to 0
+  useEffect(() => {
+    if (shouldResetCurrentStreakStat(lastMeditationDateStat)) {
+      resetCurrentStreakStat();
+    }
+  });
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.statsBlock}>

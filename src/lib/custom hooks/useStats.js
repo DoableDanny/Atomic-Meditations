@@ -37,12 +37,12 @@ const useStats = () => {
 
       // If last meditation was not today or yesterday, reset streak to 0 days.
       if (data[CURRENT_STREAK]) {
-        if (shouldResetCurrentStreak(data[LAST_MEDITATION_DATE])) {
+        if (shouldResetCurrentStreakStat(data[LAST_MEDITATION_DATE])) {
           console.log('Should reset');
           resetCurrentStreakStat();
         } else {
           console.log('should not reset');
-          setCurrentStreakStat(data[CURRENT_STREAK]);
+          setCurrentStreakStat(parseInt(data[CURRENT_STREAK]));
         }
       }
 
@@ -50,7 +50,7 @@ const useStats = () => {
     });
   }, []);
 
-  const shouldResetCurrentStreak = (lastMeditationDateData) => {
+  const shouldResetCurrentStreakStat = (lastMeditationDateData) => {
     const today = getFormattedDate(new Date());
     const yesterday = getFormattedDate(new Date(Date.now() - 86400000));
 
@@ -137,6 +137,8 @@ const useStats = () => {
     updateLastMeditationDateStat,
     currentStreakStat,
     updateCurrentStreakStat,
+    shouldResetCurrentStreakStat,
+    resetCurrentStreakStat,
   };
 };
 
