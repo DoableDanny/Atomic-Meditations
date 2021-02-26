@@ -35,31 +35,56 @@ const useStats = () => {
       data[LAST_MEDITATION_DATE] &&
         setLastMeditationDateStat(data[LAST_MEDITATION_DATE]);
 
-      const currentStreakData = parseInt(data[CURRENT_STREAK]);
-      const lastMeditationDateData = data[LAST_MEDITATION_DATE];
+      // If last meditation was not today or yesterday, reset streak to 0 days.
       if (data[CURRENT_STREAK]) {
-        // Check if lastMeditationDate === today or yesterday.
-        const today = getFormattedDate(new Date());
-        const yesterday = getFormattedDate(new Date(Date.now() - 86400000));
-
-        console.log('today', today);
-        console.log('yesterday', yesterday);
-        console.log('dateLastMeditated', lastMeditationDateData);
-        if (
-          lastMeditationDateData === today ||
-          lastMeditationDateData === yesterday
-        ) {
-          setCurrentStreakStat(currentStreakData);
+        if (shouldResetCurrentStreak(data[LAST_MEDITATION_DATE])) {
+          console.log('Should reset');
+          resetCurrentStreakStat();
         } else {
-          // If user didn't meditate today or yesterday, then reset their streak.
-          storeStringData(CURRENT_STREAK, '0');
-          console.log('Reset users streak to 0');
+          console.log('should not reset');
+          setCurrentStreakStat(data[CURRENT_STREAK]);
         }
       }
 
       console.log(data);
     });
   }, []);
+
+  const shouldResetCurrentStreak = (lastMeditationDateData) => {
+    const today = getFormattedDate(new Date());
+    const yesterday = getFormattedDate(new Date(Date.now() - 86400000));
+
+    console.log('today', today);
+    console.log('yesterday', yesterday);
+    console.log('lastMedDate', lastMeditationDateData);
+
+    if (
+      lastMeditationDateData === today ||
+      lastMeditationDateData === yesterday
+    ) {
+      return false;
+    }
+
+    return true;
+  };
+
+  const getFormattedDate = (dateObj) => {
+    const today = dateObj;
+
+    const day = today.getDate();
+    const month = today.getMonth() + 1;
+    const year = today.getFullYear();
+
+    const formattedDay = day < 10 ? `0${day}` : day;
+    const formattedMonth = month < 10 ? `0${month}` : month;
+
+    return `${formattedDay}/${formattedMonth}/${year}`;
+  };
+
+  const resetCurrentStreakStat = () => {
+    setCurrentStreakStat(0);
+    storeStringData(CURRENT_STREAK, '0');
+  };
 
   const updateTotalSessionsStat = () => {
     setTotalSessionsStat((prev) => {
@@ -82,32 +107,24 @@ const useStats = () => {
     storeStringData(LAST_MEDITATION_DATE, today);
   };
 
-  const getFormattedDate = (dateObj) => {
-    const today = dateObj;
-
-    const day = today.getDate();
-    const month = today.getMonth() + 1;
-    const year = today.getFullYear();
-
-    const formattedDay = day < 10 ? `0${day}` : day;
-    const formattedMonth = month < 10 ? `0${month}` : month;
-
-    return `${formattedDay}/${formattedMonth}/${year}`;
-  };
-
   const updateCurrentStreakStat = (lastMeditationDate) => {
     const today = getFormattedDate(new Date());
-    console.log('Today: ', today);
-    console.log('LastMed', lastMeditationDate);
+    const yesterday = getFormattedDate(new Date(Date.now() - 86400000));
 
+    // If lastMeditation = today => do nothing
     if (today !== lastMeditationDate) {
-      console.log('Adding 1 to streak...');
+      // If lastMeditation = yesterday => add 1 to streak
+      if (yesterday === lastMeditationDate) {
+        setCurrentStreakStat((prev) => {
+          storeStringData(CURRENT_STREAK, prev + 1);
 
-      setCurrentStreakStat((prev) => {
-        storeStringData(CURRENT_STREAK, (prev + 1).toString());
-
-        return prev + 1;
-      });
+          return prev + 1;
+        });
+        // If first ever meditation or lastMeditation >= 2 days ago => setStreak to 1
+      } else {
+        setCurrentStreakStat(1);
+        storeStringData(CURRENT_STREAK, '1');
+      }
     }
   };
 

@@ -80,6 +80,7 @@ const App = () => {
               updateLastMeditationDateStat={updateLastMeditationDateStat}
               updateCurrentStreakStat={updateCurrentStreakStat}
               lastMeditationDateStat={lastMeditationDateStat}
+              currentStreakStat={currentStreakStat}
             />
           )}
         </Stack.Screen>

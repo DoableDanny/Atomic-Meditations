@@ -22,6 +22,7 @@ const TimerScreen = ({
   updateTotalTimeStat,
   updateLastMeditationDateStat,
   updateCurrentStreakStat,
+  currentStreakStat,
 }) => {
   const [seconds, setSeconds] = useState(0);
   const {playSound, stopSound, setUpTrackPlayer} = useTrackPlayer();
