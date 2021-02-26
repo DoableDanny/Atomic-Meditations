@@ -33,6 +33,8 @@ const App = () => {
     updateCurrentStreakStat,
     shouldResetCurrentStreakStat,
     resetCurrentStreakStat,
+    updateLongestStreakStat,
+    longestStreakStat,
   } = useStats();
 
   return (
@@ -99,6 +101,7 @@ const App = () => {
               currentStreakStat={currentStreakStat}
               shouldResetCurrentStreakStat={shouldResetCurrentStreakStat}
               resetCurrentStreakStat={resetCurrentStreakStat}
+              longestStreakStat={longestStreakStat}
             />
           )}
         </Stack.Screen>

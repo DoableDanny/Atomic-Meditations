@@ -15,13 +15,14 @@ const StatRow = ({statKey, statValue}) => {
   );
 };
 
-const SettingsScreen = ({
+const StatsScreen = ({
   totalSessionsStat,
   totalTimeStat,
   lastMeditationDateStat,
   currentStreakStat,
   shouldResetCurrentStreakStat,
   resetCurrentStreakStat,
+  longestStreakStat,
 }) => {
   // If last meditation was not today or yesterday, reset current streak to 0
   useEffect(() => {
@@ -52,7 +53,12 @@ const SettingsScreen = ({
             currentStreakStat === 1 ? 'day' : 'days'
           }`}
         />
-        <StatRow statKey="Longest Streak" statValue="3 days" />
+        <StatRow
+          statKey="Longest Streak"
+          statValue={`${longestStreakStat} ${
+            longestStreakStat === 1 ? 'day' : 'days'
+          }`}
+        />
         <StatRow statKey="Last Meditation" statValue={lastMeditationDateStat} />
       </View>
     </ScrollView>
@@ -81,4 +87,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SettingsScreen;
+export default StatsScreen;

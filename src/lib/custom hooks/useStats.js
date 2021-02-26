@@ -10,6 +10,7 @@ const {
   TOTAL_TIME,
   LAST_MEDITATION_DATE,
   CURRENT_STREAK,
+  LONGEST_STREAK,
 } = STORAGE_KEYS;
 
 const useStats = () => {
@@ -17,6 +18,7 @@ const useStats = () => {
   const [totalTimeStat, setTotalTimeStat] = useState(0);
   const [lastMeditationDateStat, setLastMeditationDateStat] = useState('-');
   const [currentStreakStat, setCurrentStreakStat] = useState(0);
+  const [longestStreakStat, setLongestStreakStat] = useState(0);
 
   // Initial loading of stats data from async storage and setting of state.
   useEffect(() => {
@@ -45,6 +47,9 @@ const useStats = () => {
           setCurrentStreakStat(parseInt(data[CURRENT_STREAK]));
         }
       }
+
+      data[LONGEST_STREAK] &&
+        setLongestStreakStat(parseInt(data[LONGEST_STREAK]));
 
       console.log(data);
     });
@@ -118,6 +123,8 @@ const useStats = () => {
         setCurrentStreakStat((prev) => {
           storeStringData(CURRENT_STREAK, prev + 1);
 
+          updateLongestStreakStat(prev + 1);
+
           return prev + 1;
         });
         // If first ever meditation or lastMeditation >= 2 days ago => setStreak to 1
@@ -125,6 +132,14 @@ const useStats = () => {
         setCurrentStreakStat(1);
         storeStringData(CURRENT_STREAK, '1');
       }
+    }
+  };
+
+  const updateLongestStreakStat = (newCurrentStreak) => {
+    if (newCurrentStreak > longestStreakStat) {
+      setLongestStreakStat(newCurrentStreak);
+
+      storeStringData(LONGEST_STREAK, newCurrentStreak.toString());
     }
   };
 
@@ -139,6 +154,7 @@ const useStats = () => {
     updateCurrentStreakStat,
     shouldResetCurrentStreakStat,
     resetCurrentStreakStat,
+    longestStreakStat,
   };
 };
 

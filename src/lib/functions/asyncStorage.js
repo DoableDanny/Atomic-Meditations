@@ -1,15 +1,3 @@
-// 1.
-// MEDITATIONS SCREEN -> AFTER 2 MINS, UNLOCK NEXT DAY.
-// DoneBtn pressed -> Get stored time, add current and save.
-// -> Get sessions, add 1 and save.
-// -> Save current date
-// -> If current date = yesterday + 1, add 1 to streak and save
-// -> If current streak > longest streak, + 1 and save
-// STATS SCREEN -> If streak !== 0 and if lastMed !== today || today - 1, reset streak to 0 and save
-// 2.
-// ON App COMPONENT MOUNT CAN GET ALL DATA (multiGet) FROM STORAGE AND SET STATES (apart from streak?)
-// THIS CAN BE PASSED DOWN TO CORRECT SCREENS?
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const STORAGE_KEYS = {
