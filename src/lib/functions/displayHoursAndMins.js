@@ -24,7 +24,7 @@ export const hoursAndMinsString = (seconds) => {
     ? `${hours} ${hours === '01' ? 'hr, ' : 'hrs, '}`
     : null;
 
-  const minsString = `${mins} ${mins === 1 ? 'min' : 'mins'}`;
+  const minsString = `${mins} ${mins === '01' ? 'min' : 'mins'}`;
 
   const displayString = hoursString ? hoursString + minsString : minsString;
 
