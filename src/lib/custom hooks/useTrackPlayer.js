@@ -35,17 +35,32 @@ const useTrackPlayer = () => {
   };
 
   const playSound = () => {
-    TrackPlayer.play();
+    try {
+      TrackPlayer.play();
+    } catch (e) {
+      console.log(e);
+      setUpTrackPlayerAndPlaySound();
+    }
   };
 
   const stopSound = () => {
     TrackPlayer.destroy();
   };
 
+  // If timer is on for long time, Trackplayer will be re-setup just to be safe.
+  const setUpTrackPlayerAndPlaySound = async () => {
+    await setUpTrackPlayer;
+    playSound();
+  };
+
+  TrackPlayer.getState().then((state) => {
+    console.log(state);
+  });
+
   return {
+    setUpTrackPlayer,
     playSound,
     stopSound,
-    setUpTrackPlayer,
   };
 };
 

@@ -152,11 +152,11 @@ const SettingsScreen = ({
         </Text>
         <Button
           title="Purchase Full App"
-          handlePress={() => purchase('test_1')}
+          handlePress={() => purchase(itemSKUs[0])}
         />
         <Text style={styles.description}>
           {isFullAppPurchased &&
-            'You made the great decision to purchase Atomic Meditations, thank you!'}
+            'You made a great decision. You purchased Atomic Meditations, thank you!'}
         </Text>
       </View>
     </ScrollView>

@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import BackgroundTimer from 'react-native-background-timer';
+import TrackPlayer from 'react-native-track-player';
 
 import Button from '../../lib/components/Button';
 import useTrackPlayer from '../../lib/custom hooks/useTrackPlayer';
@@ -22,17 +23,15 @@ const TimerScreen = ({
   updateCurrentStreakStat,
 }) => {
   const [seconds, setSeconds] = useState(0);
-  const {playSound, stopSound, setUpTrackPlayer} = useTrackPlayer();
+  const {playSound, stopSound, setUpTrackPlayerAndPlaySound} = useTrackPlayer();
+  const [showStopSoundBtn, setShowStopSoundBtn] = useState(false);
+
+  let headerMsgTimeOut = useRef(null);
 
   const startTimer = () => {
     BackgroundTimer.runBackgroundTimer(() => {
       setSeconds((prevSecs) => prevSecs + 1);
-    }, 1);
-  };
-
-  const setUpTrackPlayerAndPlaySound = async () => {
-    await setUpTrackPlayer;
-    playSound();
+    }, 20);
   };
 
   // Called when user presses doneBtn
@@ -50,23 +49,24 @@ const TimerScreen = ({
     }
 
     if (seconds === alarmRingSeconds) {
-      try {
-        playSound();
-      } catch (e) {
-        console.log(e);
-        // Track player may need re-setting up if long meditation (just to be safe)
-        setUpTrackPlayerAndPlaySound();
-      }
+      playSound();
 
-      // setHeaderMsg('Goal time reached, great job!');
+      setHeaderMsg('Goal time reached, great job!');
 
-      // setTimeout(() => {
-      //   setHeaderMsg('Feel free to continue meditating...');
-      // }, 4000);
+      headerMsgTimeOut.current = setTimeout(() => {
+        setHeaderMsg('Feel free to continue meditating...');
+      }, 3000);
 
-      // setTimeout(() => {
-      //   setHeaderMsg('');
-      // }, 8000);
+      headerMsgTimeOut.current = setTimeout(() => {
+        setHeaderMsg('');
+      }, 8000);
+
+      setShowStopSoundBtn(true);
+    }
+
+    // Alarm sounds will be about 15 seconds
+    if (seconds === alarmRingSeconds + 15) {
+      // setShowStopSoundBtn(false);
     }
   }, [seconds]);
 
@@ -74,8 +74,14 @@ const TimerScreen = ({
     startTimer();
 
     // Clean up
-    return () => BackgroundTimer.stopBackgroundTimer();
+    return () => {
+      BackgroundTimer.stopBackgroundTimer();
+      clearTimeout(headerMsgTimeOut.current);
+    };
   }, []);
+
+  // Need a Stop btn to appear when alarmRingSeconds === seconds
+  // OR btn appears if TrackPlayer state === 'PLAYING
 
   return (
     <>
@@ -84,6 +90,16 @@ const TimerScreen = ({
         <Text style={styles.time}>{clockify(seconds).displayMins} : </Text>
         <Text style={styles.time}>{clockify(seconds).displaySecs}</Text>
       </View>
+
+      {showStopSoundBtn && (
+        <Button
+          title="Stop Sound"
+          handlePress={() => {
+            stopSound();
+            setShowStopSoundBtn(false);
+          }}
+        />
+      )}
 
       <View style={styles.doneBtnWrapper}>
         {seconds >= 120 && (
