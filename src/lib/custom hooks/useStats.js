@@ -27,6 +27,7 @@ const useStats = () => {
       TOTAL_TIME,
       LAST_MEDITATION_DATE,
       CURRENT_STREAK,
+      LONGEST_STREAK,
     ]).then((data) => {
       // If not null then set state.
       data[TOTAL_SESSIONS] &&
