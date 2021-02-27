@@ -1,16 +1,21 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+// import {requestPurchase, requestSubscription, useIAP} from 'react-native-iap';
 
 import {theme} from './src/lib/theme/theme';
-import HomeScreen from './src/screens/Home/HomeScreen';
-import MeditationScreen from './src/screens/Meditation/MeditationScreen';
-import SettingsScreen from './src/screens/Settings/SettingsScreen';
-import StatsScreen from './src/screens/Stats/StatsScreen';
+
+import {
+  HomeScreen,
+  MeditationScreen,
+  SettingsScreen,
+  StatsScreen,
+} from './src/screens';
 
 import useMeditations from './src/lib/custom hooks/useMeditations';
 import useStats from './src/lib/custom hooks/useStats';
+import useInAppPurchase from './src/lib/custom hooks/useInAppPurchase';
 
 const App = () => {
   const Stack = createStackNavigator();
@@ -35,6 +40,20 @@ const App = () => {
     resetCurrentStreakStat,
     longestStreakStat,
   } = useStats();
+
+  const {
+    connected,
+    products,
+    getProducts,
+    finishTransaction,
+    currentPurchase,
+    currentPurchaseError,
+    purchase,
+    isFullAppPurchased,
+  } = useInAppPurchase();
+
+  console.log('CURRENT PURCHASE', currentPurchase);
+  console.log('CURRENT PURCHASE ERROR', currentPurchaseError);
 
   return (
     <NavigationContainer>
@@ -72,7 +91,17 @@ const App = () => {
           )}
         </Stack.Screen>
 
-        <Stack.Screen name="Settings" component={SettingsScreen} />
+        <Stack.Screen name="Settings">
+          {(props) => (
+            <SettingsScreen
+              {...props}
+              connected={connected}
+              products={products}
+              purchase={purchase}
+              isFullAppPurchased={isFullAppPurchased}
+            />
+          )}
+        </Stack.Screen>
 
         <Stack.Screen name="Stats">
           {(props) => (

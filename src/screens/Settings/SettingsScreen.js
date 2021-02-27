@@ -6,6 +6,7 @@ import Button from '../../lib/components/Button';
 import AdjustTimeModule from './components/AdjustTimeModule';
 import {theme} from '../../lib/theme/theme';
 import {setLocalNotificationSchedule} from '../../lib/functions/pushNotificationConfig';
+import {itemSKUs} from '../../lib/custom hooks/useInAppPurchase';
 
 // Need a cancelReminderBtn
 
@@ -15,10 +16,18 @@ import {setLocalNotificationSchedule} from '../../lib/functions/pushNotification
 
 const NOTIFICATION_TITLE = `Get ready, it's meditation time in 5 mins...`;
 
-const SettingsScreen = () => {
+const SettingsScreen = ({
+  connected,
+  products,
+  purchase,
+  isFullAppPurchased,
+}) => {
   const [hours, setHours] = useState(12);
   const [mins, setMins] = useState(30);
   const [notificationsArray, setNotificationsArray] = useState([]);
+
+  console.log('CONN: ', connected);
+  console.log('PRODUCTS: ', products);
 
   let displayHours = hours < 10 ? `0${hours}` : hours;
   let displayMins = mins < 10 ? `0${mins}` : mins;
@@ -101,8 +110,6 @@ const SettingsScreen = () => {
     getAndSetScheduledLocalNotifications();
   }, []);
 
-  console.log(notificationsArray);
-
   return (
     <ScrollView style={styles.container}>
       <View style={styles.optionWrapper}>
@@ -143,7 +150,14 @@ const SettingsScreen = () => {
           The first 3 days are free. The full app costs just ***** and helps to
           support the developer!
         </Text>
-        <Button title="Purchase Full App" />
+        <Button
+          title="Purchase Full App"
+          handlePress={() => purchase('test_1')}
+        />
+        <Text style={styles.description}>
+          {isFullAppPurchased &&
+            'You made the great decision to purchase Atomic Meditations, thank you!'}
+        </Text>
       </View>
     </ScrollView>
   );
