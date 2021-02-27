@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import BackgroundTimer from 'react-native-background-timer';
-import TrackPlayer from 'react-native-track-player';
+import KeepAwake from 'react-native-keep-awake';
 
 import Button from '../../lib/components/Button';
 import useTrackPlayer from '../../lib/custom hooks/useTrackPlayer';
@@ -72,11 +72,13 @@ const TimerScreen = ({
 
   useEffect(() => {
     startTimer();
+    KeepAwake.activate();
 
     // Clean up
     return () => {
       BackgroundTimer.stopBackgroundTimer();
       clearTimeout(headerMsgTimeOut.current);
+      KeepAwake.deactivate();
     };
   }, []);
 

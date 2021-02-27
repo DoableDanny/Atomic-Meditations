@@ -12,6 +12,8 @@ target 'atomicMeditation' do
 
   pod 'RNIap', :path => '../node_modules/react-native-iap'
 
+  pod 'react-native-keep-awake', :path => '../node_modules/react-native-keep-awake'
+
   target 'atomicMeditationTests' do
     inherit! :complete
     # Pods for testing

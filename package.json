@@ -19,6 +19,7 @@
     "react-native-background-timer": "^2.4.1",
     "react-native-gesture-handler": "^1.10.1",
     "react-native-iap": "^6.0.0-rc.23",
+    "react-native-keep-awake": "^4.0.0",
     "react-native-push-notification": "^7.2.1",
     "react-native-reanimated": "^1.13.2",
     "react-native-safe-area-context": "^3.1.9",
