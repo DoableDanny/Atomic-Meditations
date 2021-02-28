@@ -23,7 +23,7 @@ const TimerScreen = ({
   updateCurrentStreakStat,
 }) => {
   const [seconds, setSeconds] = useState(0);
-  const {playSound, stopSound, setUpTrackPlayerAndPlaySound} = useTrackPlayer();
+  const {playSound, stopSound} = useTrackPlayer();
   const [showStopSoundBtn, setShowStopSoundBtn] = useState(false);
 
   let headerMsgTimeOut = useRef(null);
@@ -36,9 +36,11 @@ const TimerScreen = ({
 
   // Called when user presses doneBtn
   const updateUserStats = () => {
+    // const newCurrentStreak = currentStreakStat;
     updateTotalSessionsStat();
     updateTotalTimeStat(seconds);
     updateCurrentStreakStat(lastMeditationDateStat);
+    // updateLongestStreakStat(newCurrentStreak);
     updateLastMeditationDateStat();
   };
 

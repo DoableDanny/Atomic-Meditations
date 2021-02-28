@@ -53,10 +53,6 @@ const useTrackPlayer = () => {
     playSound();
   };
 
-  TrackPlayer.getState().then((state) => {
-    console.log(state);
-  });
-
   return {
     setUpTrackPlayer,
     playSound,

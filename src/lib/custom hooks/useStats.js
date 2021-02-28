@@ -56,13 +56,10 @@ const useStats = () => {
     });
   }, []);
 
+  // If meditation not today or yesterday => return true
   const shouldResetCurrentStreakStat = (lastMeditationDateData) => {
     const today = getFormattedDate(new Date());
     const yesterday = getFormattedDate(new Date(Date.now() - 86400000));
-
-    console.log('today', today);
-    console.log('yesterday', yesterday);
-    console.log('lastMedDate', lastMeditationDateData);
 
     if (
       lastMeditationDateData === today ||
@@ -74,6 +71,7 @@ const useStats = () => {
     return true;
   };
 
+  // Format date to dd/mm/yyyy
   const getFormattedDate = (dateObj) => {
     const today = dateObj;
 
@@ -132,15 +130,16 @@ const useStats = () => {
       } else {
         setCurrentStreakStat(1);
         storeStringData(CURRENT_STREAK, '1');
+
+        updateLongestStreakStat(1);
       }
     }
   };
 
-  const updateLongestStreakStat = (newCurrentStreak) => {
-    if (newCurrentStreak > longestStreakStat) {
-      setLongestStreakStat(newCurrentStreak);
-
-      storeStringData(LONGEST_STREAK, newCurrentStreak.toString());
+  const updateLongestStreakStat = (currentStreak) => {
+    if (currentStreak > longestStreakStat) {
+      setLongestStreakStat(currentStreak);
+      storeStringData(LONGEST_STREAK, currentStreak.toString());
     }
   };
 
