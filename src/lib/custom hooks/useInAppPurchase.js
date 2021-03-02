@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {requestPurchase, requestSubscription, useIAP} from 'react-native-iap';
 import {Alert} from 'react-native';
 
@@ -10,7 +10,19 @@ import {
 
 // Play store item Ids
 export const itemSKUs = Platform.select({
-  android: ['full_app'],
+  android: [
+    'full_app',
+    'test_1',
+    'test_2',
+    'test_3',
+    'test_4',
+    'test_5',
+    'test_6',
+    'test_7',
+    'test_8',
+    'test_9',
+    'test_10',
+  ],
 });
 
 const {IS_FULL_APP_PURCHASED} = STORAGE_KEYS;
@@ -33,17 +45,23 @@ const useInAppPurchase = () => {
     getProducts(itemSKUs);
   }, [getProducts]);
 
+  // User gets full app access upon purchase, even before purchase is acknowledged. Then if error, app access is removed and alert showed.
   useEffect(() => {
     const checkCurrentPurchase = async (purchase) => {
       if (purchase) {
         const receipt = purchase.transactionReceipt;
 
+        console.log('RECEIPT: ', receipt);
+
         if (receipt) {
+          // Give full app access
+          setAndStoreFullAppPurchase(true);
           try {
             const ackResult = await finishTransaction(purchase);
-            console.log('ackResult', ackResult);
+            console.log('ackResult: ', ackResult);
           } catch (ackErr) {
-            console.warn('ackErr', ackErr);
+            // We would need a backend to validate receipts for purhcases that pended a while and were then declined. So I'll assume most purchase attempts go through successfully (OK ackResult) & take the hit for the ones that don't (user will still have full app access).
+            console.log('ackErr', ackErr);
           }
         }
       }
@@ -59,8 +77,7 @@ const useInAppPurchase = () => {
         currentPurchaseError.code === 'E_ALREADY_OWNED' &&
         !isFullAppPurchased
       ) {
-        setIsFullAppPurchased(true);
-        storeStringData(IS_FULL_APP_PURCHASED, 'true');
+        setAndStoreFullAppPurchase(true);
       }
     }
   }, [currentPurchaseError]);
@@ -72,9 +89,15 @@ const useInAppPurchase = () => {
   // Load is_full_app_purchased from storage on initial load. true => full app access.
   useEffect(() => {
     getStringData(IS_FULL_APP_PURCHASED).then((data) => {
+      console.log('data: ', data);
       setIsFullAppPurchased(data === 'true');
     });
   }, []);
+
+  const setAndStoreFullAppPurchase = (boolean) => {
+    setIsFullAppPurchased(boolean);
+    storeStringData(IS_FULL_APP_PURCHASED, boolean.toString());
+  };
 
   return {
     connected,

@@ -14,26 +14,6 @@ const MeditationModule = ({
   // Total meditation session seconds
   const seconds = item.completionTime;
 
-  // const clockify = (seconds) => {
-  //   const hours = Math.floor(seconds / 60 / 60);
-  //   const mins = Math.round((seconds / 60) % 60);
-
-  //   let displayHours = null;
-  //   if (hours > 0) {
-  //     displayHours = hours < 10 ? `0${hours}` : hours;
-  //   }
-
-  //   const displayMins = mins < 10 ? `0${mins}` : mins;
-
-  //   return {
-  //     displayHours,
-  //     displayMins,
-  //   };
-  // };
-
-  // // Convert to hours & mins to display
-  // const hours = clockify(item.completionTime).displayHours;
-  // const mins = clockify(item.completionTime).displayMins;
   return (
     <TouchableOpacity
       style={[

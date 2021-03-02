@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, {useEffect} from 'react';
+import React, {useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 // import {requestPurchase, requestSubscription, useIAP} from 'react-native-iap';
@@ -18,8 +18,6 @@ import useStats from './src/lib/custom hooks/useStats';
 import useInAppPurchase from './src/lib/custom hooks/useInAppPurchase';
 
 const App = () => {
-  const Stack = createStackNavigator();
-
   const {
     meditations,
     meditationsUnlocked,
@@ -54,6 +52,8 @@ const App = () => {
 
   console.log('CURRENT PURCHASE', currentPurchase);
   console.log('CURRENT PURCHASE ERROR', currentPurchaseError);
+
+  const Stack = createStackNavigator();
 
   return (
     <NavigationContainer>

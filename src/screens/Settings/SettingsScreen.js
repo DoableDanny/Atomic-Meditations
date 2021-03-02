@@ -26,9 +26,6 @@ const SettingsScreen = ({
   const [mins, setMins] = useState(30);
   const [notificationsArray, setNotificationsArray] = useState([]);
 
-  console.log('CONN: ', connected);
-  console.log('PRODUCTS: ', products);
-
   let displayHours = hours < 10 ? `0${hours}` : hours;
   let displayMins = mins < 10 ? `0${mins}` : mins;
 
@@ -152,12 +149,14 @@ const SettingsScreen = ({
         </Text>
         <Button
           title="Purchase Full App"
-          handlePress={() => purchase(itemSKUs[0])}
+          handlePress={() => purchase(itemSKUs[10])}
         />
-        <Text style={styles.description}>
-          {isFullAppPurchased &&
-            'You made a great decision. You purchased Atomic Meditations, thank you!'}
-        </Text>
+        {isFullAppPurchased && (
+          <Text style={styles.description}>
+            'You have full access to Atomic Meditations. You made a great
+            decision. Thank you!'
+          </Text>
+        )}
       </View>
     </ScrollView>
   );

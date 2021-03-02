@@ -41,10 +41,10 @@ const useStats = () => {
       // If last meditation was not today or yesterday, reset streak to 0 days.
       if (data[CURRENT_STREAK]) {
         if (shouldResetCurrentStreakStat(data[LAST_MEDITATION_DATE])) {
-          console.log('Should reset');
+          console.log('Should reset streak');
           resetCurrentStreakStat();
         } else {
-          console.log('should not reset');
+          console.log('should not reset streak');
           setCurrentStreakStat(parseInt(data[CURRENT_STREAK]));
         }
       }
