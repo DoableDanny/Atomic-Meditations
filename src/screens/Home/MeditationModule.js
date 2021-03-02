@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, TouchableOpacity, View, Text, StyleSheet} from 'react-native';
+import {TouchableOpacity, Text, StyleSheet, Alert} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {theme} from '../../lib/theme/theme';
@@ -10,9 +10,23 @@ const MeditationModule = ({
   navigation,
   listLength,
   meditationsUnlocked,
+  isFullAppPurchased,
 }) => {
   // Total meditation session seconds
   const seconds = item.completionTime;
+
+  const handlePress = () => {
+    // If meditation has been unlocked (if not we do nothing).
+    if (item.id <= meditationsUnlocked + 1) {
+      // If app's been purchased, or not purchased and the meditation is 1, 2, or 3
+      if (isFullAppPurchased || (!isFullAppPurchased && item.id <= 3)) {
+        // Then navigate to it.
+        navigation.navigate('Meditation', {currentMeditation: item});
+      } else if (!isFullAppPurchased && item.id > 3) {
+        Alert.alert('Please purchase full app');
+      }
+    }
+  };
 
   return (
     <TouchableOpacity
@@ -20,10 +34,7 @@ const MeditationModule = ({
         styles.meditationModule,
         item.id == listLength && {marginBottom: 80},
       ]}
-      onPress={() =>
-        item.id <= meditationsUnlocked + 1 &&
-        navigation.navigate('Meditation', {currentMeditation: item})
-      }>
+      onPress={handlePress}>
       {item.id <= meditationsUnlocked + 1 ? (
         <>
           <Text style={styles.text}>Day {item.id}</Text>

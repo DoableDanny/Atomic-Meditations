@@ -72,6 +72,7 @@ const App = () => {
               {...props}
               meditations={meditations}
               meditationsUnlocked={meditationsUnlocked}
+              isFullAppPurchased={isFullAppPurchased}
             />
           )}
         </Stack.Screen>

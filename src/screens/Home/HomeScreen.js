@@ -5,13 +5,19 @@ import {theme} from '../../lib/theme/theme';
 import MeditationModule from './MeditationModule';
 import Footer from './Footer';
 
-const HomeScreen = ({navigation, meditations, meditationsUnlocked}) => {
+const HomeScreen = ({
+  navigation,
+  meditations,
+  meditationsUnlocked,
+  isFullAppPurchased,
+}) => {
   const renderMeditationModule = ({item}) => (
     <MeditationModule
       item={item}
       navigation={navigation}
       listLength={meditations.length}
       meditationsUnlocked={meditationsUnlocked}
+      isFullAppPurchased={isFullAppPurchased}
     />
   );
 
