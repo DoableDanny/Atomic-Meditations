@@ -14,7 +14,7 @@ const SettingScaffold = ({title, description, children}) => {
 const styles = StyleSheet.create({
   optionWrapper: {
     alignItems: 'center',
-    marginVertical: 16,
+    marginVertical: 24,
   },
   title: {
     textAlign: 'center',

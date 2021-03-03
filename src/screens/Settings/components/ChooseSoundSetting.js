@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 import AdjustTimeBtn from '../../../lib/components/AdjustTimeBtn';
+import SettingScaffold from './SettingScaffold';
 import useTrackPlayer, {TRACKS} from '../../../lib/custom hooks/useTrackPlayer';
 
 const ChooseSoundSetting = () => {
@@ -30,14 +31,21 @@ const ChooseSoundSetting = () => {
   };
 
   return (
-    <View style={styles.wrapper}>
-      <AdjustTimeBtn
-        iconName="keyboard-arrow-left"
-        handlePress={previousTrack}
-      />
-      <Text>{TRACKS[trackNumber].title}</Text>
-      <AdjustTimeBtn iconName="keyboard-arrow-right" handlePress={nextTrack} />
-    </View>
+    <SettingScaffold
+      title="Select Alarm Sound"
+      description="Sound to be played upon time up.">
+      <View style={styles.wrapper}>
+        <AdjustTimeBtn
+          iconName="keyboard-arrow-left"
+          handlePress={previousTrack}
+        />
+        <Text>{TRACKS[trackNumber].title}</Text>
+        <AdjustTimeBtn
+          iconName="keyboard-arrow-right"
+          handlePress={nextTrack}
+        />
+      </View>
+    </SettingScaffold>
   );
 };
 

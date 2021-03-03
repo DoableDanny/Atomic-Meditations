@@ -113,7 +113,7 @@ const NotificationSetting = ({styles}) => {
         />
       </View>
       <Button title="Set New Reminder" handlePress={setNotification} />
-      <Text style={styles.description}>
+      <Text style={styles.message}>
         {notificationsArray.length > 0
           ? notificationsArray.map(
               (notification) =>

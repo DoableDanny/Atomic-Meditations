@@ -42,13 +42,13 @@ const PurchaseFullAppSetting = ({
         }}
       />
       {isFullAppPurchased && (
-        <Text style={styles.description}>
+        <Text style={styles.message}>
           You have full access to Atomic Meditations. You made a great decision.
           Thank you!
         </Text>
       )}
       {connectionErrorMsg !== '' && (
-        <Text style={{...styles.description, color: 'red'}}>
+        <Text style={{...styles.message, color: 'red'}}>
           {connectionErrorMsg}
         </Text>
       )}

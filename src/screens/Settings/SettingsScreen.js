@@ -43,9 +43,9 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
   },
-  description: {
+  message: {
     textAlign: 'center',
-    marginVertical: 16,
+    marginTop: 16,
     fontSize: 16,
   },
 });
