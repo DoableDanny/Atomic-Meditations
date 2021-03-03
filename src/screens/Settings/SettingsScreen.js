@@ -43,22 +43,10 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
   },
-  optionWrapper: {
-    alignItems: 'center',
-    marginVertical: 16,
-  },
-  heading: {
-    textAlign: 'center',
-    fontSize: 21,
-  },
   description: {
     textAlign: 'center',
     marginVertical: 16,
     fontSize: 16,
-  },
-  timesContainer: {
-    flexDirection: 'row',
-    marginBottom: 16,
   },
 });
 

@@ -3,6 +3,7 @@ import {View, Text, Alert} from 'react-native';
 import PushNotification from 'react-native-push-notification';
 
 import {setLocalNotificationSchedule} from '../../../lib/functions/pushNotificationConfig';
+import SettingScaffold from './SettingScaffold';
 import AdjustTimeModule from './AdjustTimeModule';
 import Button from '../../../lib/components/Button';
 
@@ -95,13 +96,11 @@ const NotificationSetting = ({styles}) => {
   };
 
   return (
-    <View style={styles.optionWrapper}>
-      <Text style={styles.heading}>Set a Daily Reminder</Text>
-      <Text style={styles.description}>
-        What time will you meditate? We'll send you a daily reminder 5 mins
-        before it's time so you can get yourself ready.
-      </Text>
-      <View style={styles.timesContainer}>
+    <SettingScaffold
+      title="Set a Daily Reminder"
+      description="What time will you meditate? We'll send you a daily reminder 5 mins
+        before it's time so you can get yourself ready.">
+      <View style={{flexDirection: 'row', marginBottom: 16}}>
         <AdjustTimeModule
           time={hours < 10 ? `0${hours}` : hours}
           addOne={addOneHour}
@@ -125,7 +124,7 @@ const NotificationSetting = ({styles}) => {
             )
           : 'You currently have no reminders set.'}
       </Text>
-    </View>
+    </SettingScaffold>
   );
 };
 
