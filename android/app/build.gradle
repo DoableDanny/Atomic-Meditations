@@ -135,7 +135,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.atomicmeditation"
+        applicationId "com.doabledanny.atomicmeditation"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

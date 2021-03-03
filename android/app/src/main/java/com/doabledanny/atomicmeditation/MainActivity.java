@@ -1,4 +1,4 @@
-package com.atomicmeditation;
+package com.doabledanny.atomicmeditation;
 
 import com.facebook.react.ReactActivity;
 
