@@ -1,14 +1,14 @@
 import React from 'react';
 import {Text, StyleSheet, View} from 'react-native';
 
-import AdjustTimeBtn from '../../../lib/components/AdjustTimeBtn';
+import ArrowButton from '../../../lib/components/ArrowButton';
 
 const AdjustTimeModule = ({time, addOne, minusOne}) => {
   return (
     <View style={styles.timeSelectWrapper}>
-      <AdjustTimeBtn iconName="keyboard-arrow-up" handlePress={addOne} />
+      <ArrowButton iconName="keyboard-arrow-up" handlePress={addOne} />
       <Text style={styles.timeText}>{time}</Text>
-      <AdjustTimeBtn iconName="keyboard-arrow-down" handlePress={minusOne} />
+      <ArrowButton iconName="keyboard-arrow-down" handlePress={minusOne} />
     </View>
   );
 };

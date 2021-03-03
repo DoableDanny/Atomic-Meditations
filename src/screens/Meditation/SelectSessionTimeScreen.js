@@ -1,20 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-// import {TouchableOpacity} from 'react-native-gesture-handler';
-// import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import AdjustTimeBtn from '../../lib/components/AdjustTimeBtn';
+import ArrowButton from '../../lib/components/ArrowButton';
 import Button from '../../lib/components/Button';
-import {theme} from '../../lib/theme/theme';
-
-// const AdjustTimeBtn = ({iconName, iconNum, handlePress}) => {
-//   return (
-//     <TouchableOpacity onPress={handlePress} style={styles.adjustTimeBtn}>
-//       <Icon name={iconName} size={30} />
-//       {iconNum === 2 && <Icon name={iconName} size={30} />}
-//     </TouchableOpacity>
-//   );
-// };
 
 const SelectSessionTimeScreen = ({
   setIsTimerOn,
@@ -60,16 +48,13 @@ const SelectSessionTimeScreen = ({
   return (
     <>
       <View style={{alignItems: 'center'}}>
-        <View style={styles.adjustTimeBtnsModule}>
-          <AdjustTimeBtn
+        <View style={styles.arrowButton}>
+          <ArrowButton
             iconName="keyboard-arrow-up"
             twoArrows
             handlePress={plusTenMins}
           />
-          <AdjustTimeBtn
-            iconName="keyboard-arrow-up"
-            handlePress={plusOneMin}
-          />
+          <ArrowButton iconName="keyboard-arrow-up" handlePress={plusOneMin} />
         </View>
 
         <Text style={styles.time}>
@@ -80,12 +65,12 @@ const SelectSessionTimeScreen = ({
           {clockify(alarmRingSeconds).displayMins}{' '}
           {clockify(alarmRingSeconds).displayMins === '01' ? 'Min' : 'Mins'}
         </Text>
-        <View style={styles.adjustTimeBtnsModule}>
-          <AdjustTimeBtn
+        <View style={styles.arrowButton}>
+          <ArrowButton
             iconName="keyboard-arrow-down"
             handlePress={minusOneMin}
           />
-          <AdjustTimeBtn
+          <ArrowButton
             iconName="keyboard-arrow-down"
             twoArrows
             handlePress={minusTenMins}
@@ -100,7 +85,7 @@ const SelectSessionTimeScreen = ({
 };
 
 const styles = StyleSheet.create({
-  adjustTimeBtnsModule: {
+  arrowButton: {
     width: 100,
   },
   time: {

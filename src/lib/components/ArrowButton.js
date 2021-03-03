@@ -4,9 +4,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {theme} from '../theme/theme';
 
-const AdjustTimeBtn = ({iconName, twoArrows, handlePress}) => {
+const ArrowButton = ({iconName, twoArrows, handlePress}) => {
   return (
-    <TouchableOpacity onPress={handlePress} style={styles.adjustTimeBtn}>
+    <TouchableOpacity onPress={handlePress} style={styles.arrowButton}>
       <Icon name={iconName} size={30} />
       {twoArrows && <Icon name={iconName} size={30} />}
     </TouchableOpacity>
@@ -14,7 +14,7 @@ const AdjustTimeBtn = ({iconName, twoArrows, handlePress}) => {
 };
 
 const styles = StyleSheet.create({
-  adjustTimeBtn: {
+  arrowButton: {
     margin: 8,
     backgroundColor: theme.lightGreen,
     alignItems: 'center',
@@ -24,4 +24,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AdjustTimeBtn;
+export default ArrowButton;

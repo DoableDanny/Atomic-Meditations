@@ -1,87 +1,74 @@
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import TrackPlayer from 'react-native-track-player';
 
 export const TRACKS = [
   {
-    id: '1',
-    url: require('../../assets/sounds/country.mp3'),
-    title: 'Country',
-  },
-  {
-    id: '2',
+    id: '0',
     url: require('../../assets/sounds/crystal-bowls.mp3'),
     title: 'Crystal Bowls',
   },
+
   {
-    id: '3',
+    id: '1',
+    url: require('../../assets/sounds/guitar.mp3'),
+    title: 'Guitar',
+  },
+  {
+    id: '2',
     url: require('../../assets/sounds/flute.mp3'),
     title: 'Flute',
   },
   {
-    id: '4',
-    url: require('../../assets/sounds/guitar.mp3'),
-    title: 'Guitar',
+    id: '3',
+    url: require('../../assets/sounds/country.mp3'),
+    title: 'Country',
   },
 ];
 
-const useTrackPlayer = () => {
+const useTrackPlayer = (tracks) => {
   useEffect(() => {
-    setUpTrackPlayer();
+    TrackPlayer.setupPlayer().then(() => {
+      TrackPlayer.add([...tracks]);
+      console.log('Trackplayer setup');
+    });
 
     return () => {
       try {
         TrackPlayer.destroy();
-        console.log('PLAYER DESTROYED');
-      } catch (e) {
-        console.log(e);
+        console.log('TrackPlayer destroyed');
+      } catch (err) {
+        console.log(err);
       }
     };
   }, []);
 
-  const setUpTrackPlayer = async () => {
-    await TrackPlayer.setupPlayer();
-
-    // TrackPlayer.add(TRACKS[Math.floor(Math.random() * 2)]);
+  const skipTrack = (trackId) => {
+    TrackPlayer.skip(trackId);
   };
 
-  const addAllTracks = () => {
-    TrackPlayer.add(TRACKS);
-  };
-
-  const skipToNext = () => {
-    TrackPlayer.skipToNext();
-  };
-
-  const skipToPrevious = () => {
-    TrackPlayer.skipToPrevious();
-  };
-
-  const playSound = () => {
+  const playTrack = async () => {
     try {
       TrackPlayer.play();
     } catch (e) {
       console.log(e);
-      setUpTrackPlayerAndPlaySound();
+      await setUpTrackPlayer(tracks);
+      playTrack();
     }
   };
 
-  const stopSound = () => {
+  const pauseTrack = () => {
+    TrackPlayer.pause();
+  };
+
+  const stopTrack = () => {
     TrackPlayer.destroy();
   };
 
-  // If timer is on for long time, Trackplayer will be re-setup just to be safe.
-  const setUpTrackPlayerAndPlaySound = async () => {
-    await setUpTrackPlayer;
-    playSound();
-  };
-
   return {
-    setUpTrackPlayer,
-    playSound,
-    stopSound,
-    addAllTracks,
-    skipToNext,
-    skipToPrevious,
+    skipTrack,
+    playTrack,
+    pauseTrack,
+    stopTrack,
   };
 };
 

@@ -1,33 +1,52 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 
-import AdjustTimeBtn from '../../../lib/components/AdjustTimeBtn';
+import ArrowButton from '../../../lib/components/ArrowButton';
 import SettingScaffold from './SettingScaffold';
+import Button from '../../../lib/components/Button';
 import useTrackPlayer, {TRACKS} from '../../../lib/custom hooks/useTrackPlayer';
 
 const ChooseSoundSetting = () => {
   const [trackNumber, setTrackNumber] = useState(0);
+  const [isSoundPlaying, setIsSoundPlaying] = useState(false);
 
-  const {addAllTracks, skipToNext, skipToPrevious} = useTrackPlayer();
+  const {skipTrack, playTrack, pauseTrack} = useTrackPlayer(TRACKS);
 
   useEffect(() => {
-    addAllTracks();
+    if (isSoundPlaying) playTrack();
+    else pauseTrack();
+  }, [isSoundPlaying]);
+
+  useEffect(() => {
+    return () => setIsSoundPlaying(false);
   }, []);
 
   const nextTrack = () => {
-    if (trackNumber === TRACKS.length - 1) {
+    if (trackNumber == TRACKS.length - 1) {
       setTrackNumber(0);
+      skipTrack(`${TRACKS[0].id}`);
+    } else {
+      setTrackNumber((prev) => {
+        skipTrack(`${TRACKS[prev + 1].id}`);
+        return prev + 1;
+      });
     }
-    skipToNext();
-    setTrackNumber((prev) => prev + 1);
   };
 
-  const previousTrack = () => {
-    if (trackNumber === 0) {
-      nextTrack();
+  const prevTrack = () => {
+    if (trackNumber == 0) {
+      setTrackNumber(TRACKS.length - 1);
+      skipTrack(`${TRACKS.length - 1}`);
+    } else {
+      setTrackNumber((prev) => {
+        skipTrack(`${TRACKS[prev - 1].id}`);
+        return prev - 1;
+      });
     }
-    skipToPrevious();
-    setTrackNumber((prev) => prev - 1);
+  };
+
+  const playOrPauseSound = () => {
+    setIsSoundPlaying((prev) => !prev);
   };
 
   return (
@@ -35,16 +54,11 @@ const ChooseSoundSetting = () => {
       title="Select Alarm Sound"
       description="Sound to be played upon time up.">
       <View style={styles.wrapper}>
-        <AdjustTimeBtn
-          iconName="keyboard-arrow-left"
-          handlePress={previousTrack}
-        />
-        <Text>{TRACKS[trackNumber].title}</Text>
-        <AdjustTimeBtn
-          iconName="keyboard-arrow-right"
-          handlePress={nextTrack}
-        />
+        <ArrowButton iconName="keyboard-arrow-left" handlePress={prevTrack} />
+        <Text style={styles.track}>{TRACKS[trackNumber].title}</Text>
+        <ArrowButton iconName="keyboard-arrow-right" handlePress={nextTrack} />
       </View>
+      <Button title="Play/Pause" handlePress={playOrPauseSound} />
     </SettingScaffold>
   );
 };
@@ -55,6 +69,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 16,
+  },
+  track: {
+    fontSize: 18,
+    color: 'blue',
+    paddingHorizontal: 8,
   },
 });
 
