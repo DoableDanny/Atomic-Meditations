@@ -4,9 +4,10 @@ import PushNotification from 'react-native-push-notification';
 
 import Button from '../../lib/components/Button';
 import AdjustTimeModule from './components/AdjustTimeModule';
+import ChooseSoundSetting from './components/ChooseSoundSetting';
 import {theme} from '../../lib/theme/theme';
 import {setLocalNotificationSchedule} from '../../lib/functions/pushNotificationConfig';
-import {itemSKUs} from '../../lib/custom hooks/useInAppPurchase';
+import PurchaseFullAppSetting from './components/PurchaseFullAppSetting';
 
 // Need a cancelReminderBtn
 
@@ -141,23 +142,14 @@ const SettingsScreen = ({
         </Text>
       </View>
 
-      <View style={styles.optionWrapper}>
-        <Text style={styles.heading}>Purchase The Full App</Text>
-        <Text style={styles.description}>
-          The first 3 days are free. The full app costs just ***** and helps to
-          support the developer!
-        </Text>
-        <Button
-          title="Purchase Full App"
-          handlePress={() => purchase(itemSKUs[10])}
-        />
-        {isFullAppPurchased && (
-          <Text style={styles.description}>
-            'You have full access to Atomic Meditations. You made a great
-            decision. Thank you!'
-          </Text>
-        )}
-      </View>
+      <PurchaseFullAppSetting
+        styles={styles}
+        connected={connected}
+        isFullAppPurchased={isFullAppPurchased}
+        purchase={purchase}
+      />
+
+      <ChooseSoundSetting />
     </ScrollView>
   );
 };

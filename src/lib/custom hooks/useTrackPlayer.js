@@ -1,16 +1,26 @@
 import React, {useEffect} from 'react';
 import TrackPlayer from 'react-native-track-player';
 
-const tracks = [
+export const TRACKS = [
   {
     id: '1',
-    url: require('../../assets/sounds/blues.wav'),
-    title: 'Blues',
+    url: require('../../assets/sounds/country.mp3'),
+    title: 'Country',
   },
   {
     id: '2',
-    url: require('../../assets/sounds/country.mp3'),
-    title: 'Country',
+    url: require('../../assets/sounds/crystal-bowls.mp3'),
+    title: 'Crystal Bowls',
+  },
+  {
+    id: '3',
+    url: require('../../assets/sounds/flute.mp3'),
+    title: 'Flute',
+  },
+  {
+    id: '4',
+    url: require('../../assets/sounds/guitar.mp3'),
+    title: 'Guitar',
   },
 ];
 
@@ -31,7 +41,19 @@ const useTrackPlayer = () => {
   const setUpTrackPlayer = async () => {
     await TrackPlayer.setupPlayer();
 
-    TrackPlayer.add(tracks[Math.floor(Math.random() * 2)]);
+    // TrackPlayer.add(TRACKS[Math.floor(Math.random() * 2)]);
+  };
+
+  const addAllTracks = () => {
+    TrackPlayer.add(TRACKS);
+  };
+
+  const skipToNext = () => {
+    TrackPlayer.skipToNext();
+  };
+
+  const skipToPrevious = () => {
+    TrackPlayer.skipToPrevious();
   };
 
   const playSound = () => {
@@ -57,6 +79,9 @@ const useTrackPlayer = () => {
     setUpTrackPlayer,
     playSound,
     stopSound,
+    addAllTracks,
+    skipToNext,
+    skipToPrevious,
   };
 };
 
