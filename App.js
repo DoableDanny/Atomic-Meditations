@@ -99,6 +99,7 @@ const App = () => {
               connected={connected}
               products={products}
               purchase={purchase}
+              currentPurchaseError={currentPurchaseError}
               isFullAppPurchased={isFullAppPurchased}
             />
           )}

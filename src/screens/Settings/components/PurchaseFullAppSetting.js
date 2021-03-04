@@ -9,6 +9,7 @@ const PurchaseFullAppSetting = ({
   connected,
   isFullAppPurchased,
   purchase,
+  currentPurchaseError,
 }) => {
   const [connectionErrorMsg, setConnectionErrorMsg] = useState('');
 
@@ -17,7 +18,12 @@ const PurchaseFullAppSetting = ({
   }, []);
 
   const purchaseFullApp = () => {
-    if (!connected && !isFullAppPurchased) {
+    if (
+      !isFullAppPurchased &&
+      ((currentPurchaseError &&
+        currentPurchaseError.code === 'PROMISE_BUY_ITEM') ||
+        !connected)
+    ) {
       setConnectionErrorMsg(
         'You need an internet connection to make a purchase.',
       );
@@ -26,12 +32,6 @@ const PurchaseFullAppSetting = ({
   };
 
   return (
-    // <View style={styles.optionWrapper}>
-    //   <Text style={styles.heading}>Purchase The Full App</Text>
-    //   <Text style={styles.description}>
-    //     The first 3 days are free. The full app costs just ***** and helps to
-    //     support the developer!
-    //   </Text>
     <SettingScaffold
       title="Purchase The Full App"
       description="The first 3 days are free. The full app costs just ***** and helps to support the developer!">

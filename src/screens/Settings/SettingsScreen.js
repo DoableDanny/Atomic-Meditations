@@ -1,8 +1,6 @@
-import React, {useState, useEffect} from 'react';
-import {ScrollView, Text, StyleSheet, View, Alert} from 'react-native';
+import React from 'react';
+import {ScrollView, StyleSheet} from 'react-native';
 
-import Button from '../../lib/components/Button';
-import AdjustTimeModule from './components/AdjustTimeModule';
 import ChooseSoundSetting from './components/ChooseSoundSetting';
 import {theme} from '../../lib/theme/theme';
 
@@ -17,19 +15,20 @@ import NotificationSetting from './components/NotificationSetting';
 
 const SettingsScreen = ({
   connected,
-  products,
   purchase,
+  currentPurchaseError,
   isFullAppPurchased,
 }) => {
   return (
     <ScrollView style={styles.container}>
-      <NotificationSetting styles={styles} />
+      <NotificationSetting styles={sharedSettingStyles} />
 
       <PurchaseFullAppSetting
-        styles={styles}
+        styles={sharedSettingStyles}
         connected={connected}
         isFullAppPurchased={isFullAppPurchased}
         purchase={purchase}
+        currentPurchaseError={currentPurchaseError}
       />
 
       <ChooseSoundSetting />
@@ -43,6 +42,9 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
   },
+});
+
+const sharedSettingStyles = StyleSheet.create({
   message: {
     textAlign: 'center',
     marginTop: 16,
