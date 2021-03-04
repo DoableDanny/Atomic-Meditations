@@ -72,7 +72,6 @@ const styles = StyleSheet.create({
   },
   track: {
     fontSize: 18,
-    color: 'blue',
     paddingHorizontal: 8,
   },
 });
