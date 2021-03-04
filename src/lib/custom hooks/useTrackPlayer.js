@@ -1,5 +1,10 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import TrackPlayer from 'react-native-track-player';
+import {
+  STORAGE_KEYS,
+  getStringData,
+  storeStringData,
+} from '../functions/asyncStorage';
 
 export const TRACKS = [
   {
@@ -26,9 +31,27 @@ export const TRACKS = [
 ];
 
 const useTrackPlayer = (tracks) => {
+  const [alarmTrackId, setAlarmTrackId] = useState(0);
+
   useEffect(() => {
     TrackPlayer.setupPlayer().then(() => {
-      TrackPlayer.add([...tracks]);
+      // Get users preferred track.
+      getStringData(STORAGE_KEYS.ALARM_SOUND_ID).then((data) => {
+        console.log('DATA: ', data);
+
+        if (data) {
+          const id = parseInt(data);
+          setAlarmTrackId(id);
+
+          // Add all tracks (for Settings Screen).
+          if (tracks === 'all') TrackPlayer.add([...TRACKS]);
+          // Otherwise just add users preferred track (for time-up alarm)
+          else TrackPlayer.add([TRACKS[id]]);
+        }
+      });
+
+      if (tracks === 'all') TrackPlayer.add([...TRACKS]);
+
       console.log('Trackplayer setup');
     });
 
@@ -41,6 +64,12 @@ const useTrackPlayer = (tracks) => {
       }
     };
   }, []);
+
+  const setAndStoreAlarmTrackId = (trackId) => {
+    console.log('SAving trackIdd', trackId);
+    setAlarmTrackId(trackId);
+    storeStringData(STORAGE_KEYS.ALARM_SOUND_ID, trackId.toString());
+  };
 
   const skipTrack = (trackId) => {
     TrackPlayer.skip(trackId);
@@ -69,6 +98,8 @@ const useTrackPlayer = (tracks) => {
     playTrack,
     pauseTrack,
     stopTrack,
+    alarmTrackId,
+    setAndStoreAlarmTrackId,
   };
 };
 

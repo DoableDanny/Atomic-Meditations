@@ -1,8 +1,7 @@
 import 'react-native-gesture-handler';
-import React, {useState} from 'react';
+import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-// import {requestPurchase, requestSubscription, useIAP} from 'react-native-iap';
 
 import {theme} from './src/lib/theme/theme';
 
@@ -37,6 +36,7 @@ const App = () => {
     shouldResetCurrentStreakStat,
     resetCurrentStreakStat,
     longestStreakStat,
+    resetAllStats,
   } = useStats();
 
   const {
@@ -47,9 +47,6 @@ const App = () => {
     purchase,
     isFullAppPurchased,
   } = useInAppPurchase();
-
-  console.log('CURRENT PURCHASE', currentPurchase);
-  console.log('CURRENT PURCHASE ERROR', currentPurchaseError);
 
   const Stack = createStackNavigator();
 
@@ -99,6 +96,7 @@ const App = () => {
               purchase={purchase}
               currentPurchaseError={currentPurchaseError}
               isFullAppPurchased={isFullAppPurchased}
+              resetAllStats={resetAllStats}
             />
           )}
         </Stack.Screen>

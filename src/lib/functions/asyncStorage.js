@@ -9,6 +9,7 @@ export const STORAGE_KEYS = {
   LONGEST_STREAK: '@longest_streak',
   LAST_MEDITATION_DATE: '@last_meditation_date',
   IS_FULL_APP_PURCHASED: '@is_full_app_purchased',
+  ALARM_SOUND_ID: '@alram_sound_id',
 };
 
 // Storing new string data or updating.

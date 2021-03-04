@@ -31,7 +31,7 @@ const SettingsScreen = ({
         currentPurchaseError={currentPurchaseError}
       />
 
-      <ChooseSoundSetting />
+      <ChooseSoundSetting settingStyles={sharedSettingStyles} />
 
       <ResetSettings resetAllStats={resetAllStats} />
     </ScrollView>

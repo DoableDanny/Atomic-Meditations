@@ -23,8 +23,9 @@ const TimerScreen = ({
   updateCurrentStreakStat,
 }) => {
   const [seconds, setSeconds] = useState(0);
-  const {playSound, stopSound} = useTrackPlayer();
   const [showStopSoundBtn, setShowStopSoundBtn] = useState(false);
+
+  const {playSound, stopSound} = useTrackPlayer();
 
   let headerMsgTimeOut = useRef(null);
 
@@ -36,11 +37,9 @@ const TimerScreen = ({
 
   // Called when user presses doneBtn
   const updateUserStats = () => {
-    // const newCurrentStreak = currentStreakStat;
     updateTotalSessionsStat();
     updateTotalTimeStat(seconds);
     updateCurrentStreakStat(lastMeditationDateStat);
-    // updateLongestStreakStat(newCurrentStreak);
     updateLastMeditationDateStat();
   };
 
@@ -83,9 +82,6 @@ const TimerScreen = ({
       KeepAwake.deactivate();
     };
   }, []);
-
-  // Need a Stop btn to appear when alarmRingSeconds === seconds
-  // OR btn appears if TrackPlayer state === 'PLAYING
 
   return (
     <>
