@@ -3,6 +3,7 @@ import {
   STORAGE_KEYS,
   getMultiple,
   storeStringData,
+  removeMultiple,
 } from '../functions/asyncStorage';
 
 const {
@@ -143,6 +144,22 @@ const useStats = () => {
     }
   };
 
+  // Delete all stats
+  const resetAllStats = () => {
+    removeMultiple([
+      TOTAL_SESSIONS,
+      TOTAL_TIME,
+      LAST_MEDITATION_DATE,
+      CURRENT_STREAK,
+      LONGEST_STREAK,
+    ]);
+    setTotalSessionsStat(0);
+    setTotalTimeStat(0);
+    setLastMeditationDateStat('-');
+    setCurrentStreakStat(0);
+    setLongestStreakStat(0);
+  };
+
   return {
     totalSessionsStat,
     updateTotalSessionsStat,
@@ -155,6 +172,7 @@ const useStats = () => {
     shouldResetCurrentStreakStat,
     resetCurrentStreakStat,
     longestStreakStat,
+    resetAllStats,
   };
 };
 

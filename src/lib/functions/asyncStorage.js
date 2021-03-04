@@ -22,7 +22,7 @@ export const storeStringData = async (key, value) => {
   console.log(`Saved`);
 };
 
-export const storeObjectData = async (key, value) => {
+const storeObjectData = async (key, value) => {
   try {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem(key, jsonValue);
@@ -88,7 +88,7 @@ const multiSet = async (keyValuePairsArray) => {
 };
 
 // Remove multiple key-value entries. Input example: ['@MyApp_USER_1', '@MyApp_USER_2']
-const removeMultiple = async (arrayOfKeys) => {
+export const removeMultiple = async (arrayOfKeys) => {
   try {
     await AsyncStorage.multiRemove(arrayOfKeys);
   } catch (e) {

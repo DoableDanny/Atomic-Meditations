@@ -5,5 +5,6 @@ export const theme = {
   yellow: '#FCFFC6',
   lightBlue: '#BBE3F1',
   darkBlue: '#A7D2E9',
-  danger: '#FCFFC6',
+  warning: '#FCFFC6',
+  danger: '#F7B0AD',
 };

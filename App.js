@@ -42,8 +42,6 @@ const App = () => {
   const {
     connected,
     products,
-    getProducts,
-    finishTransaction,
     currentPurchase,
     currentPurchaseError,
     purchase,

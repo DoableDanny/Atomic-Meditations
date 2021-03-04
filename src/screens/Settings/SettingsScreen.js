@@ -6,8 +6,7 @@ import {theme} from '../../lib/theme/theme';
 
 import PurchaseFullAppSetting from './components/PurchaseFullAppSetting';
 import NotificationSetting from './components/NotificationSetting';
-
-// Need a cancelReminderBtn
+import ResetSettings from './components/ResetSettings';
 
 // Need a resetWholeAppBtn
 // Need a resetMeditationsBtn
@@ -18,6 +17,7 @@ const SettingsScreen = ({
   purchase,
   currentPurchaseError,
   isFullAppPurchased,
+  resetAllStats,
 }) => {
   return (
     <ScrollView style={styles.container}>
@@ -32,6 +32,8 @@ const SettingsScreen = ({
       />
 
       <ChooseSoundSetting />
+
+      <ResetSettings resetAllStats={resetAllStats} />
     </ScrollView>
   );
 };
