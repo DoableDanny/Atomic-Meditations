@@ -1,10 +1,24 @@
 import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet, Text, Alert} from 'react-native';
 
 import SettingScaffold from './SettingScaffold';
 import Button from '../../../lib/components/Button';
 
 const ResetSettings = ({resetAllStats}) => {
+  const handleResetStats = () => {
+    Alert.alert(
+      `Are you sure?`,
+      `This will permanently delete all your stats data. Your unlocked meditations will remain.`,
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {text: 'Delete', onPress: resetAllStats},
+      ],
+    );
+  };
+
   return (
     <SettingScaffold
       title="Reset Stats"
@@ -12,7 +26,7 @@ const ResetSettings = ({resetAllStats}) => {
       <Button
         title="Reset Stats"
         btnStyle="danger"
-        handlePress={resetAllStats}
+        handlePress={handleResetStats}
       />
     </SettingScaffold>
   );
