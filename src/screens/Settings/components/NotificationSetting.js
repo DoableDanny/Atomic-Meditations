@@ -95,6 +95,11 @@ const NotificationSetting = ({styles}) => {
     return int < 10 ? `0${int}` : int;
   };
 
+  const cancelNotification = () => {
+    PushNotification.cancelAllLocalNotifications();
+    setNotificationsArray([]);
+  };
+
   return (
     <SettingScaffold
       title="Set a Daily Reminder"
@@ -112,7 +117,10 @@ const NotificationSetting = ({styles}) => {
           minusOne={minusOneMin}
         />
       </View>
-      <Button title="Set New Reminder" handlePress={setNotification} />
+      <View style={{marginBottom: 16}}>
+        <Button title="Set New Reminder" handlePress={setNotification} />
+      </View>
+      <Button title="Cancel Reminder" handlePress={cancelNotification} danger />
       <Text style={styles.message}>
         {notificationsArray.length > 0
           ? notificationsArray.map(
