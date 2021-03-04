@@ -37,7 +37,7 @@ const useTrackPlayer = (tracks) => {
     TrackPlayer.setupPlayer().then(() => {
       // Get users preferred track.
       getStringData(STORAGE_KEYS.ALARM_SOUND_ID).then((data) => {
-        console.log('DATA: ', data);
+        console.log('trackId data: ', data);
 
         if (data) {
           const id = parseInt(data);

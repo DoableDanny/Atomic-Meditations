@@ -28,7 +28,7 @@ const TimerScreen = ({
   // Load users selected track,
   // add it to Trackplayer.
 
-  const {playSound, stopSound} = useTrackPlayer();
+  const {playTrack, stopTrack} = useTrackPlayer();
 
   let headerMsgTimeOut = useRef(null);
 
@@ -53,7 +53,7 @@ const TimerScreen = ({
     }
 
     if (seconds === alarmRingSeconds) {
-      playSound();
+      playTrack();
 
       setHeaderMsg('Goal time reached, great job!');
 
@@ -98,7 +98,7 @@ const TimerScreen = ({
         <Button
           title="Stop Sound"
           handlePress={() => {
-            stopSound();
+            stopTrack();
             setShowStopSoundBtn(false);
           }}
         />
