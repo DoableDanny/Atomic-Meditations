@@ -5,7 +5,7 @@ import {itemSKUs} from '../../../lib/custom hooks/useInAppPurchase';
 import SettingScaffold from './SettingScaffold';
 
 const PurchaseFullAppSetting = ({
-  styles,
+  settingStyles,
   connected,
   isFullAppPurchased,
   purchase,
@@ -42,13 +42,13 @@ const PurchaseFullAppSetting = ({
         }}
       />
       {isFullAppPurchased && (
-        <Text style={styles.message}>
+        <Text style={settingStyles.message}>
           You have full access to Atomic Meditations. You made a great decision.
           Thank you!
         </Text>
       )}
       {connectionErrorMsg !== '' && (
-        <Text style={{...styles.message, color: 'red'}}>
+        <Text style={{...settingStyles.message, color: 'red'}}>
           {connectionErrorMsg}
         </Text>
       )}

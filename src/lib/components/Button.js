@@ -2,12 +2,25 @@ import React from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 import {theme} from '../theme/theme';
 
-const Button = ({title, handlePress, danger}) => {
+const Button = ({title, handlePress, btnStyle}) => {
+  let backgroundColor;
+
+  switch (btnStyle) {
+    case 'warning':
+      backgroundColor = theme.warning;
+      break;
+    case 'danger':
+      backgroundColor = theme.danger;
+      break;
+    default:
+      backgroundColor = theme.lightBlue;
+  }
+
   return (
     <TouchableOpacity
       style={{
         ...styles.btn,
-        backgroundColor: !danger ? theme.lightBlue : theme.danger,
+        backgroundColor: backgroundColor,
       }}
       onPress={handlePress}>
       <Text style={styles.text}>{title}</Text>

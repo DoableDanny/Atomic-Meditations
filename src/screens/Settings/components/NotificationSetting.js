@@ -9,7 +9,7 @@ import Button from '../../../lib/components/Button';
 
 const NOTIFICATION_TITLE = `Get ready, it's meditation time in 5 mins...`;
 
-const NotificationSetting = ({styles}) => {
+const NotificationSetting = ({settingStyles}) => {
   const [hours, setHours] = useState(12);
   const [mins, setMins] = useState(30);
   const [notificationsArray, setNotificationsArray] = useState([]);
@@ -120,8 +120,12 @@ const NotificationSetting = ({styles}) => {
       <View style={{marginBottom: 16}}>
         <Button title="Set New Reminder" handlePress={setNotification} />
       </View>
-      <Button title="Cancel Reminder" handlePress={cancelNotification} danger />
-      <Text style={styles.message}>
+      <Button
+        title="Cancel Reminder"
+        handlePress={cancelNotification}
+        btnStyle="warning"
+      />
+      <Text style={settingStyles.message}>
         {notificationsArray.length > 0
           ? notificationsArray.map(
               (notification) =>

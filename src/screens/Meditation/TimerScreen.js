@@ -25,6 +25,9 @@ const TimerScreen = ({
   const [seconds, setSeconds] = useState(0);
   const [showStopSoundBtn, setShowStopSoundBtn] = useState(false);
 
+  // Load users selected track,
+  // add it to Trackplayer.
+
   const {playSound, stopSound} = useTrackPlayer();
 
   let headerMsgTimeOut = useRef(null);

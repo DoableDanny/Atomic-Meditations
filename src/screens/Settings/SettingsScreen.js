@@ -21,10 +21,10 @@ const SettingsScreen = ({
 }) => {
   return (
     <ScrollView style={styles.container}>
-      <NotificationSetting styles={sharedSettingStyles} />
+      <NotificationSetting settingStyles={sharedSettingStyles} />
 
       <PurchaseFullAppSetting
-        styles={sharedSettingStyles}
+        settingStyles={sharedSettingStyles}
         connected={connected}
         isFullAppPurchased={isFullAppPurchased}
         purchase={purchase}

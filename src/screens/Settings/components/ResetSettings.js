@@ -9,7 +9,11 @@ const ResetSettings = ({resetAllStats}) => {
     <SettingScaffold
       title="Reset Stats"
       description="Reset all of your stats. Your meditation progress will remain.">
-      <Button title="Reset Stats" danger handlePress={resetAllStats} />
+      <Button
+        title="Reset Stats"
+        btnStyle="danger"
+        handlePress={resetAllStats}
+      />
     </SettingScaffold>
   );
 };
