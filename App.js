@@ -21,7 +21,9 @@ const App = () => {
     meditations,
     meditationsUnlocked,
     unlockNextMeditation,
+    updateMeditations,
     updateMeditationCompletionTime,
+    resetAllMeditationCompletionTimes,
   } = useMeditations();
 
   const {
@@ -66,6 +68,7 @@ const App = () => {
             <HomeScreen
               {...props}
               meditations={meditations}
+              updateMeditations={updateMeditations}
               meditationsUnlocked={meditationsUnlocked}
               isFullAppPurchased={isFullAppPurchased}
             />
@@ -97,6 +100,10 @@ const App = () => {
               currentPurchaseError={currentPurchaseError}
               isFullAppPurchased={isFullAppPurchased}
               resetAllStats={resetAllStats}
+              resetAllMeditationCompletionTimes={
+                resetAllMeditationCompletionTimes
+              }
+              meditations={meditations}
             />
           )}
         </Stack.Screen>

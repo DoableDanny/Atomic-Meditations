@@ -13,11 +13,14 @@ import ResetSettings from './components/ResetSettings';
 // Need a resetStatsBtn
 
 const SettingsScreen = ({
+  navigation,
   connected,
   purchase,
   currentPurchaseError,
   isFullAppPurchased,
   resetAllStats,
+  resetAllMeditationCompletionTimes,
+  meditations,
 }) => {
   return (
     <ScrollView style={styles.container}>
@@ -33,7 +36,12 @@ const SettingsScreen = ({
 
       <ChooseSoundSetting settingStyles={sharedSettingStyles} />
 
-      <ResetSettings resetAllStats={resetAllStats} />
+      <ResetSettings
+        navigation={navigation}
+        resetAllStats={resetAllStats}
+        resetAllMeditationCompletionTimes={resetAllMeditationCompletionTimes}
+        meditations={meditations}
+      />
     </ScrollView>
   );
 };

@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {
   STORAGE_KEYS,
   getMultiple,
   storeStringData,
-  removeValue,
   storeObjectData,
+  removeValue,
 } from '../functions/asyncStorage';
 
 const initialState = [];
@@ -60,11 +60,23 @@ const useMeditations = () => {
     storeObjectData(MEDITATIONS, meditations);
   };
 
+  const updateMeditations = (meditations) => {
+    setMeditations(meditations);
+  };
+
+  // Reset completion times to 0 (initial state)
+  const resetAllMeditationCompletionTimes = () => {
+    setMeditations(initialState);
+    removeValue(STORAGE_KEYS.MEDITATIONS);
+  };
+
   return {
     meditations,
     unlockNextMeditation,
     meditationsUnlocked,
     updateMeditationCompletionTime,
+    resetAllMeditationCompletionTimes,
+    updateMeditations,
   };
 };
 
