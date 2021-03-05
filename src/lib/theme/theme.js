@@ -1,3 +1,4 @@
+// https://www.schemecolor.com/pastel-green-blue-yellow.php
 export const theme = {
   navBannerColor: '#4CC94B',
   darkGreen: '#77DD76',
@@ -8,3 +9,5 @@ export const theme = {
   warning: '#FCFFC6',
   danger: '#F7B0AD',
 };
+
+// Dark:  https://www.schemecolor.com/night-sky-color-palette.php

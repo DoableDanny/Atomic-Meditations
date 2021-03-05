@@ -8,7 +8,7 @@ const ResetSettings = ({navigation, resetAllStats}) => {
   const handleResetStats = () => {
     Alert.alert(
       `Are you sure?`,
-      `This will permanently delete all your stats data. Your unlocked meditations will remain.`,
+      `This will permanently delete all your stats data. Your completion times and unlocked meditations will remain.`,
       [
         {
           text: 'Cancel',
@@ -28,7 +28,7 @@ const ResetSettings = ({navigation, resetAllStats}) => {
   const handleResetTimes = () => {
     Alert.alert(
       `Are you sure?`,
-      `This will permanently reset all meditation completion times to 00 mins. Your unlocked meditations will remain.`,
+      `This will permanently reset all meditation completion times to 00 mins. Your stats and unlocked meditations will remain.`,
       [
         {
           text: 'Cancel',

@@ -10,6 +10,7 @@ export const STORAGE_KEYS = {
   LAST_MEDITATION_DATE: '@last_meditation_date',
   IS_FULL_APP_PURCHASED: '@is_full_app_purchased',
   ALARM_SOUND_ID: '@alram_sound_id',
+  DARK_MODE: '@dark_mode',
 };
 
 // Storing new string data or updating.

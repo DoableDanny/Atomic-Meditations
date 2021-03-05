@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {ScrollView, StyleSheet} from 'react-native';
 
+import ThemeContext from '../../lib/contexts/ThemeContext';
 import ChooseSoundSetting from './components/ChooseSoundSetting';
-import {theme} from '../../lib/theme/theme';
+// import {theme} from '../../lib/theme/theme';
 
 import PurchaseFullAppSetting from './components/PurchaseFullAppSetting';
 import NotificationSetting from './components/NotificationSetting';
@@ -18,8 +19,13 @@ const SettingsScreen = ({
   resetAllMeditationCompletionTimes,
   meditations,
 }) => {
+  const theme = useContext(ThemeContext);
+
+  console.log('theme: ', theme);
+
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      style={{...styles.container, backgroundColor: theme.colors.background}}>
       <NotificationSetting settingStyles={sharedSettingStyles} />
 
       <PurchaseFullAppSetting
@@ -44,7 +50,6 @@ const SettingsScreen = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: theme.darkGreen,
     flex: 1,
     padding: 16,
   },
