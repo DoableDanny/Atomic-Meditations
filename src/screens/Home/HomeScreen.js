@@ -10,7 +10,6 @@ const HomeScreen = ({
   navigation,
   route,
   meditations,
-  updateMeditations,
   meditationsUnlocked,
   resetAllMeditationCompletionTimes,
   isFullAppPurchased,
@@ -19,7 +18,7 @@ const HomeScreen = ({
   const isFocused = useIsFocused();
 
   useEffect(() => {
-    // If user resets completion times in Settings, updateMedtiations is called to setState again to ensure meditations are re-rendered (React Native Navigation doesn't re-render when go back a screen).
+    // If user resets completion times in Settings, we reset times here. (React Native Navigation doesn't re-render when go back a screen).
     if (route.params?.resetCompletionTimes) {
       resetAllMeditationCompletionTimes();
       navigation.setParams({resetCompletionTimes: false});

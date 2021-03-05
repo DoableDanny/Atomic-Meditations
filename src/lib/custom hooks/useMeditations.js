@@ -60,10 +60,6 @@ const useMeditations = () => {
     storeObjectData(MEDITATIONS, meditations);
   };
 
-  const updateMeditations = (meditations) => {
-    setMeditations(meditations);
-  };
-
   // Reset completion times to 0.
   const resetAllMeditationCompletionTimes = () => {
     let meditationsCopy = meditations;
@@ -78,7 +74,6 @@ const useMeditations = () => {
     meditationsUnlocked,
     updateMeditationCompletionTime,
     resetAllMeditationCompletionTimes,
-    updateMeditations,
   };
 };
 
