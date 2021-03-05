@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {ScrollView, StyleSheet} from 'react-native';
+import {ScrollView, Button, StyleSheet} from 'react-native';
 
 import ThemeContext from '../../lib/contexts/ThemeContext';
 import ChooseSoundSetting from './components/ChooseSoundSetting';
@@ -18,6 +18,7 @@ const SettingsScreen = ({
   resetAllStats,
   resetAllMeditationCompletionTimes,
   meditations,
+  toggleDarkMode,
 }) => {
   const theme = useContext(ThemeContext);
 
@@ -37,6 +38,8 @@ const SettingsScreen = ({
       />
 
       <ChooseSoundSetting settingStyles={sharedSettingStyles} />
+
+      <Button title="Toggle Dark Mode" onPress={toggleDarkMode} />
 
       <ResetSettings
         navigation={navigation}

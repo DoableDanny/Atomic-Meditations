@@ -20,11 +20,11 @@ import useStats from './src/lib/custom hooks/useStats';
 import useInAppPurchase from './src/lib/custom hooks/useInAppPurchase';
 
 const App = () => {
-  const {darkMode, updateDarkMode} = useTheme();
+  const {darkMode, toggleDarkMode} = useTheme();
 
   console.log(theme);
 
-  // Need to pass updateDarkMode to Settings Screen so can set from there.
+  // Need to pass toggleDarkMode to Settings Screen so can set from there.
 
   const {
     meditations,
@@ -115,6 +115,7 @@ const App = () => {
                 isFullAppPurchased={isFullAppPurchased}
                 resetAllStats={resetAllStats}
                 meditations={meditations}
+                toggleDarkMode={toggleDarkMode}
               />
             )}
           </Stack.Screen>

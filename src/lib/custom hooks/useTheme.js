@@ -20,14 +20,17 @@ const useTheme = () => {
     });
   }, []);
 
-  const updateDarkMode = (boolean) => {
-    setDarkMode(DARK_MODE);
-    storeStringData(boolean.toString());
+  const toggleDarkMode = () => {
+    setDarkMode((prev) => {
+      storeStringData(DARK_MODE, !prev.toString());
+      console.log('darkMode: ', !prev);
+      return !prev;
+    });
   };
 
   return {
     darkMode,
-    updateDarkMode,
+    toggleDarkMode,
   };
 };
 
