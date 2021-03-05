@@ -8,10 +8,6 @@ import PurchaseFullAppSetting from './components/PurchaseFullAppSetting';
 import NotificationSetting from './components/NotificationSetting';
 import ResetSettings from './components/ResetSettings';
 
-// Need a resetWholeAppBtn
-// Need a resetMeditationsBtn
-// Need a resetStatsBtn
-
 const SettingsScreen = ({
   navigation,
   connected,

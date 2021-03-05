@@ -68,12 +68,18 @@ const useMeditations = () => {
     removeValue(STORAGE_KEYS.MEDITATIONS);
   };
 
+  const relockMeditations = () => {
+    setMeditationsUnlocked(0);
+    removeValue(STORAGE_KEYS.MEDITATIONS_UNLOCKED);
+  };
+
   return {
     meditations,
     unlockNextMeditation,
     meditationsUnlocked,
     updateMeditationCompletionTime,
     resetAllMeditationCompletionTimes,
+    relockMeditations,
   };
 };
 

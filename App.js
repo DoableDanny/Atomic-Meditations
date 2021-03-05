@@ -23,6 +23,7 @@ const App = () => {
     unlockNextMeditation,
     updateMeditationCompletionTime,
     resetAllMeditationCompletionTimes,
+    relockMeditations,
   } = useMeditations();
 
   const {
@@ -43,7 +44,6 @@ const App = () => {
   const {
     connected,
     products,
-    currentPurchase,
     currentPurchaseError,
     purchase,
     isFullAppPurchased,
@@ -71,6 +71,7 @@ const App = () => {
               resetAllMeditationCompletionTimes={
                 resetAllMeditationCompletionTimes
               }
+              relockMeditations={relockMeditations}
               isFullAppPurchased={isFullAppPurchased}
             />
           )}
