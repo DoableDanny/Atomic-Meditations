@@ -64,9 +64,11 @@ const useMeditations = () => {
     setMeditations(meditations);
   };
 
-  // Reset completion times to 0 (initial state)
+  // Reset completion times to 0.
   const resetAllMeditationCompletionTimes = () => {
-    setMeditations(initialState);
+    let meditationsCopy = meditations;
+    meditationsCopy.forEach((med) => (med.completionTime = 0));
+    setMeditations(meditationsCopy);
     removeValue(STORAGE_KEYS.MEDITATIONS);
   };
 

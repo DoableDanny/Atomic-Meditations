@@ -12,17 +12,20 @@ const HomeScreen = ({
   meditations,
   updateMeditations,
   meditationsUnlocked,
+  resetAllMeditationCompletionTimes,
   isFullAppPurchased,
 }) => {
   // If on this screen => isFocused = true
   const isFocused = useIsFocused();
 
   useEffect(() => {
-    // If user resets completion times in Settings, updateMedtiations is called to ensure meditations are re-rendered (React Native Navigation doesn't re-render when go back a screen).
-    if (route.params && route.params.resetCompletionTimes) {
-      updateMeditations(meditations);
+    // If user resets completion times in Settings, updateMedtiations is called to setState again to ensure meditations are re-rendered (React Native Navigation doesn't re-render when go back a screen).
+    if (route.params?.resetCompletionTimes) {
+      resetAllMeditationCompletionTimes();
+      navigation.setParams({resetCompletionTimes: false});
+      console.log(route.params);
     }
-  }, [isFocused]);
+  }, [isFocused, meditations]);
 
   const renderMeditationModule = ({item}) => (
     <MeditationModule

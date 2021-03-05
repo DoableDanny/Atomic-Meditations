@@ -70,6 +70,9 @@ const App = () => {
               meditations={meditations}
               updateMeditations={updateMeditations}
               meditationsUnlocked={meditationsUnlocked}
+              resetAllMeditationCompletionTimes={
+                resetAllMeditationCompletionTimes
+              }
               isFullAppPurchased={isFullAppPurchased}
             />
           )}
@@ -100,9 +103,9 @@ const App = () => {
               currentPurchaseError={currentPurchaseError}
               isFullAppPurchased={isFullAppPurchased}
               resetAllStats={resetAllStats}
-              resetAllMeditationCompletionTimes={
-                resetAllMeditationCompletionTimes
-              }
+              // resetAllMeditationCompletionTimes={
+              //   resetAllMeditationCompletionTimes
+              // }
               meditations={meditations}
             />
           )}

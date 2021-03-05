@@ -41,20 +41,8 @@ const ResetSettings = ({
         },
         {
           text: 'Delete',
-          onPress: () => {
-            resetAllMeditationCompletionTimes();
-            Alert.alert(
-              'Deleted',
-              'Your meditation completion times have been reset.',
-              [
-                {
-                  text: 'OK',
-                  onPress: () =>
-                    navigation.navigate('Home', {resetCompletionTimes: true}),
-                },
-              ],
-            );
-          },
+          onPress: () =>
+            navigation.navigate('Home', {resetCompletionTimes: true}),
         },
       ],
     );
