@@ -20,10 +20,10 @@ const useTheme = () => {
     });
   }, []);
 
+  // Sets state & vaves to storage.
   const toggleDarkMode = () => {
     setDarkMode((prev) => {
       storeStringData(DARK_MODE, !prev.toString());
-      console.log('darkMode: ', !prev);
       return !prev;
     });
   };

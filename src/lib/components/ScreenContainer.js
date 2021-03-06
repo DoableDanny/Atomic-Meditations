@@ -3,14 +3,14 @@ import {View, ScrollView, StyleSheet} from 'react-native';
 
 import ThemeContext from '../contexts/ThemeContext';
 
-const ScreenContainer = ({scrollable, children}) => {
+const ScreenContainer = ({scrollable, children, extraStyles}) => {
   const theme = useContext(ThemeContext);
 
   const dynamicStyles = {
     backgroundColor: theme.colors.background,
   };
 
-  const fullStyles = [styles.container, dynamicStyles];
+  const fullStyles = [styles.container, dynamicStyles, extraStyles];
 
   return (
     <>

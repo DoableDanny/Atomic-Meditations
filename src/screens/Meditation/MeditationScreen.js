@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 
 import {theme} from '../../lib/theme/theme';
+import ScreenContainer from '../../lib/components/ScreenContainer';
 import SelectSessionTimeScreen from './SelectSessionTimeScreen';
 import TimerScreen from './TimerScreen';
 
@@ -43,7 +44,7 @@ const MeditationScreen = ({
   };
 
   return (
-    <View style={styles.container}>
+    <ScreenContainer extraStyles={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Day {currentMeditation.id}</Text>
         <Text style={styles.headerBody}>{headerMsg}</Text>
@@ -73,14 +74,12 @@ const MeditationScreen = ({
           lastMeditationDateStat={lastMeditationDateStat}
         />
       )}
-    </View>
+    </ScreenContainer>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: theme.darkGreen,
     justifyContent: 'center',
     alignItems: 'center',
   },

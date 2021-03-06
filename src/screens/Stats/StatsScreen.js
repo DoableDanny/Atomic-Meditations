@@ -3,6 +3,7 @@ import {Text, StyleSheet, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 
 import {theme} from '../../lib/theme/theme';
+import ScreenContainer from '../../lib/components/ScreenContainer';
 import {hoursAndMinsString} from '../../lib/functions/displayHoursAndMins';
 
 const StatRow = ({statKey, statValue}) => {
@@ -32,7 +33,7 @@ const StatsScreen = ({
   });
 
   return (
-    <ScrollView style={styles.container}>
+    <ScreenContainer>
       <View style={styles.statsBlock}>
         <StatRow statKey="Total Sessions" statValue={totalSessionsStat} />
         <StatRow
@@ -61,16 +62,11 @@ const StatsScreen = ({
         />
         <StatRow statKey="Last Meditation" statValue={lastMeditationDateStat} />
       </View>
-    </ScrollView>
+    </ScreenContainer>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.darkGreen,
-    padding: 16,
-  },
   statsBlock: {
     alignItems: 'center',
     marginBottom: 24,
