@@ -11,7 +11,7 @@ const Button = ({title, handlePress, btnStyle}) => {
 
   switch (btnStyle) {
     case 'secondary':
-      backgroundColor = theme.secondary;
+      backgroundColor = colors.secondary;
       break;
     case 'danger':
       backgroundColor = colors.danger;

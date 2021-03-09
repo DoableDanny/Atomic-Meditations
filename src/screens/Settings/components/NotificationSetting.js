@@ -5,6 +5,7 @@ import PushNotification from 'react-native-push-notification';
 import {setLocalNotificationSchedule} from '../../../lib/functions/pushNotificationConfig';
 import SettingScaffold from './SettingScaffold';
 import AdjustTimeModule from './AdjustTimeModule';
+import Message from './Message';
 import Button from '../../../lib/components/Button';
 
 const NOTIFICATION_TITLE = `Get ready, it's meditation time in 5 mins...`;
@@ -123,9 +124,9 @@ const NotificationSetting = ({settingStyles}) => {
       <Button
         title="Cancel Reminder"
         handlePress={cancelNotification}
-        btnStyle="warning"
+        btnStyle="secondary"
       />
-      <Text style={settingStyles.message}>
+      <Message>
         {notificationsArray.length > 0
           ? notificationsArray.map(
               (notification) =>
@@ -135,7 +136,7 @@ const NotificationSetting = ({settingStyles}) => {
                 )} every day. You're welcome!`,
             )
           : 'You currently have no reminders set.'}
-      </Text>
+      </Message>
     </SettingScaffold>
   );
 };

@@ -22,8 +22,6 @@ const SettingsScreen = ({
 }) => {
   const theme = useContext(ThemeContext);
 
-  console.log('theme: ', theme);
-
   return (
     <ScreenContainer scrollable>
       <NotificationSetting settingStyles={sharedSettingStyles} />
