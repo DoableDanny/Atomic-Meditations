@@ -1,10 +1,11 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useRef, useContext} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import BackgroundTimer from 'react-native-background-timer';
 import KeepAwake from 'react-native-keep-awake';
 
 import Button from '../../lib/components/Button';
 import useTrackPlayer from '../../lib/custom hooks/useTrackPlayer';
+import ThemeContext from '../../lib/contexts/ThemeContext';
 
 // Need to add a stop sound btn
 
@@ -89,9 +90,9 @@ const TimerScreen = ({
   return (
     <>
       <View style={styles.timeWrapper}>
-        <Text style={styles.time}>{clockify(seconds).displayHours} : </Text>
-        <Text style={styles.time}>{clockify(seconds).displayMins} : </Text>
-        <Text style={styles.time}>{clockify(seconds).displaySecs}</Text>
+        <TimeText time={clockify(seconds).displayHours + ' : '} />
+        <TimeText time={clockify(seconds).displayMins + ' : '} />
+        <TimeText time={clockify(seconds).displaySecs} />
       </View>
 
       {showStopSoundBtn && (
@@ -117,6 +118,16 @@ const TimerScreen = ({
         )}
       </View>
     </>
+  );
+};
+
+const TimeText = ({time}) => {
+  const theme = useContext(ThemeContext);
+
+  return (
+    <Text style={{...styles.time, color: theme.colors.textPrimary}}>
+      {time}
+    </Text>
   );
 };
 

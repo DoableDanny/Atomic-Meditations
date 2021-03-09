@@ -3,8 +3,6 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
-// import {theme} from './src/lib/theme/theme';
-
 import ThemeContext, {theme, darkTheme} from './src/lib/contexts/ThemeContext';
 
 import {
@@ -67,7 +65,9 @@ const App = () => {
           initialRouteName="Home"
           screenOptions={{
             headerTitleAlign: 'center',
-            headerTintColor: '#fff',
+            headerTintColor: darkMode
+              ? darkTheme.colors.secondary
+              : theme.colors.secondary,
             headerStyle: {
               backgroundColor: darkMode
                 ? darkTheme.colors.navBannerColor

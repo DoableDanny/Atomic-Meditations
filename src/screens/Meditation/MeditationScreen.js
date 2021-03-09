@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-
+import React, {useState, useContext} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 
+import ThemeContext from '../../lib/contexts/ThemeContext';
 import ScreenContainer from '../../lib/components/ScreenContainer';
 import SelectSessionTimeScreen from './SelectSessionTimeScreen';
 import TimerScreen from './TimerScreen';
@@ -24,6 +24,9 @@ const MeditationScreen = ({
     'I would like the alarm to ring in...',
   );
 
+  const theme = useContext(ThemeContext);
+  const colors = theme.colors;
+
   const {currentMeditation} = route.params;
 
   const clockify = (inputSeconds) => {
@@ -45,8 +48,12 @@ const MeditationScreen = ({
   return (
     <ScreenContainer extraStyles={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Day {currentMeditation.id}</Text>
-        <Text style={styles.headerBody}>{headerMsg}</Text>
+        <Text style={{...styles.headerTitle, color: colors.textSecondary}}>
+          Day {currentMeditation.id}
+        </Text>
+        <Text style={{...styles.headerBody, color: colors.textPrimary}}>
+          {headerMsg}
+        </Text>
       </View>
 
       {!isTimerOn ? (

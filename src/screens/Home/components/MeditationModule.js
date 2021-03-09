@@ -2,9 +2,9 @@ import React, {useContext} from 'react';
 import {TouchableOpacity, Text, StyleSheet, Alert} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import {theme} from '../../lib/theme/theme';
-import {hoursAndMinsString} from '../../lib/functions/displayHoursAndMins';
-import ThemeContext from '../../lib/contexts/ThemeContext';
+import {theme} from '../../../lib/theme/theme';
+import {hoursAndMinsString} from '../../../lib/functions/displayHoursAndMins';
+import ThemeContext from '../../../lib/contexts/ThemeContext';
 
 const MeditationModule = ({
   item,
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   },
   textDay: {
     fontSize: 20,
-    margin: 6,
+    margin: 4,
   },
   textTime: {
     fontSize: 18,

@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {TouchableOpacity, Text, StyleSheet, View} from 'react-native';
 
-import ThemeContext from '../../lib/contexts/ThemeContext';
+import ThemeContext from '../../../lib/contexts/ThemeContext';
 
 const FooterBtn = ({title, borderRight, handlePress}) => {
   const theme = useContext(ThemeContext);
@@ -16,11 +16,16 @@ const FooterBtn = ({title, borderRight, handlePress}) => {
     <TouchableOpacity
       style={[
         styles.footerBtn,
-        borderRight && styles.borderRight,
+        borderRight && {
+          ...styles.borderRight,
+          borderColor: theme.colors.secondary,
+        },
         dynamicStyles.footerBtn,
       ]}
       onPress={handlePress}>
-      <Text style={styles.footerBtnTitle}>{title}</Text>
+      <Text style={{...styles.footerBtnTitle, color: theme.colors.secondary}}>
+        {title}
+      </Text>
     </TouchableOpacity>
   );
 };
@@ -57,11 +62,9 @@ const styles = StyleSheet.create({
   },
   borderRight: {
     borderRightWidth: 1,
-    borderColor: 'white',
   },
   footerBtnTitle: {
     fontSize: 17,
-    color: 'white',
   },
 });
 

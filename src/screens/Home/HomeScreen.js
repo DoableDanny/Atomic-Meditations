@@ -3,8 +3,8 @@ import {FlatList, View, StyleSheet} from 'react-native';
 import {useIsFocused} from '@react-navigation/native';
 
 import ThemeContext from '../../lib/contexts/ThemeContext';
-import MeditationModule from './MeditationModule';
-import Footer from './Footer';
+import MeditationModule from './components/MeditationModule';
+import Footer from './components/Footer';
 
 const HomeScreen = ({
   navigation,

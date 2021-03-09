@@ -1,14 +1,20 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {TouchableOpacity, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {theme} from '../theme/theme';
+import ThemeContext from '../contexts/ThemeContext';
 
 const ArrowButton = ({iconName, twoArrows, handlePress}) => {
+  const theme = useContext(ThemeContext);
+  const colors = theme.colors;
+
   return (
-    <TouchableOpacity onPress={handlePress} style={styles.arrowButton}>
-      <Icon name={iconName} size={30} />
-      {twoArrows && <Icon name={iconName} size={30} />}
+    <TouchableOpacity
+      onPress={handlePress}
+      style={{...styles.arrowButton, backgroundColor: colors.background2}}>
+      <Icon name={iconName} size={30} color={colors.secondary} />
+      {twoArrows && <Icon name={iconName} size={30} color={colors.secondary} />}
     </TouchableOpacity>
   );
 };

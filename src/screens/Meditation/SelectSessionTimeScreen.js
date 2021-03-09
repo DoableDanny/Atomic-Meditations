@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
+import ThemeContext from '../../lib/contexts/ThemeContext';
 import ArrowButton from '../../lib/components/ArrowButton';
 import Button from '../../lib/components/Button';
 
@@ -11,8 +12,10 @@ const SelectSessionTimeScreen = ({
   setHeaderMsg,
   clockify,
 }) => {
-  // ADJUST TIME FUNCTIONS
+  const theme = useContext(ThemeContext);
+  const colors = theme.colors;
 
+  // ADJUST TIME FUNCTIONS
   const plusOneMin = () => {
     setAlarmRingSeconds((prevSecs) => prevSecs + 60);
   };
@@ -57,7 +60,7 @@ const SelectSessionTimeScreen = ({
           <ArrowButton iconName="keyboard-arrow-up" handlePress={plusOneMin} />
         </View>
 
-        <Text style={styles.time}>
+        <Text style={{...styles.time, color: colors.textPrimary}}>
           {alarmRingSeconds > 3540 &&
             `${clockify(alarmRingSeconds).displayHours} ${
               alarmRingSeconds < 7200 ? 'Hr' : 'Hrs'
@@ -93,6 +96,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     padding: 8,
     letterSpacing: 4,
+    color: '#F4C602',
   },
 
   beginBtnWrapper: {

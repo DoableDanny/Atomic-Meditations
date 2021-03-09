@@ -1,19 +1,23 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
-import {theme} from '../theme/theme';
+
+import ThemeContext from '../contexts/ThemeContext';
 
 const Button = ({title, handlePress, btnStyle}) => {
   let backgroundColor;
 
+  const theme = useContext(ThemeContext);
+  const colors = theme.colors;
+
   switch (btnStyle) {
-    case 'warning':
-      backgroundColor = theme.warning;
+    case 'secondary':
+      backgroundColor = theme.secondary;
       break;
     case 'danger':
-      backgroundColor = theme.danger;
+      backgroundColor = colors.danger;
       break;
     default:
-      backgroundColor = theme.lightBlue;
+      backgroundColor = colors.primary;
   }
 
   return (
