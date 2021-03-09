@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
 import {FlatList, View, StyleSheet} from 'react-native';
 import {useIsFocused} from '@react-navigation/native';
 
-import {theme} from '../../lib/theme/theme';
+import ThemeContext from '../../lib/contexts/ThemeContext';
 import MeditationModule from './MeditationModule';
 import Footer from './Footer';
 
@@ -15,6 +15,8 @@ const HomeScreen = ({
   relockMeditations,
   isFullAppPurchased,
 }) => {
+  const theme = useContext(ThemeContext);
+
   // If on this screen => isFocused = true
   const isFocused = useIsFocused();
 
@@ -42,7 +44,8 @@ const HomeScreen = ({
   );
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[styles.container, {backgroundColor: theme.colors.background}]}>
       <FlatList
         data={meditations}
         renderItem={renderMeditationModule}
@@ -56,8 +59,7 @@ const HomeScreen = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.darkGreen,
-    paddingTop: 20,
+    paddingTop: 16,
   },
 });
 

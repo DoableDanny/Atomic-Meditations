@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 
 import {Text, View, StyleSheet} from 'react-native';
 
-import {theme} from '../../lib/theme/theme';
 import ScreenContainer from '../../lib/components/ScreenContainer';
 import SelectSessionTimeScreen from './SelectSessionTimeScreen';
 import TimerScreen from './TimerScreen';

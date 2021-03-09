@@ -1,12 +1,24 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {TouchableOpacity, Text, StyleSheet, View} from 'react-native';
 
-import {theme} from '../../lib/theme/theme';
+import ThemeContext from '../../lib/contexts/ThemeContext';
 
 const FooterBtn = ({title, borderRight, handlePress}) => {
+  const theme = useContext(ThemeContext);
+
+  const dynamicStyles = {
+    footerBtn: {
+      backgroundColor: theme.colors.navBannerColor,
+    },
+  };
+
   return (
     <TouchableOpacity
-      style={[styles.footerBtn, borderRight && styles.borderRight]}
+      style={[
+        styles.footerBtn,
+        borderRight && styles.borderRight,
+        dynamicStyles.footerBtn,
+      ]}
       onPress={handlePress}>
       <Text style={styles.footerBtnTitle}>{title}</Text>
     </TouchableOpacity>
@@ -38,7 +50,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   footerBtn: {
-    backgroundColor: theme.navBannerColor,
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',

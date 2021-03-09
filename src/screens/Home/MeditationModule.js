@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {TouchableOpacity, Text, StyleSheet, Alert} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {theme} from '../../lib/theme/theme';
 import {hoursAndMinsString} from '../../lib/functions/displayHoursAndMins';
+import ThemeContext from '../../lib/contexts/ThemeContext';
 
 const MeditationModule = ({
   item,
@@ -12,6 +13,8 @@ const MeditationModule = ({
   meditationsUnlocked,
   isFullAppPurchased,
 }) => {
+  const theme = useContext(ThemeContext);
+
   // Total meditation session seconds
   const seconds = item.completionTime;
 
@@ -33,12 +36,17 @@ const MeditationModule = ({
       style={[
         styles.meditationModule,
         item.id == listLength && {marginBottom: 80},
+        {backgroundColor: theme.colors.background2},
       ]}
       onPress={handlePress}>
       {item.id <= meditationsUnlocked + 1 ? (
         <>
-          <Text style={styles.text}>Day {item.id}</Text>
-          <Text>{hoursAndMinsString(seconds)}</Text>
+          <Text style={{...styles.textDay, color: theme.colors.textPrimary}}>
+            Day {item.id}
+          </Text>
+          <Text style={{...styles.textTime, color: theme.colors.textSecondary}}>
+            {hoursAndMinsString(seconds)}
+          </Text>
         </>
       ) : (
         <Icon name="lock-outline" size={40} color="rgba(0, 0, 0, 0.5)" />
@@ -57,8 +65,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  text: {
+  textDay: {
     fontSize: 20,
+    margin: 6,
+  },
+  textTime: {
+    fontSize: 18,
   },
 });
 
