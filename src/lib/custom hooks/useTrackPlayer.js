@@ -11,22 +11,26 @@ export const TRACKS = [
     id: '0',
     url: require('../../assets/sounds/crystal-bowls.mp3'),
     title: 'Crystal Bowls',
+    duration: 37, // seconds
   },
 
   {
     id: '1',
     url: require('../../assets/sounds/guitar.mp3'),
     title: 'Guitar',
+    duration: 26,
   },
   {
     id: '2',
     url: require('../../assets/sounds/flute.mp3'),
     title: 'Flute',
+    duration: 46,
   },
   {
     id: '3',
     url: require('../../assets/sounds/country.mp3'),
     title: 'Country',
+    duration: 21,
   },
 ];
 
@@ -51,6 +55,8 @@ const useTrackPlayer = (tracks) => {
       });
 
       if (tracks === 'all') TrackPlayer.add([...TRACKS]);
+
+      console.log('Meta, ', TrackPlayer.updateMetadataForTrack);
 
       console.log('Trackplayer setup');
     });
@@ -93,6 +99,17 @@ const useTrackPlayer = (tracks) => {
     TrackPlayer.destroy();
   };
 
+  // Returns track duration in seconds
+  const getTrackDuration = async () => {
+    return await TrackPlayer.getCurrentTrack().then((idString) => {
+      if (idString) {
+        const id = parseInt(idString);
+
+        return TRACKS[id].duration;
+      } else return 40;
+    });
+  };
+
   return {
     skipTrack,
     playTrack,
@@ -100,6 +117,7 @@ const useTrackPlayer = (tracks) => {
     stopTrack,
     alarmTrackId,
     setAndStoreAlarmTrackId,
+    getTrackDuration,
   };
 };
 

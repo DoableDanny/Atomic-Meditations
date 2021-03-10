@@ -1,7 +1,5 @@
-import React, {useContext} from 'react';
-import {ScrollView, Button, StyleSheet, Switch} from 'react-native';
+import React from 'react';
 
-import ThemeContext from '../../lib/contexts/ThemeContext';
 import ScreenContainer from '../../lib/components/ScreenContainer';
 
 import ChooseSoundSetting from './components/ChooseSoundSetting';
@@ -22,8 +20,6 @@ const SettingsScreen = ({
   darkMode,
   toggleDarkMode,
 }) => {
-  const theme = useContext(ThemeContext);
-
   return (
     <ScreenContainer scrollable>
       <NotificationSetting />
@@ -38,9 +34,6 @@ const SettingsScreen = ({
       />
 
       <ChooseSoundSetting />
-
-      {/* Use a Switch */}
-      <Button title="Toggle Dark Mode" onPress={toggleDarkMode} />
 
       <ResetSettings
         navigation={navigation}

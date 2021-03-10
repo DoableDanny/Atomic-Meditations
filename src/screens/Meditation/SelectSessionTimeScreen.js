@@ -42,10 +42,6 @@ const SelectSessionTimeScreen = ({
   const handlePressBegin = () => {
     setIsTimerOn(true);
     setHeaderMsg('Let it flow...');
-
-    setTimeout(() => {
-      setHeaderMsg('');
-    }, 3000);
   };
 
   return (

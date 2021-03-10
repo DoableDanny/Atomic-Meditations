@@ -7,8 +7,6 @@ import Button from '../../lib/components/Button';
 import useTrackPlayer from '../../lib/custom hooks/useTrackPlayer';
 import ThemeContext from '../../lib/contexts/ThemeContext';
 
-// Need to add a stop sound btn
-
 const TimerScreen = ({
   clockify,
   alarmRingSeconds,
@@ -23,20 +21,21 @@ const TimerScreen = ({
   updateLastMeditationDateStat,
   updateCurrentStreakStat,
 }) => {
-  const [seconds, setSeconds] = useState(0);
+  const [seconds, setSeconds] = useState(116);
   const [showStopSoundBtn, setShowStopSoundBtn] = useState(false);
+  // Track length ranges from 26-46 seconds so the time the stopSoundBtn is shown will depend on the track.
+  const [trackDuration, setTrackDuration] = useState(40);
 
-  // Load users selected track,
-  // add it to Trackplayer.
-
-  const {playTrack, stopTrack} = useTrackPlayer();
+  const {playTrack, stopTrack, getTrackDuration} = useTrackPlayer();
 
   let headerMsgTimeOut = useRef(null);
+
+  console.log(navigation);
 
   const startTimer = () => {
     BackgroundTimer.runBackgroundTimer(() => {
       setSeconds((prevSecs) => prevSecs + 1);
-    }, 20);
+    }, 1000);
   };
 
   // Called when user presses doneBtn
@@ -48,8 +47,12 @@ const TimerScreen = ({
   };
 
   useEffect(() => {
+    if (seconds === 3) setHeaderMsg('');
     // After 2 mins, check whether to unlock next day and unlock.
-    if (seconds === 120) {
+    else if (seconds === 120) {
+      // Remove back btn from navigation header.
+      navigation.setOptions({headerLeft: () => null});
+
       unlockNextMeditation(currentMeditation.id);
     }
 
@@ -67,11 +70,13 @@ const TimerScreen = ({
       }, 8000);
 
       setShowStopSoundBtn(true);
-    }
 
-    // Alarm sounds will be about 15 seconds
-    if (seconds === alarmRingSeconds + 15) {
-      // setShowStopSoundBtn(false);
+      getTrackDuration().then((duration) => {
+        setTrackDuration(duration);
+      });
+      // When track ends, remove stopSoundBtn
+    } else if (seconds === alarmRingSeconds + trackDuration) {
+      setShowStopSoundBtn(false);
     }
   }, [seconds]);
 
@@ -95,17 +100,19 @@ const TimerScreen = ({
         <TimeText time={clockify(seconds).displaySecs} />
       </View>
 
-      {showStopSoundBtn && (
-        <Button
-          title="Stop Sound"
-          handlePress={() => {
-            stopTrack();
-            setShowStopSoundBtn(false);
-          }}
-        />
-      )}
-
-      <View style={styles.doneBtnWrapper}>
+      <View style={styles.btnsWrapper}>
+        <View style={{marginBottom: 32}}>
+          {showStopSoundBtn && (
+            <Button
+              title="Stop Sound"
+              btnStyle="secondary"
+              handlePress={() => {
+                stopTrack();
+                setShowStopSoundBtn(false);
+              }}
+            />
+          )}
+        </View>
         {seconds >= 120 && (
           <Button
             title="Done"
@@ -141,7 +148,7 @@ const styles = StyleSheet.create({
     padding: 8,
     letterSpacing: 4,
   },
-  doneBtnWrapper: {
+  btnsWrapper: {
     position: 'absolute',
     bottom: 16,
   },
