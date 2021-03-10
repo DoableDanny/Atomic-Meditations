@@ -29,6 +29,7 @@ export const theme = {
     secondary: palette.yellow,
     danger: palette.melon,
     text: palette.black,
+    white: palette.white,
   },
   spacing: {
     s: 8,

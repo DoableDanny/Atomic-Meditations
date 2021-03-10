@@ -115,6 +115,7 @@ const App = () => {
                 isFullAppPurchased={isFullAppPurchased}
                 resetAllStats={resetAllStats}
                 meditations={meditations}
+                darkMode={darkMode}
                 toggleDarkMode={toggleDarkMode}
               />
             )}

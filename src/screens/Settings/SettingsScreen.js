@@ -8,6 +8,7 @@ import ChooseSoundSetting from './components/ChooseSoundSetting';
 import PurchaseFullAppSetting from './components/PurchaseFullAppSetting';
 import NotificationSetting from './components/NotificationSetting';
 import ResetSettings from './components/ResetSettings';
+import DarkModeSetting from './components/DarkModeSetting';
 
 const SettingsScreen = ({
   navigation,
@@ -18,6 +19,7 @@ const SettingsScreen = ({
   resetAllStats,
   resetAllMeditationCompletionTimes,
   meditations,
+  darkMode,
   toggleDarkMode,
 }) => {
   const theme = useContext(ThemeContext);
@@ -25,6 +27,8 @@ const SettingsScreen = ({
   return (
     <ScreenContainer scrollable>
       <NotificationSetting />
+
+      <DarkModeSetting toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
 
       <PurchaseFullAppSetting
         connected={connected}
