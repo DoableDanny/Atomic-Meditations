@@ -24,17 +24,16 @@ const SettingsScreen = ({
 
   return (
     <ScreenContainer scrollable>
-      <NotificationSetting settingStyles={sharedSettingStyles} />
+      <NotificationSetting />
 
       <PurchaseFullAppSetting
-        settingStyles={sharedSettingStyles}
         connected={connected}
         isFullAppPurchased={isFullAppPurchased}
         purchase={purchase}
         currentPurchaseError={currentPurchaseError}
       />
 
-      <ChooseSoundSetting settingStyles={sharedSettingStyles} />
+      <ChooseSoundSetting />
 
       {/* Use a Switch */}
       <Button title="Toggle Dark Mode" onPress={toggleDarkMode} />
@@ -48,13 +47,5 @@ const SettingsScreen = ({
     </ScreenContainer>
   );
 };
-
-const sharedSettingStyles = StyleSheet.create({
-  message: {
-    textAlign: 'center',
-    marginTop: 16,
-    fontSize: 16,
-  },
-});
 
 export default SettingsScreen;

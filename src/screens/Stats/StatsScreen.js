@@ -1,16 +1,21 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
 import {Text, StyleSheet, View} from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
 
-import {theme} from '../../lib/theme/theme';
+import ThemeContext from '../../lib/contexts/ThemeContext';
 import ScreenContainer from '../../lib/components/ScreenContainer';
 import {hoursAndMinsString} from '../../lib/functions/displayHoursAndMins';
 
 const StatRow = ({statKey, statValue}) => {
+  const theme = useContext(ThemeContext);
+  const colors = theme.colors;
+
   return (
     <View style={styles.statRow}>
-      <Text style={styles.statKey}>
-        {statKey}: <Text style={styles.statValue}>{statValue}</Text>
+      <Text style={{...styles.statKey, color: colors.textSecondary}}>
+        {statKey}:{' '}
+        <Text style={{...styles.statValue, color: colors.textPrimary}}>
+          {statValue}
+        </Text>
       </Text>
     </View>
   );
@@ -75,11 +80,7 @@ const styles = StyleSheet.create({
     paddingTop: 16,
   },
   statKey: {
-    fontSize: 20,
-    color: 'black',
-  },
-  statValue: {
-    color: 'rgba(0, 0, 0, 0.5)',
+    fontSize: 21,
   },
 });
 

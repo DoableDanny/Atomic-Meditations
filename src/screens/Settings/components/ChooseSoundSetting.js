@@ -1,14 +1,18 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {View, Text, StyleSheet, Alert} from 'react-native';
 
 import ArrowButton from '../../../lib/components/ArrowButton';
 import SettingScaffold from './SettingScaffold';
+import Message from './Message';
 import Button from '../../../lib/components/Button';
 import useTrackPlayer, {TRACKS} from '../../../lib/custom hooks/useTrackPlayer';
+import ThemeContext from '../../../lib/contexts/ThemeContext';
 
-const ChooseSoundSetting = ({settingStyles}) => {
+const ChooseSoundSetting = () => {
   const [trackNumber, setTrackNumber] = useState(0);
   const [isSoundPlaying, setIsSoundPlaying] = useState(false);
+
+  const theme = useContext(ThemeContext);
 
   // alarmTrackId is the current saved preferred track. trackNumber is the track currently available to play/pause.
   const {
@@ -70,16 +74,16 @@ const ChooseSoundSetting = ({settingStyles}) => {
       description="Sound to be played upon time up.">
       <View style={styles.wrapper}>
         <ArrowButton iconName="keyboard-arrow-left" handlePress={prevTrack} />
-        <Text style={styles.track}>{TRACKS[trackNumber].title}</Text>
+        <Text style={{...styles.track, color: theme.colors.primary}}>
+          {TRACKS[trackNumber].title}
+        </Text>
         <ArrowButton iconName="keyboard-arrow-right" handlePress={nextTrack} />
       </View>
       <View style={{marginBottom: 16}}>
         <Button title="Play/Pause" handlePress={handlePlayOrPauseSound} />
       </View>
       <Button title="Select Sound" handlePress={handleSelectSound} />
-      <Text style={settingStyles.message}>
-        Current sound: {TRACKS[alarmTrackId].title}
-      </Text>
+      <Message>Current sound: {TRACKS[alarmTrackId].title}</Message>
     </SettingScaffold>
   );
 };

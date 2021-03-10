@@ -9,7 +9,7 @@ const SettingScaffold = ({title, description, children}) => {
 
   return (
     <View style={styles.optionWrapper}>
-      <Text style={{...styles.title, color: colors.primary}}>{title}</Text>
+      <Text style={{...styles.title, color: colors.textPrimary}}>{title}</Text>
       <Text style={{...styles.description, color: colors.textPrimary}}>
         {description}
       </Text>
@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
     fontSize: 23,
+    fontWeight: 'bold',
   },
   description: {
     textAlign: 'center',

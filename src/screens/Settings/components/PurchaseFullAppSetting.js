@@ -3,6 +3,7 @@ import {View, Text} from 'react-native';
 import Button from '../../../lib/components/Button';
 import {itemSKUs} from '../../../lib/custom hooks/useInAppPurchase';
 import SettingScaffold from './SettingScaffold';
+import Message from './Message';
 
 const PurchaseFullAppSetting = ({
   settingStyles,
@@ -48,9 +49,7 @@ const PurchaseFullAppSetting = ({
         </Text>
       )}
       {connectionErrorMsg !== '' && (
-        <Text style={{...settingStyles.message, color: 'red'}}>
-          {connectionErrorMsg}
-        </Text>
+        <Message danger>{connectionErrorMsg}</Message>
       )}
     </SettingScaffold>
   );
