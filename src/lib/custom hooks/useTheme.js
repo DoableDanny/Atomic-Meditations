@@ -3,7 +3,7 @@ import {useState, useEffect} from 'react';
 import {
   STORAGE_KEYS,
   getStringData,
-  storeStringData,
+  storeBooleanData,
 } from '../functions/asyncStorage';
 
 const useTheme = () => {
@@ -14,16 +14,18 @@ const useTheme = () => {
   // Load users preferred theme.
   useEffect(() => {
     getStringData(DARK_MODE).then((data) => {
+      console.log('Dark_MODE: ', data);
       if (data && data !== 'false') {
         setDarkMode(true);
       }
     });
   }, []);
 
-  // Sets state & vaves to storage.
+  // Sets state & saves to storage.
   const toggleDarkMode = () => {
     setDarkMode((prev) => {
-      storeStringData(DARK_MODE, !prev.toString());
+      console.log('prev: ', !prev);
+      storeBooleanData(DARK_MODE, !prev);
       return !prev;
     });
   };

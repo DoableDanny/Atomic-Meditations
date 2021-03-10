@@ -33,6 +33,15 @@ export const storeObjectData = async (key, value) => {
   }
 };
 
+export const storeBooleanData = async (key, value) => {
+  try {
+    const stringValue = value.toString();
+    await AsyncStorage.setItem(key, stringValue);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 // getItem returns a promise that either resolves to stored value when data is found for given key, or returns null otherwise.
 export const getStringData = async (key) => {
   try {
@@ -43,9 +52,9 @@ export const getStringData = async (key) => {
   }
 };
 
-const getObjectData = async () => {
+const getObjectData = async (key) => {
   try {
-    const jsonValue = await AsyncStorage.getItem('@storage_Key');
+    const jsonValue = await AsyncStorage.getItem(key);
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
     console.log(e);
