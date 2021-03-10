@@ -22,16 +22,16 @@ const SettingsScreen = ({
 }) => {
   return (
     <ScreenContainer scrollable>
-      <NotificationSetting />
-
-      <DarkModeSetting toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
-
       <PurchaseFullAppSetting
         connected={connected}
         isFullAppPurchased={isFullAppPurchased}
         purchase={purchase}
         currentPurchaseError={currentPurchaseError}
       />
+
+      <NotificationSetting />
+
+      <DarkModeSetting toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
 
       <ChooseSoundSetting />
 

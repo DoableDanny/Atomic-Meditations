@@ -73,7 +73,7 @@ const ResetSettings = ({navigation, resetAllStats}) => {
       </SettingScaffold>
       <SettingScaffold
         title="Reset Meditation Completion Times"
-        description="All meditation completion times will be reset to 00. Unlocked meditations will remain.">
+        description="All meditation completion times will be reset to 00 mins. Unlocked meditations will remain.">
         <Button
           title="Reset Times"
           btnStyle="danger"

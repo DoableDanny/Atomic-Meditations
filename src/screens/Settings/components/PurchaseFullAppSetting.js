@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text} from 'react-native';
+import {Text} from 'react-native';
 import Button from '../../../lib/components/Button';
 import {itemSKUs} from '../../../lib/custom hooks/useInAppPurchase';
 import SettingScaffold from './SettingScaffold';
 import Message from './Message';
 
 const PurchaseFullAppSetting = ({
-  settingStyles,
   connected,
   isFullAppPurchased,
   purchase,
@@ -29,13 +28,13 @@ const PurchaseFullAppSetting = ({
         'You need an internet connection to make a purchase.',
       );
     }
-    purchase(itemSKUs[10]);
+    purchase(itemSKUs[1]);
   };
 
   return (
     <SettingScaffold
       title="Purchase The Full App"
-      description="The first 3 days are free. The full app costs just ***** and helps to support the developer!">
+      description="The first 3 days are free. The full app only costs a few dollars and helps to support the app's development!">
       <Button
         title="Purchase Full App"
         handlePress={() => {
@@ -43,10 +42,10 @@ const PurchaseFullAppSetting = ({
         }}
       />
       {isFullAppPurchased && (
-        <Text style={settingStyles.message}>
+        <Message>
           You have full access to Atomic Meditations. You made a great decision.
           Thank you!
-        </Text>
+        </Message>
       )}
       {connectionErrorMsg !== '' && (
         <Message danger>{connectionErrorMsg}</Message>

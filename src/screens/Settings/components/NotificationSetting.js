@@ -10,7 +10,7 @@ import Button from '../../../lib/components/Button';
 
 const NOTIFICATION_TITLE = `Get ready, it's meditation time in 5 mins...`;
 
-const NotificationSetting = ({settingStyles}) => {
+const NotificationSetting = () => {
   const [hours, setHours] = useState(12);
   const [mins, setMins] = useState(30);
   const [notificationsArray, setNotificationsArray] = useState([]);

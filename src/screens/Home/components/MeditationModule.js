@@ -26,7 +26,22 @@ const MeditationModule = ({
         // Then navigate to it.
         navigation.navigate('Meditation', {currentMeditation: item});
       } else if (!isFullAppPurchased && item.id > 3) {
-        Alert.alert('Please purchase full app');
+        Alert.alert(
+          'Please Purchase the Full App',
+          `You're doing great! Let's continue developing this habit and purchase the full app. It doesn't cost much and supports this app's development!`,
+          [
+            {
+              text: 'Another time',
+              style: 'cancel',
+            },
+            {
+              text: `Let's do it!`,
+              onPress: () => {
+                navigation.navigate('Settings');
+              },
+            },
+          ],
+        );
       }
     }
   };
