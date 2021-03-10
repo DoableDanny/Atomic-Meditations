@@ -74,7 +74,7 @@ const ChooseSoundSetting = () => {
       description="Sound to be played upon time up.">
       <View style={styles.wrapper}>
         <ArrowButton iconName="keyboard-arrow-left" handlePress={prevTrack} />
-        <Text style={{...styles.track, color: theme.colors.primary}}>
+        <Text style={{...styles.track, color: theme.colors.textPrimary}}>
           {TRACKS[trackNumber].title}
         </Text>
         <ArrowButton iconName="keyboard-arrow-right" handlePress={nextTrack} />
@@ -98,6 +98,7 @@ const styles = StyleSheet.create({
   track: {
     fontSize: 18,
     paddingHorizontal: 8,
+    fontWeight: 'bold',
   },
 });
 

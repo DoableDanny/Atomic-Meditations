@@ -1,12 +1,14 @@
 import {createContext} from 'react';
 
 const palette = {
-  darkGreen: '#4CC94B',
-  green: '#77DD76',
-  lightGreen: '#9AE79C',
-  blue: '#BBE3F1',
-  yellow: '#FCFFC6',
-  melon: '#F7B0AD',
+  tuftsBlue: '#1B93E3',
+  blueJeans: '#40a5e9',
+  cyanProcess: '#3eb1eb',
+  emeraldGreen: '#51D26D',
+  lavenderBlue: '#DCD4FA',
+  aliceBlue: '#f7fcfe',
+  lightBlue: '#B9E5F6',
+  tartOrange: '#EE5959',
   white: '#fff',
   black: '#000',
   cetaceanBlue: '#070b34',
@@ -14,7 +16,6 @@ const palette = {
   cosmicCobalt: '#2E327B',
   skyBlue: '#83d1f0',
   violetBlueCrayola: '#717CE5',
-  // amethyst: '#a373c7',
   persianPink: '#FD84C7',
   wisteria: '#b9a0d3',
   lavenderFloral: '#a977cc',
@@ -22,13 +23,14 @@ const palette = {
 
 export const theme = {
   colors: {
-    navBannerColor: palette.darkGreen,
-    background: palette.green,
-    background2: palette.lightGreen,
-    primary: palette.blue,
-    secondary: palette.yellow,
-    danger: palette.melon,
-    text: palette.black,
+    navBannerColor: palette.tuftsBlue,
+    background: palette.blueJeans,
+    background2: palette.cyanProcess,
+    primary: palette.emeraldGreen,
+    secondary: palette.lavenderBlue,
+    danger: palette.tartOrange,
+    textPrimary: palette.aliceBlue,
+    textSecondary: palette.lightBlue,
     white: palette.white,
   },
   spacing: {

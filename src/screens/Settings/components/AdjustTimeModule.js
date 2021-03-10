@@ -10,7 +10,7 @@ const AdjustTimeModule = ({time, addOne, minusOne}) => {
   return (
     <View style={styles.timeSelectWrapper}>
       <ArrowButton iconName="keyboard-arrow-up" handlePress={addOne} />
-      <Text style={{...styles.timeText, color: theme.colors.primary}}>
+      <Text style={{...styles.timeText, color: theme.colors.textPrimary}}>
         {time}
       </Text>
       <ArrowButton iconName="keyboard-arrow-down" handlePress={minusOne} />
@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
   timeText: {
     fontSize: 18,
     marginVertical: 16,
+    fontWeight: 'bold',
   },
 });
 
