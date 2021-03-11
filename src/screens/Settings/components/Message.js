@@ -22,7 +22,8 @@ const styles = StyleSheet.create({
   message: {
     textAlign: 'center',
     marginTop: 16,
-    fontSize: 17,
+    fontSize: 18,
+    lineHeight: 24,
   },
 });
 

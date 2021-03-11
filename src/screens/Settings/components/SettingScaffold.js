@@ -27,14 +27,14 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: 'center',
-    fontSize: 23,
+    fontSize: 24,
     fontWeight: 'bold',
   },
   description: {
     textAlign: 'center',
     marginVertical: 16,
-    fontSize: 17,
-    lineHeight: 22,
+    fontSize: 18,
+    lineHeight: 24,
   },
 });
 
