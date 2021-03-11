@@ -21,7 +21,11 @@ const SettingsScreen = ({
   toggleDarkMode,
 }) => {
   return (
-    <ScreenContainer scrollable>
+    <ScreenContainer
+      scrollable
+      contentContainerStyle={{
+        alignSelf: 'center',
+      }}>
       <PurchaseFullAppSetting
         connected={connected}
         isFullAppPurchased={isFullAppPurchased}

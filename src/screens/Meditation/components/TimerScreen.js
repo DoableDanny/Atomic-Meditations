@@ -3,9 +3,9 @@ import {StyleSheet, View, Text} from 'react-native';
 import BackgroundTimer from 'react-native-background-timer';
 import KeepAwake from 'react-native-keep-awake';
 
-import Button from '../../lib/components/Button';
-import useTrackPlayer from '../../lib/custom hooks/useTrackPlayer';
-import ThemeContext from '../../lib/contexts/ThemeContext';
+import Button from '../../../lib/components/Button';
+import useTrackPlayer from '../../../lib/custom hooks/useTrackPlayer';
+import ThemeContext from '../../../lib/contexts/ThemeContext';
 
 const TimerScreen = ({
   clockify,
@@ -21,7 +21,7 @@ const TimerScreen = ({
   updateLastMeditationDateStat,
   updateCurrentStreakStat,
 }) => {
-  const [seconds, setSeconds] = useState(116);
+  const [seconds, setSeconds] = useState(0);
   const [showStopSoundBtn, setShowStopSoundBtn] = useState(false);
   // Track length ranges from 26-46 seconds so the time the stopSoundBtn is shown will depend on the track.
   const [trackDuration, setTrackDuration] = useState(40);
@@ -29,8 +29,6 @@ const TimerScreen = ({
   const {playTrack, stopTrack, getTrackDuration} = useTrackPlayer();
 
   let headerMsgTimeOut = useRef(null);
-
-  console.log(navigation);
 
   const startTimer = () => {
     BackgroundTimer.runBackgroundTimer(() => {

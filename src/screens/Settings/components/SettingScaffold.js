@@ -22,6 +22,8 @@ const styles = StyleSheet.create({
   optionWrapper: {
     alignItems: 'center',
     marginVertical: 24,
+    maxWidth: 600,
+    alignSelf: 'stretch',
   },
   title: {
     textAlign: 'center',

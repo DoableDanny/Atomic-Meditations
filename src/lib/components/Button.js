@@ -3,7 +3,7 @@ import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 
 import ThemeContext from '../contexts/ThemeContext';
 
-const Button = ({title, handlePress, btnStyle}) => {
+const Button = ({title, handlePress, btnStyle, extraStyles}) => {
   let backgroundColor;
 
   const theme = useContext(ThemeContext);
@@ -24,6 +24,7 @@ const Button = ({title, handlePress, btnStyle}) => {
     <TouchableOpacity
       style={{
         ...styles.btn,
+        ...extraStyles,
         backgroundColor: backgroundColor,
       }}
       onPress={handlePress}>
@@ -37,7 +38,8 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     paddingVertical: 14,
     paddingHorizontal: 14,
-    minWidth: 250,
+    minWidth: 280,
+    alignSelf: 'stretch',
   },
   text: {
     fontSize: 20,

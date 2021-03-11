@@ -79,13 +79,12 @@ const ChooseSoundSetting = () => {
         </Text>
         <ArrowButton iconName="keyboard-arrow-right" handlePress={nextTrack} />
       </View>
-      <View style={{marginBottom: 16}}>
-        <Button
-          title="Play/Pause"
-          btnStyle="secondary"
-          handlePress={handlePlayOrPauseSound}
-        />
-      </View>
+      <Button
+        title="Play/Pause"
+        btnStyle="secondary"
+        extraStyles={{marginBottom: 16}}
+        handlePress={handlePlayOrPauseSound}
+      />
       <Button title="Select Sound" handlePress={handleSelectSound} />
       <Message>Current sound: {TRACKS[alarmTrackId].title}</Message>
     </SettingScaffold>

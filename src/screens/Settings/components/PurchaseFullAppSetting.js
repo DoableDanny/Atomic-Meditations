@@ -28,7 +28,7 @@ const PurchaseFullAppSetting = ({
         'You need an internet connection to make a purchase.',
       );
     }
-    purchase(itemSKUs[1]);
+    purchase(itemSKUs[0]);
   };
 
   return (

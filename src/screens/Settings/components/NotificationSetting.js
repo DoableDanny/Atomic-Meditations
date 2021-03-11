@@ -118,9 +118,11 @@ const NotificationSetting = () => {
           minusOne={minusOneMin}
         />
       </View>
-      <View style={{marginBottom: 16}}>
-        <Button title="Set New Reminder" handlePress={setNotification} />
-      </View>
+      <Button
+        title="Set New Reminder"
+        handlePress={setNotification}
+        extraStyles={{marginBottom: 16}}
+      />
       <Button
         title="Cancel Reminder"
         handlePress={cancelNotification}

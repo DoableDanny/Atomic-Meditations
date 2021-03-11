@@ -3,7 +3,12 @@ import {View, ScrollView, StyleSheet} from 'react-native';
 
 import ThemeContext from '../contexts/ThemeContext';
 
-const ScreenContainer = ({scrollable, children, extraStyles}) => {
+const ScreenContainer = ({
+  scrollable,
+  children,
+  extraStyles,
+  contentContainerStyle,
+}) => {
   const theme = useContext(ThemeContext);
 
   const dynamicStyles = {
@@ -17,7 +22,11 @@ const ScreenContainer = ({scrollable, children, extraStyles}) => {
       {!scrollable ? (
         <View style={fullStyles}>{children}</View>
       ) : (
-        <ScrollView style={fullStyles}>{children}</ScrollView>
+        <ScrollView
+          style={fullStyles}
+          contentContainerStyle={contentContainerStyle}>
+          {children}
+        </ScrollView>
       )}
     </>
   );

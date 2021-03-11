@@ -3,8 +3,8 @@ import {Text, View, StyleSheet} from 'react-native';
 
 import ThemeContext from '../../lib/contexts/ThemeContext';
 import ScreenContainer from '../../lib/components/ScreenContainer';
-import SelectSessionTimeScreen from './SelectSessionTimeScreen';
-import TimerScreen from './TimerScreen';
+import SelectSessionTimeScreen from './components/SelectSessionTimeScreen';
+import TimerScreen from './components/TimerScreen';
 
 const MeditationScreen = ({
   navigation,
