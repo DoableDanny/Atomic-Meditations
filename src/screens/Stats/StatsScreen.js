@@ -1,25 +1,11 @@
 import React, {useEffect, useContext} from 'react';
-import {Text, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
-import ThemeContext from '../../lib/contexts/ThemeContext';
+import ThemeContext, {theme} from '../../lib/contexts/ThemeContext';
 import ScreenContainer from '../../lib/components/ScreenContainer';
+import StatRow from './components/StatRow';
 import {hoursAndMinsString} from '../../lib/functions/displayHoursAndMins';
-
-const StatRow = ({statKey, statValue}) => {
-  const theme = useContext(ThemeContext);
-  const colors = theme.colors;
-
-  return (
-    <View style={styles.statRow}>
-      <Text style={{...styles.statKey, color: colors.textSecondary}}>
-        {statKey}:{' '}
-        <Text style={{...styles.statValue, color: colors.textPrimary}}>
-          {statValue}
-        </Text>
-      </Text>
-    </View>
-  );
-};
 
 const StatsScreen = ({
   totalSessionsStat,
@@ -30,6 +16,8 @@ const StatsScreen = ({
   resetCurrentStreakStat,
   longestStreakStat,
 }) => {
+  const theme = useContext(ThemeContext);
+
   // If last meditation was not today or yesterday, reset current streak to 0
   useEffect(() => {
     if (shouldResetCurrentStreakStat(lastMeditationDateStat)) {
@@ -67,6 +55,13 @@ const StatsScreen = ({
         />
         <StatRow statKey="Last Meditation" statValue={lastMeditationDateStat} />
       </View>
+
+      <Icon
+        name="stats-chart-outline"
+        color={theme.colors.secondary}
+        size={60}
+        style={styles.icon}
+      />
     </ScreenContainer>
   );
 };
@@ -74,13 +69,12 @@ const StatsScreen = ({
 const styles = StyleSheet.create({
   statsBlock: {
     alignItems: 'center',
-    marginBottom: 24,
+    marginBottom: 32,
   },
-  statRow: {
-    paddingTop: 16,
-  },
-  statKey: {
-    fontSize: 21,
+  icon: {
+    position: 'absolute',
+    bottom: 16,
+    alignSelf: 'center',
   },
 });
 
