@@ -2,19 +2,33 @@ import React, {useContext} from 'react';
 import {TouchableOpacity, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import {theme} from '../theme/theme';
 import ThemeContext from '../contexts/ThemeContext';
 
-const ArrowButton = ({iconName, twoArrows, handlePress}) => {
+const ArrowButton = ({direction, double, handlePress}) => {
   const theme = useContext(ThemeContext);
   const colors = theme.colors;
+
+  let iconName;
+  switch (direction) {
+    case 'up':
+      iconName = 'keyboard-arrow-up';
+      break;
+    case 'down':
+      iconName = 'keyboard-arrow-down';
+      break;
+    case 'left':
+      iconName = 'keyboard-arrow-left';
+      break;
+    default:
+      iconName = 'keyboard-arrow-right';
+  }
 
   return (
     <TouchableOpacity
       onPress={handlePress}
       style={{...styles.arrowButton, backgroundColor: colors.background2}}>
       <Icon name={iconName} size={30} color={colors.secondary} />
-      {twoArrows && <Icon name={iconName} size={30} color={colors.secondary} />}
+      {double && <Icon name={iconName} size={30} color={colors.secondary} />}
     </TouchableOpacity>
   );
 };
@@ -22,7 +36,6 @@ const ArrowButton = ({iconName, twoArrows, handlePress}) => {
 const styles = StyleSheet.create({
   arrowButton: {
     margin: 8,
-    backgroundColor: theme.lightGreen,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 6,

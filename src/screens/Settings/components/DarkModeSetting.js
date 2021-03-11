@@ -11,7 +11,7 @@ const DarkModeSetting = ({toggleDarkMode, darkMode}) => {
   return (
     <SettingScaffold
       title="Toggle Night Mode"
-      description="Dark mode is great for before bed meditations as it's easier on the eye. Light mode shines blue light into your eyes, helping you wake up!">
+      description="Night Mode is great for before bed meditations as it's easier on the eye. Morning Mode shines blue light into your eyes, helping you wake up in the morning!">
       <Switch
         onValueChange={toggleDarkMode}
         thumbColor={colors.white}

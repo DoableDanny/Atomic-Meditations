@@ -73,11 +73,11 @@ const ChooseSoundSetting = () => {
       title="Select Alarm Sound"
       description="Sound to be played upon time up.">
       <View style={styles.wrapper}>
-        <ArrowButton iconName="keyboard-arrow-left" handlePress={prevTrack} />
+        <ArrowButton direction="left" handlePress={prevTrack} />
         <Text style={{...styles.track, color: theme.colors.textPrimary}}>
           {TRACKS[trackNumber].title}
         </Text>
-        <ArrowButton iconName="keyboard-arrow-right" handlePress={nextTrack} />
+        <ArrowButton direction="right" handlePress={nextTrack} />
       </View>
       <Button
         title="Play/Pause"

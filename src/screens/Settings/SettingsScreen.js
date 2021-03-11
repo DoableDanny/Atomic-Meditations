@@ -26,18 +26,18 @@ const SettingsScreen = ({
       contentContainerStyle={{
         alignSelf: 'center',
       }}>
+      <DarkModeSetting toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
+
+      <ChooseSoundSetting />
+
+      <NotificationSetting />
+
       <PurchaseFullAppSetting
         connected={connected}
         isFullAppPurchased={isFullAppPurchased}
         purchase={purchase}
         currentPurchaseError={currentPurchaseError}
       />
-
-      <NotificationSetting />
-
-      <DarkModeSetting toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
-
-      <ChooseSoundSetting />
 
       <ResetSettings
         navigation={navigation}

@@ -48,12 +48,8 @@ const SelectSessionTimeScreen = ({
     <>
       <View style={{alignItems: 'center'}}>
         <View style={styles.arrowButton}>
-          <ArrowButton
-            iconName="keyboard-arrow-up"
-            twoArrows
-            handlePress={plusTenMins}
-          />
-          <ArrowButton iconName="keyboard-arrow-up" handlePress={plusOneMin} />
+          <ArrowButton direction="up" double handlePress={plusTenMins} />
+          <ArrowButton direction="up" handlePress={plusOneMin} />
         </View>
 
         <Text style={{...styles.time, color: colors.textPrimary}}>
@@ -65,15 +61,8 @@ const SelectSessionTimeScreen = ({
           {clockify(alarmRingSeconds).displayMins === '01' ? 'Min' : 'Mins'}
         </Text>
         <View style={styles.arrowButton}>
-          <ArrowButton
-            iconName="keyboard-arrow-down"
-            handlePress={minusOneMin}
-          />
-          <ArrowButton
-            iconName="keyboard-arrow-down"
-            twoArrows
-            handlePress={minusTenMins}
-          />
+          <ArrowButton direction="down" handlePress={minusOneMin} />
+          <ArrowButton direction="down" double handlePress={minusTenMins} />
         </View>
       </View>
       <View style={styles.beginBtnWrapper}>

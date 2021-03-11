@@ -9,11 +9,11 @@ const AdjustTimeModule = ({time, addOne, minusOne}) => {
 
   return (
     <View style={styles.timeSelectWrapper}>
-      <ArrowButton iconName="keyboard-arrow-up" handlePress={addOne} />
+      <ArrowButton direction="up" handlePress={addOne} />
       <Text style={{...styles.timeText, color: theme.colors.textPrimary}}>
         {time}
       </Text>
-      <ArrowButton iconName="keyboard-arrow-down" handlePress={minusOne} />
+      <ArrowButton direction="down" handlePress={minusOne} />
     </View>
   );
 };
