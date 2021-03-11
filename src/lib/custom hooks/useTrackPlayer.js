@@ -39,24 +39,21 @@ const useTrackPlayer = (tracks) => {
 
   useEffect(() => {
     TrackPlayer.setupPlayer().then(() => {
-      // Get users preferred track.
-      getStringData(STORAGE_KEYS.ALARM_SOUND_ID).then((data) => {
-        console.log('trackId data: ', data);
-
-        if (data) {
-          const id = parseInt(data);
-          setAlarmTrackId(id);
-
-          // Add all tracks (for Settings Screen).
-          if (tracks === 'all') TrackPlayer.add([...TRACKS]);
-          // Otherwise just add users preferred track (for time-up alarm)
-          else TrackPlayer.add([TRACKS[id]]);
-        }
-      });
-
+      // Get all tracks (for choose sound option in Settings Screen)
       if (tracks === 'all') TrackPlayer.add([...TRACKS]);
+      else {
+        // Get users preferred track (for time up).
+        getStringData(STORAGE_KEYS.ALARM_SOUND_ID).then((data) => {
+          console.log('trackId data: ', data);
 
-      console.log('Meta, ', TrackPlayer.updateMetadataForTrack);
+          if (data) {
+            const id = parseInt(data);
+            setAlarmTrackId(id);
+
+            TrackPlayer.add([TRACKS[id]]);
+          } else TrackPlayer.add([TRACKS[0]]);
+        });
+      }
 
       console.log('Trackplayer setup');
     });

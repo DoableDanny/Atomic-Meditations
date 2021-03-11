@@ -5,7 +5,7 @@ const palette = {
   blueJeans: '#40a5e9',
   cyanProcess: '#3eb1eb',
   emeraldGreen: '#51D26D',
-  lavenderBlue: '#DCD4FA',
+  lavenderBlue: '#D6D4FA',
   aliceBlue: '#f7fcfe',
   lightBlue: '#B9E5F6',
   tartOrange: '#EE5959',
