@@ -39,21 +39,44 @@ const useTrackPlayer = (tracks) => {
 
   useEffect(() => {
     TrackPlayer.setupPlayer().then(() => {
+      // getStringData for settings and timer
+      // setAlarmTrackId(data)
+      // if(tracks === 'all') addAllTracks
+      // else add(data)
+
       // Get all tracks (for choose sound option in Settings Screen)
       if (tracks === 'all') TrackPlayer.add([...TRACKS]);
-      else {
-        // Get users preferred track (for time up).
-        getStringData(STORAGE_KEYS.ALARM_SOUND_ID).then((data) => {
-          console.log('trackId data: ', data);
 
-          if (data) {
-            const id = parseInt(data);
-            setAlarmTrackId(id);
+      // Get users preferred track (for time up).
+      getStringData(STORAGE_KEYS.ALARM_SOUND_ID).then((data) => {
+        console.log('trackId data: ', data);
 
-            TrackPlayer.add([TRACKS[id]]);
-          } else TrackPlayer.add([TRACKS[0]]);
-        });
-      }
+        if (data) {
+          const id = parseInt(data);
+          setAlarmTrackId(id);
+
+          // If on timer screen, add the preferred alarm sound.
+          if (tracks !== 'all') TrackPlayer.add([TRACKS[id]]);
+        } else if (tracks !== 'all') {
+          TrackPlayer.add([TRACKS[0]]);
+        }
+      });
+
+      // // Get all tracks (for choose sound option in Settings Screen)
+      // if (tracks === 'all') TrackPlayer.add([...TRACKS]);
+      // else {
+      //   // Get users preferred track (for time up).
+      //   getStringData(STORAGE_KEYS.ALARM_SOUND_ID).then((data) => {
+      //     console.log('trackId data: ', data);
+
+      //     if (data) {
+      //       const id = parseInt(data);
+      //       setAlarmTrackId(id);
+
+      //       TrackPlayer.add([TRACKS[id]]);
+      //     } else TrackPlayer.add([TRACKS[0]]);
+      //   });
+      // }
 
       console.log('Trackplayer setup');
     });
