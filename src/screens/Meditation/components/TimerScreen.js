@@ -18,7 +18,7 @@ const TimerScreen = ({
   updateMeditationCompletionTime,
   updateAllStats,
 }) => {
-  const [seconds, setSeconds] = useState(180);
+  const [seconds, setSeconds] = useState(0);
   const [showStopSoundBtn, setShowStopSoundBtn] = useState(false);
   // Track length ranges from 26-46 seconds so the time the stopSoundBtn is shown will depend on the track.
   const [trackDuration, setTrackDuration] = useState(40);
@@ -26,12 +26,6 @@ const TimerScreen = ({
   const {playTrack, stopTrack, getTrackDuration} = useTrackPlayer();
 
   let headerMsgTimeOut = useRef(null);
-
-  const startTimer = () => {
-    BackgroundTimer.runBackgroundTimer(() => {
-      setSeconds((prevSecs) => prevSecs + 1);
-    }, 1000);
-  };
 
   useEffect(() => {
     if (seconds === 3) setHeaderMsg('');
@@ -46,17 +40,9 @@ const TimerScreen = ({
     if (seconds === alarmRingSeconds) {
       playTrack();
 
-      setHeaderMsg('Goal time reached, great job!');
-
-      headerMsgTimeOut.current = setTimeout(() => {
-        setHeaderMsg('Feel free to continue meditating...');
-      }, 3000);
-
-      headerMsgTimeOut.current = setTimeout(() => {
-        setHeaderMsg('');
-      }, 8000);
-
       setShowStopSoundBtn(true);
+
+      updateHeaderMessages();
 
       getTrackDuration().then((duration) => {
         setTrackDuration(duration);
@@ -78,6 +64,25 @@ const TimerScreen = ({
       KeepAwake.deactivate();
     };
   }, []);
+
+  const startTimer = () => {
+    BackgroundTimer.runBackgroundTimer(() => {
+      setSeconds((prevSecs) => prevSecs + 1);
+    }, 1000);
+  };
+
+  // Messages for when user reaches their goal time.
+  const updateHeaderMessages = () => {
+    setHeaderMsg('Goal time reached, great job!');
+
+    headerMsgTimeOut.current = setTimeout(() => {
+      setHeaderMsg('Feel free to continue meditating...');
+    }, 3000);
+
+    headerMsgTimeOut.current = setTimeout(() => {
+      setHeaderMsg('');
+    }, 8000);
+  };
 
   return (
     <>
