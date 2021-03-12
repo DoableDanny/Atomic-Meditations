@@ -72,7 +72,7 @@ const App = () => {
                 : theme.colors.navBannerColor,
             },
           }}>
-          <Stack.Screen name="Home" options={{title: 'Atomic Meditations'}}>
+          <Stack.Screen name="Home" options={{title: 'Atomic Meditation'}}>
             {(props) => (
               <HomeScreen
                 {...props}

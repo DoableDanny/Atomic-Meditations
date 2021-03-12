@@ -22,6 +22,7 @@ const FooterBtn = ({title, borderRight, handlePress}) => {
         },
         dynamicStyles.footerBtn,
       ]}
+      activeOpacity={0.4}
       onPress={handlePress}>
       <Text style={{...styles.footerBtnTitle, color: theme.colors.secondary}}>
         {title}

@@ -57,8 +57,6 @@ const NotificationSetting = () => {
     const day = dateObj.getDate();
 
     const userDateObj = new Date(year, month, day, hours, mins);
-    // Reminder will be sent 5 mins before meditation session time
-    userDateObj.setMinutes(userDateObj.getMinutes() - 5);
 
     // Check if that time has already passed today. If has, add 1 to day. getTime() returns the number of millisecs since 1970/01/01.
     if (dateObj.getTime() > userDateObj.getTime()) {
@@ -72,7 +70,7 @@ const NotificationSetting = () => {
 
     Alert.alert(
       'Success!',
-      `You wil be sent a reminder 5 minutes before ${displayHours}:${displayMins} every day. Let's build this habit!`,
+      `You will be sent a reminder at ${displayHours}:${displayMins} every day. Let's build this habit!`,
       [{text: 'Cool', onPress: () => getAndSetScheduledLocalNotifications()}],
     );
   };
@@ -104,8 +102,7 @@ const NotificationSetting = () => {
   return (
     <SettingScaffold
       title="Set a Daily Reminder"
-      description="What time will you meditate? We'll send you a daily reminder 5 mins
-        before it's time so you can get yourself ready.">
+      description="What time will you meditate? Be sure to give yourself enough time to get ready. We'll send you a daily reminder! ">
       <View style={{flexDirection: 'row', marginBottom: 16}}>
         <AdjustTimeModule
           time={hours < 10 ? `0${hours}` : hours}
