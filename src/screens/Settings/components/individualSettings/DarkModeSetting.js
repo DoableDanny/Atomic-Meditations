@@ -1,8 +1,8 @@
 import React, {useContext} from 'react';
 import {Switch} from 'react-native';
 
-import SettingScaffold from './SettingScaffold';
-import ThemeContext from '../../../lib/contexts/ThemeContext';
+import SettingScaffold from '../SettingScaffold';
+import ThemeContext from '../../../../lib/contexts/ThemeContext';
 
 const DarkModeSetting = ({toggleDarkMode, darkMode}) => {
   const theme = useContext(ThemeContext);

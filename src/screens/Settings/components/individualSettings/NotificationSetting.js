@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import {View, Alert} from 'react-native';
 
-import {usePushNotification} from '../../../lib/custom hooks';
+import {usePushNotification} from '../../../../lib/custom hooks';
 
-import SettingScaffold from './SettingScaffold';
-import AdjustTimeModule from './AdjustTimeModule';
-import Message from './Message';
-import Button from '../../../lib/components/Button';
+import SettingScaffold from '../SettingScaffold';
+import AdjustTimeModule from '../AdjustTimeModule';
+import Message from '../Message';
+import Button from '../../../../lib/components/Button';
 
 const NotificationSetting = () => {
   const [hours, setHours] = useState(12);

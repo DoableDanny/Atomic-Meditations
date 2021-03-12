@@ -1,8 +1,8 @@
 import React from 'react';
 import {Alert} from 'react-native';
 
-import SettingScaffold from './SettingScaffold';
-import Button from '../../../lib/components/Button';
+import SettingScaffold from '../SettingScaffold';
+import Button from '../../../../lib/components/Button';
 
 const ResetSettings = ({navigation, resetAllStats}) => {
   const handleResetStats = () => {

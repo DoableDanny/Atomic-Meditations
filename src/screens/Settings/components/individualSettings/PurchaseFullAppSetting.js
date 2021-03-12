@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {Text} from 'react-native';
-import Button from '../../../lib/components/Button';
-import {itemSKUs} from '../../../lib/custom hooks/useInAppPurchase';
-import SettingScaffold from './SettingScaffold';
-import Message from './Message';
+import Button from '../../../../lib/components/Button';
+import {itemSKUs} from '../../../../lib/custom hooks/useInAppPurchase';
+import SettingScaffold from '../SettingScaffold';
+import Message from '../Message';
 
 const PurchaseFullAppSetting = ({
   connected,

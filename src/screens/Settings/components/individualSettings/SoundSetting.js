@@ -1,12 +1,14 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {View, Text, StyleSheet, Alert} from 'react-native';
 
-import ArrowButton from '../../../lib/components/ArrowButton';
-import SettingScaffold from './SettingScaffold';
-import Message from './Message';
-import Button from '../../../lib/components/Button';
-import useTrackPlayer, {TRACKS} from '../../../lib/custom hooks/useTrackPlayer';
-import ThemeContext from '../../../lib/contexts/ThemeContext';
+import ArrowButton from '../../../../lib/components/ArrowButton';
+import SettingScaffold from '../SettingScaffold';
+import Message from '../Message';
+import Button from '../../../../lib/components/Button';
+import useTrackPlayer, {
+  TRACKS,
+} from '../../../../lib/custom hooks/useTrackPlayer';
+import ThemeContext from '../../../../lib/contexts/ThemeContext';
 
 const ChooseSoundSetting = () => {
   const [trackNumber, setTrackNumber] = useState(0);

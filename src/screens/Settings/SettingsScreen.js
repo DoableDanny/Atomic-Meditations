@@ -2,11 +2,13 @@ import React from 'react';
 
 import ScreenContainer from '../../lib/components/ScreenContainer';
 
-import ChooseSoundSetting from './components/ChooseSoundSetting';
-import PurchaseFullAppSetting from './components/PurchaseFullAppSetting';
-import NotificationSetting from './components/NotificationSetting';
-import ResetSettings from './components/ResetSettings';
-import DarkModeSetting from './components/DarkModeSetting';
+import {
+  SoundSetting,
+  PurchaseFullAppSetting,
+  NotificationSetting,
+  ResetSettings,
+  DarkModeSetting,
+} from './components/individualSettings';
 
 const SettingsScreen = ({
   navigation,
@@ -28,7 +30,7 @@ const SettingsScreen = ({
       }}>
       <DarkModeSetting toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
 
-      <ChooseSoundSetting />
+      <SoundSetting />
 
       <NotificationSetting />
 
