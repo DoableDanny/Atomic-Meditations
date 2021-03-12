@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {requestPurchase, requestSubscription, useIAP} from 'react-native-iap';
+import {requestPurchase, useIAP} from 'react-native-iap';
 import {Alert} from 'react-native';
 
 import {
@@ -10,19 +10,7 @@ import {
 
 // Play store item Ids
 export const itemSKUs = Platform.select({
-  android: [
-    'full_app',
-    'test_1',
-    'test_2',
-    'test_3',
-    'test_4',
-    'test_5',
-    'test_6',
-    'test_7',
-    'test_8',
-    'test_9',
-    'test_10',
-  ],
+  android: ['full_app'],
 });
 
 const {IS_FULL_APP_PURCHASED} = STORAGE_KEYS;
@@ -31,9 +19,7 @@ const useInAppPurchase = () => {
   const {
     connected,
     products,
-    subscriptions,
     getProducts,
-    getSubscriptions,
     finishTransaction,
     currentPurchase,
     currentPurchaseError,
@@ -102,8 +88,6 @@ const useInAppPurchase = () => {
   return {
     connected,
     products,
-    getProducts,
-    finishTransaction,
     currentPurchase,
     currentPurchaseError,
     purchase,

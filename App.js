@@ -12,15 +12,15 @@ import {
   StatsScreen,
 } from './src/screens';
 
-import useTheme from './src/lib/custom hooks/useTheme';
-import useMeditations from './src/lib/custom hooks/useMeditations';
-import useStats from './src/lib/custom hooks/useStats';
-import useInAppPurchase from './src/lib/custom hooks/useInAppPurchase';
+import {
+  useTheme,
+  useMeditations,
+  useStats,
+  useInAppPurchase,
+} from './src/lib/custom hooks';
 
 const App = () => {
   const {darkMode, toggleDarkMode} = useTheme();
-
-  // Need to pass toggleDarkMode to Settings Screen so can set from there.
 
   const {
     meditations,
