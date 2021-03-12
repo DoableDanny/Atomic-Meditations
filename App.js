@@ -33,15 +33,12 @@ const App = () => {
 
   const {
     totalSessionsStat,
-    updateTotalSessionsStat,
     totalTimeStat,
-    updateTotalTimeStat,
     lastMeditationDateStat,
-    updateLastMeditationDateStat,
     currentStreakStat,
-    updateCurrentStreakStat,
-    shouldResetCurrentStreakStat,
     resetCurrentStreakStat,
+    shouldResetCurrentStreakStat,
+    updateAllStats,
     longestStreakStat,
     resetAllStats,
   } = useStats();
@@ -92,12 +89,9 @@ const App = () => {
               <MeditationScreen
                 {...props}
                 unlockNextMeditation={unlockNextMeditation}
-                updateTotalSessionsStat={updateTotalSessionsStat}
                 updateMeditationCompletionTime={updateMeditationCompletionTime}
-                updateTotalTimeStat={updateTotalTimeStat}
-                updateLastMeditationDateStat={updateLastMeditationDateStat}
-                updateCurrentStreakStat={updateCurrentStreakStat}
                 lastMeditationDateStat={lastMeditationDateStat}
+                updateAllStats={updateAllStats}
               />
             )}
           </Stack.Screen>

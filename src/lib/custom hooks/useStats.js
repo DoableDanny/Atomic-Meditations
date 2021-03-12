@@ -144,6 +144,14 @@ const useStats = () => {
     }
   };
 
+  // Updates all users stats when user completes a meditation. updateCurrentStreakStat needs to be called before updateLastMeditationDateStat.
+  const updateAllStats = (seconds, lastMeditationDate) => {
+    updateTotalSessionsStat();
+    updateTotalTimeStat(seconds);
+    updateCurrentStreakStat(lastMeditationDate);
+    updateLastMeditationDateStat();
+  };
+
   // Delete all stats
   const resetAllStats = () => {
     removeMultiple([
@@ -162,14 +170,11 @@ const useStats = () => {
 
   return {
     totalSessionsStat,
-    updateTotalSessionsStat,
     totalTimeStat,
-    updateTotalTimeStat,
     lastMeditationDateStat,
-    updateLastMeditationDateStat,
     currentStreakStat,
-    updateCurrentStreakStat,
     shouldResetCurrentStreakStat,
+    updateAllStats,
     resetCurrentStreakStat,
     longestStreakStat,
     resetAllStats,
