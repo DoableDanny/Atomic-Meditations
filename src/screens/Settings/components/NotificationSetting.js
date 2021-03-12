@@ -1,26 +1,44 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, Alert} from 'react-native';
-import PushNotification from 'react-native-push-notification';
+import React, {useState} from 'react';
+import {View, Alert} from 'react-native';
 
-import {setLocalNotificationSchedule} from '../../../lib/functions/pushNotificationConfig';
+import {usePushNotification} from '../../../lib/custom hooks';
+
 import SettingScaffold from './SettingScaffold';
 import AdjustTimeModule from './AdjustTimeModule';
 import Message from './Message';
 import Button from '../../../lib/components/Button';
 
-const NOTIFICATION_TITLE = `Get ready, it's meditation time in 5 mins...`;
-
 const NotificationSetting = () => {
   const [hours, setHours] = useState(12);
   const [mins, setMins] = useState(30);
-  const [notificationsArray, setNotificationsArray] = useState([]);
+
+  const {
+    NOTIFICATION_TITLE,
+    notificationsArray,
+    setNotification,
+    cancelNotification,
+    getTime,
+  } = usePushNotification();
 
   let displayHours = hours < 10 ? `0${hours}` : hours;
   let displayMins = mins < 10 ? `0${mins}` : mins;
 
-  useEffect(() => {
-    getAndSetScheduledLocalNotifications();
-  }, []);
+  const setNotificationAndAlert = (hours, mins) => {
+    setNotification(hours, mins);
+
+    Alert.alert(
+      'Success!',
+      `You will be sent a reminder at ${displayHours}:${displayMins} every day. Let's build this habit!`,
+      [
+        {
+          text: 'Cool',
+          onPress: () => {
+            console.log('Cool');
+          },
+        },
+      ],
+    );
+  };
 
   const addOneHour = () => {
     if (hours === 23) setHours(0);
@@ -50,55 +68,6 @@ const NotificationSetting = () => {
     }
   };
 
-  const setNotification = () => {
-    const dateObj = new Date();
-    const year = dateObj.getFullYear();
-    const month = dateObj.getMonth();
-    const day = dateObj.getDate();
-
-    const userDateObj = new Date(year, month, day, hours, mins);
-
-    // Check if that time has already passed today. If has, add 1 to day. getTime() returns the number of millisecs since 1970/01/01.
-    if (dateObj.getTime() > userDateObj.getTime()) {
-      userDateObj.setDate(userDateObj.getDate() + 1);
-    }
-
-    // Delete all old scheduled notifications
-    PushNotification.cancelAllLocalNotifications();
-
-    setLocalNotificationSchedule(userDateObj);
-
-    Alert.alert(
-      'Success!',
-      `You will be sent a reminder at ${displayHours}:${displayMins} every day. Let's build this habit!`,
-      [{text: 'Cool', onPress: () => getAndSetScheduledLocalNotifications()}],
-    );
-  };
-
-  // Get all scheduled notifications. If none scheduled, returns []
-  const getAndSetScheduledLocalNotifications = () => {
-    PushNotification.getScheduledLocalNotifications((notificationsArray) => {
-      setNotificationsArray(notificationsArray);
-    });
-  };
-
-  const getTime = (date) => {
-    const dateObj = new Date(date);
-    const hours = dateObj.getHours();
-    const mins = dateObj.getMinutes();
-
-    return `${formatInteger(hours)} : ${formatInteger(mins)}`;
-  };
-
-  const formatInteger = (int) => {
-    return int < 10 ? `0${int}` : int;
-  };
-
-  const cancelNotification = () => {
-    PushNotification.cancelAllLocalNotifications();
-    setNotificationsArray([]);
-  };
-
   return (
     <SettingScaffold
       title="Set a Daily Reminder"
@@ -117,7 +86,7 @@ const NotificationSetting = () => {
       </View>
       <Button
         title="Set New Reminder"
-        handlePress={setNotification}
+        handlePress={() => setNotificationAndAlert(hours, mins)}
         extraStyles={{marginBottom: 16}}
       />
       <Button

@@ -21,7 +21,7 @@ export const storeStringData = async (key, value) => {
     console.log(e);
   }
 
-  console.log(`Saved`);
+  console.log(`Saved ${key} : ${value}`);
 };
 
 export const storeObjectData = async (key, value) => {

@@ -2,6 +2,7 @@ import PushNotification from 'react-native-push-notification';
 
 // CONFIGURE PUSH NOTIFICATIONS
 
+// This function is called in index.js to set everything up.
 export const configurePushNotification = () => {
   PushNotification.configure({
     // (optional) Called when Token is generated (iOS and Android)
@@ -52,15 +53,14 @@ export const configurePushNotification = () => {
   );
 };
 
-// Set daily reminder
-export const setLocalNotificationSchedule = (date) => {
-  PushNotification.localNotificationSchedule({
-    channelId: '5-min-reminder',
-    title: `Get ready, it's meditation time in 5 mins...`,
-    message: `It's almost time to meditate for at least 2 minutes. 2 mins is easy, let's keep this habit going!`,
-    // date: new Date(Date.now() + 10 * 1000), // in 60 secs
-    date: date,
-    allowWhileIdle: true, // (optional) set notification to work while on doze, default: false
-    repeatType: 'day',
-  });
-};
+// // Set daily reminder
+// export const setLocalNotificationSchedule = (date) => {
+//   PushNotification.localNotificationSchedule({
+//     channelId: '5-min-reminder',
+//     title: `Get ready, it's meditation time`,
+//     message: `It's time to meditate for at least 2 minutes. 2 mins is easy, let's keep this habit going!`,
+//     date: date,
+//     allowWhileIdle: true, // (optional) set notification to work while on doze, default: false
+//     repeatType: 'day',
+//   });
+// };
