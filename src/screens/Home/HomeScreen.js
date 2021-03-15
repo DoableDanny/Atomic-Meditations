@@ -42,6 +42,7 @@ const HomeScreen = ({
       listLength={meditations.length}
       meditationsUnlocked={meditationsUnlocked}
       isFullAppPurchased={isFullAppPurchased}
+      currentStreakStat={currentStreakStat}
     />
   );
 

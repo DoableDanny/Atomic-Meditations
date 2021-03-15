@@ -11,6 +11,7 @@ const MeditationModule = ({
   listLength,
   meditationsUnlocked,
   isFullAppPurchased,
+  currentStreakStat,
 }) => {
   const theme = useContext(ThemeContext);
 
@@ -49,6 +50,7 @@ const MeditationModule = ({
     <TouchableOpacity
       style={[
         styles.meditationModule,
+        item.id == '1' && !currentStreakStat && {marginTop: 32},
         item.id == listLength && {marginBottom: 80},
         {backgroundColor: theme.colors.background2},
       ]}
