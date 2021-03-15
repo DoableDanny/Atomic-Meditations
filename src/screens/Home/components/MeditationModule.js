@@ -23,9 +23,11 @@ const MeditationModule = ({
     if (item.id <= meditationsUnlocked + 1) {
       // If app's been purchased, or not purchased and the meditation is 1, 2, or 3
       if (isFullAppPurchased || (!isFullAppPurchased && item.id <= 3)) {
-        // Then navigate to it.
-        navigation.navigate('Meditation', {currentMeditation: item});
-      } else if (!isFullAppPurchased && item.id > 3) {
+        // If day 1, show Intro screen, otherwise navigate to the meditation.
+        item.id == '1'
+          ? navigation.navigate('Intro', {currentMeditation: item})
+          : navigation.navigate('Meditation', {currentMeditation: item});
+      } else {
         Alert.alert(
           'Please Purchase the Full App',
           `You're doing great! Let's continue developing this habit and purchase the full app. It doesn't cost much and supports this app's development!`,

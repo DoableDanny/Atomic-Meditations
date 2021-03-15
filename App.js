@@ -7,6 +7,7 @@ import ThemeContext, {theme, darkTheme} from './src/lib/contexts/ThemeContext';
 
 import {
   HomeScreen,
+  Intro,
   MeditationScreen,
   SettingsScreen,
   StatsScreen,
@@ -84,6 +85,8 @@ const App = () => {
               />
             )}
           </Stack.Screen>
+
+          <Stack.Screen name="Intro" title="Welcome" component={Intro} />
 
           <Stack.Screen name="Meditation">
             {(props) => (
