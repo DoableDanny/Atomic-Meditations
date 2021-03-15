@@ -1,8 +1,9 @@
 import React, {useEffect, useContext} from 'react';
-import {FlatList, View, StyleSheet} from 'react-native';
+import {FlatList, View, StyleSheet, Text} from 'react-native';
 import {useIsFocused} from '@react-navigation/native';
 
 import ThemeContext from '../../lib/contexts/ThemeContext';
+import StreakBanner from './components/StreakBanner';
 import MeditationModule from './components/MeditationModule';
 import Footer from './components/Footer';
 
@@ -14,6 +15,7 @@ const HomeScreen = ({
   resetAllMeditationCompletionTimes,
   relockMeditations,
   isFullAppPurchased,
+  currentStreakStat,
 }) => {
   const theme = useContext(ThemeContext);
 
@@ -46,6 +48,7 @@ const HomeScreen = ({
   return (
     <View
       style={[styles.container, {backgroundColor: theme.colors.background}]}>
+      <StreakBanner theme={theme} currentStreakStat={currentStreakStat} />
       <FlatList
         data={meditations}
         renderItem={renderMeditationModule}
@@ -59,7 +62,6 @@ const HomeScreen = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 16,
   },
 });
 

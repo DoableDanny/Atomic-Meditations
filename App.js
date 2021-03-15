@@ -69,7 +69,7 @@ const App = () => {
                 : theme.colors.navBannerColor,
             },
           }}>
-          <Stack.Screen name="Home" options={{title: 'Atomic Meditation'}}>
+          <Stack.Screen name="Home" options={{title: `Atomic Meditation`}}>
             {(props) => (
               <HomeScreen
                 {...props}
@@ -80,6 +80,7 @@ const App = () => {
                 }
                 relockMeditations={relockMeditations}
                 isFullAppPurchased={isFullAppPurchased}
+                currentStreakStat={currentStreakStat}
               />
             )}
           </Stack.Screen>
