@@ -1,5 +1,5 @@
 import React, {useEffect, useContext} from 'react';
-import {FlatList, View, StyleSheet, Text} from 'react-native';
+import {FlatList, View, StyleSheet} from 'react-native';
 import {useIsFocused} from '@react-navigation/native';
 
 import ThemeContext from '../../lib/contexts/ThemeContext';
@@ -49,6 +49,7 @@ const HomeScreen = ({
     <View
       style={[styles.container, {backgroundColor: theme.colors.background}]}>
       <StreakBanner theme={theme} currentStreakStat={currentStreakStat} />
+
       <FlatList
         data={meditations}
         renderItem={renderMeditationModule}
