@@ -2,7 +2,6 @@ import React, {useContext} from 'react';
 import {TouchableOpacity, Text, StyleSheet, Alert} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import {theme} from '../../../lib/theme/theme';
 import {hoursAndMinsString} from '../../../lib/functions/displayHoursAndMins';
 import ThemeContext from '../../../lib/contexts/ThemeContext';
 
@@ -72,7 +71,6 @@ const MeditationModule = ({
 
 const styles = StyleSheet.create({
   meditationModule: {
-    backgroundColor: theme.lightGreen,
     padding: 35,
     maxHeight: 100,
     borderRadius: 32,
