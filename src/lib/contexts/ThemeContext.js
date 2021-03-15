@@ -43,9 +43,14 @@ export const theme = {
     header: {
       fontSize: 26,
       fontWeight: 'bold',
+      lineHeight: 30,
+      marginTop: 32,
+      marginBottom: 24,
     },
     body: {
+      marginBottom: 24,
       fontSize: 19,
+      lineHeight: 24,
     },
   },
 };

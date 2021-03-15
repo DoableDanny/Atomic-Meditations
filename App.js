@@ -86,7 +86,11 @@ const App = () => {
             )}
           </Stack.Screen>
 
-          <Stack.Screen name="Intro" title="Welcome" component={Intro} />
+          <Stack.Screen
+            name="Intro"
+            component={Intro}
+            options={{title: 'Welcome!'}}
+          />
 
           <Stack.Screen name="Meditation">
             {(props) => (
