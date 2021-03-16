@@ -1,6 +1,7 @@
 import React, {useEffect, useContext} from 'react';
 import {FlatList, View, StyleSheet} from 'react-native';
 import {useIsFocused} from '@react-navigation/native';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 import ThemeContext from '../../lib/contexts/ThemeContext';
 import StreakBanner from './components/StreakBanner';
@@ -21,6 +22,10 @@ const HomeScreen = ({
 
   // If on this screen => isFocused = true
   const isFocused = useIsFocused();
+
+  useEffect(() => {
+    crashlytics().log('Home Screen mounted');
+  }, []);
 
   useEffect(() => {
     // If user resets completion times or re-locks meditations in Settings, we reset/re-lock here (React Native Navigation doesn't re-render when go back a screen).

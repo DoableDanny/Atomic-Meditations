@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import {TouchableOpacity, Text, StyleSheet, Alert} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 import {hoursAndMinsString} from '../../../lib/functions/displayHoursAndMins';
 import ThemeContext from '../../../lib/contexts/ThemeContext';
@@ -19,6 +20,10 @@ const MeditationModule = ({
   const seconds = item.completionTime;
 
   const handlePress = () => {
+    crashlytics().log(
+      `Pressed meditation module ${item.id}. isFullAppPurchased: ${isFullAppPurchased}`,
+    );
+
     // If meditation has been unlocked (if not we do nothing).
     if (item.id <= meditationsUnlocked + 1) {
       // If app's been purchased, or not purchased and the meditation is 1, 2, or 3

@@ -1,5 +1,6 @@
-import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React, {useEffect} from 'react';
+
+import crashlytics from '@react-native-firebase/crashlytics';
 
 import ScreenContainer from '../../lib/components/ScreenContainer';
 import MyText from '../../lib/components/MyText';
@@ -9,6 +10,10 @@ import Button from '../../lib/components/Button';
 
 const Intro = ({navigation, route}) => {
   const currentMeditation = route.params.currentMeditation;
+
+  useEffect(() => {
+    crashlytics().log('Intro Screen mounted');
+  }, []);
 
   return (
     <ScreenContainer scrollable>
