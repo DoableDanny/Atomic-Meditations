@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {View, Alert} from 'react-native';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 import {usePushNotification} from '../../../../lib/custom hooks';
 
@@ -24,6 +25,8 @@ const NotificationSetting = () => {
   let displayMins = mins < 10 ? `0${mins}` : mins;
 
   const setNotificationAndAlert = (hours, mins) => {
+    crashlytics().log('Set New Reminder btn pressed (NotificationSetting)');
+
     setNotification(hours, mins);
 
     Alert.alert(
@@ -91,7 +94,12 @@ const NotificationSetting = () => {
       />
       <Button
         title="Cancel Reminder"
-        handlePress={cancelNotification}
+        handlePress={() => {
+          crashlytics().log(
+            'Cancel Reminder btn pressed (NotificationSetting)',
+          );
+          cancelNotification();
+        }}
         btnStyle="secondary"
       />
       <Message>

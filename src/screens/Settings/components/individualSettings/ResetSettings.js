@@ -1,11 +1,14 @@
 import React from 'react';
 import {Alert} from 'react-native';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 import SettingScaffold from '../SettingScaffold';
 import Button from '../../../../lib/components/Button';
 
 const ResetSettings = ({navigation, resetAllStats}) => {
   const handleResetStats = () => {
+    crashlytics().log('Reset stats btn pressed (ResetSettings)');
+
     Alert.alert(
       `Are you sure?`,
       `This will permanently delete all your stats data. Your completion times and unlocked meditations will remain.`,
@@ -26,6 +29,8 @@ const ResetSettings = ({navigation, resetAllStats}) => {
   };
 
   const handleResetTimes = () => {
+    crashlytics().log('Reset times btn pressed (ResetSettings)');
+
     Alert.alert(
       `Are you sure?`,
       `This will permanently reset all meditation completion times to 00 mins. Your stats and unlocked meditations will remain.`,
@@ -44,6 +49,8 @@ const ResetSettings = ({navigation, resetAllStats}) => {
   };
 
   const handleRelockMeditations = () => {
+    crashlytics().log('Re-lock meditations btn pressed (ResetSettings)');
+
     Alert.alert(
       `Are you sure?`,
       `This will permanently re-lock all meditations but day 1. Your stats and completion times will remain.`,

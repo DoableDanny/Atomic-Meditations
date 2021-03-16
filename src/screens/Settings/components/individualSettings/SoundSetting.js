@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {View, Text, StyleSheet, Alert} from 'react-native';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 import ArrowButton from '../../../../lib/components/ArrowButton';
 import SettingScaffold from '../SettingScaffold';
@@ -35,6 +36,8 @@ const ChooseSoundSetting = () => {
   }, []);
 
   const nextTrack = () => {
+    crashlytics().log('nextTrack btn pressed (in SoundSetting)');
+
     if (trackNumber == TRACKS.length - 1) {
       setTrackNumber(0);
       skipTrack(`${TRACKS[0].id}`);
@@ -47,6 +50,8 @@ const ChooseSoundSetting = () => {
   };
 
   const prevTrack = () => {
+    crashlytics().log('prevTrack btn pressed (in SoundSetting)');
+
     if (trackNumber == 0) {
       setTrackNumber(TRACKS.length - 1);
       skipTrack(`${TRACKS.length - 1}`);
@@ -59,10 +64,14 @@ const ChooseSoundSetting = () => {
   };
 
   const handlePlayOrPauseSound = () => {
+    crashlytics().log('Play/Pause btn pressed (in SoundSetting)');
+
     setIsSoundPlaying((prev) => !prev);
   };
 
   const handleSelectSound = () => {
+    crashlytics().log('Select Sound btn pressed (in SoundSetting)');
+
     setAndStoreAlarmTrackId(trackNumber);
     Alert.alert(
       'Sound Saved',

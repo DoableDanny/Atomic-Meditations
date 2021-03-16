@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 import ScreenContainer from '../../lib/components/ScreenContainer';
 
@@ -22,6 +23,10 @@ const SettingsScreen = ({
   darkMode,
   toggleDarkMode,
 }) => {
+  useEffect(() => {
+    crashlytics().log('Settings Screen mounted');
+  }, []);
+
   return (
     <ScreenContainer
       scrollable

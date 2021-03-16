@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from 'react';
+import crashlytics from '@react-native-firebase/crashlytics';
+
 import Button from '../../../../lib/components/Button';
 import {itemSKUs} from '../../../../lib/custom hooks/useInAppPurchase';
 import SettingScaffold from '../SettingScaffold';
@@ -17,6 +19,8 @@ const PurchaseFullAppSetting = ({
   }, []);
 
   const purchaseFullApp = () => {
+    crashlytics().log('purchaseFullApp btn pressed (PurchaseFullAppSetting)');
+
     if (
       !isFullAppPurchased &&
       ((currentPurchaseError &&
@@ -34,12 +38,7 @@ const PurchaseFullAppSetting = ({
     <SettingScaffold
       title="Purchase The Full App"
       description="The first 3 days are free. The full app only costs a few dollars and helps to support the app's development!">
-      <Button
-        title="Purchase Full App"
-        handlePress={() => {
-          purchaseFullApp();
-        }}
-      />
+      <Button title="Purchase Full App" handlePress={purchaseFullApp} />
       {isFullAppPurchased && (
         <Message>
           You have full access to Atomic Meditations. You made a great decision.
