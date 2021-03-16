@@ -1,6 +1,7 @@
 import React, {useEffect, useContext} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 import ThemeContext from '../../lib/contexts/ThemeContext';
 import ScreenContainer from '../../lib/components/ScreenContainer';
@@ -24,6 +25,10 @@ const StatsScreen = ({
       resetCurrentStreakStat();
     }
   });
+
+  useEffect(() => {
+    crashlytics().log('Stats Screen mounted');
+  }, []);
 
   return (
     <ScreenContainer>
