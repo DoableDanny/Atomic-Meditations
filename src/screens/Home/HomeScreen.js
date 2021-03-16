@@ -56,6 +56,7 @@ const HomeScreen = ({
         renderItem={renderMeditationModule}
         keyExtractor={(item) => item.id}
       />
+
       <Footer navigation={navigation} />
     </View>
   );

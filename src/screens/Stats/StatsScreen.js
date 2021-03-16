@@ -2,7 +2,7 @@ import React, {useEffect, useContext} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import ThemeContext, {theme} from '../../lib/contexts/ThemeContext';
+import ThemeContext from '../../lib/contexts/ThemeContext';
 import ScreenContainer from '../../lib/components/ScreenContainer';
 import StatRow from './components/StatRow';
 import {hoursAndMinsString} from '../../lib/functions/displayHoursAndMins';

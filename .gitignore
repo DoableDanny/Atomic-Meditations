@@ -29,6 +29,7 @@ build/
 local.properties
 *.iml
 keystore.properties
+google-services.json
 
 # node.js
 #
