@@ -1,5 +1,6 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 import ThemeContext from '../../lib/contexts/ThemeContext';
 import ScreenContainer from '../../lib/components/ScreenContainer';
@@ -25,6 +26,10 @@ const MeditationScreen = ({
   const colors = theme.colors;
 
   const {currentMeditation} = route.params;
+
+  useEffect(() => {
+    crashlytics().log('Meditation Screen mounted');
+  }, []);
 
   const clockify = (inputSeconds) => {
     const hours = Math.floor(inputSeconds / 60 / 60);

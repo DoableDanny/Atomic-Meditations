@@ -2,6 +2,7 @@ import React, {useState, useEffect, useRef, useContext} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import BackgroundTimer from 'react-native-background-timer';
 import KeepAwake from 'react-native-keep-awake';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 import Button from '../../../lib/components/Button';
 import useTrackPlayer from '../../../lib/custom hooks/useTrackPlayer';
@@ -31,6 +32,8 @@ const TimerScreen = ({
     if (seconds === 3) setHeaderMsg('');
     // After 2 mins, check whether to unlock next day and unlock.
     else if (seconds === 120) {
+      crashlytics().log('2 mins reached');
+
       // Remove back btn from navigation header.
       navigation.setOptions({headerLeft: () => null});
 
@@ -38,6 +41,8 @@ const TimerScreen = ({
     }
 
     if (seconds === alarmRingSeconds) {
+      crashlytics().log('Alarm ring time reached');
+
       playTrack();
 
       setShowStopSoundBtn(true);
@@ -49,11 +54,16 @@ const TimerScreen = ({
       });
       // When track ends, remove stopSoundBtn
     } else if (seconds === alarmRingSeconds + trackDuration) {
+      crashlytics().log(
+        `Alarm sound finished playing. Track duration: ${trackDuration} secs.`,
+      );
+
       setShowStopSoundBtn(false);
     }
   }, [seconds]);
 
   useEffect(() => {
+    crashlytics().log('Timer component mounted');
     startTimer();
     KeepAwake.activate();
 
@@ -66,6 +76,8 @@ const TimerScreen = ({
   }, []);
 
   const startTimer = () => {
+    crashlytics().log('startTimer function called');
+
     BackgroundTimer.runBackgroundTimer(() => {
       setSeconds((prevSecs) => prevSecs + 1);
     }, 1000);
@@ -73,6 +85,8 @@ const TimerScreen = ({
 
   // Messages for when user reaches their goal time.
   const updateHeaderMessages = () => {
+    crashlytics().log('updateHeaderMessages function called');
+
     setHeaderMsg('Goal time reached, great job!');
 
     headerMsgTimeOut.current = setTimeout(() => {
@@ -99,6 +113,8 @@ const TimerScreen = ({
               title="Stop Sound"
               btnStyle="secondary"
               handlePress={() => {
+                crashlytics().log('Stop Sound Button pressed');
+
                 stopTrack();
                 setShowStopSoundBtn(false);
               }}
@@ -109,6 +125,8 @@ const TimerScreen = ({
           <Button
             title="Done"
             handlePress={() => {
+              crashlytics().log('Done button pressed');
+
               updateAllStats(seconds, lastMeditationDateStat);
               updateMeditationCompletionTime(currentMeditation, seconds);
               navigation.navigate('Home');

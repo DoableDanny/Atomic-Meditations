@@ -1,5 +1,6 @@
 import React, {useContext} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 import ThemeContext from '../../../lib/contexts/ThemeContext';
 import ArrowButton from '../../../lib/components/ArrowButton';
@@ -40,6 +41,7 @@ const SelectSessionTimeScreen = ({
 
   // Start meditation session
   const handlePressBegin = () => {
+    crashlytics().log('Begin Meditation Button pressed');
     setIsTimerOn(true);
     setHeaderMsg('Let it flow...');
   };
