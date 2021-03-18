@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, Image} from 'react-native';
 
 import crashlytics from '@react-native-firebase/crashlytics';
 
@@ -19,10 +19,17 @@ const Intro = ({navigation, route}) => {
   return (
     <ScreenContainer scrollable>
       <MyText header>Welcome to Atomic Meditation!</MyText>
+
+      <Image
+        style={styles.img}
+        source={require('../../assets/images/profile.png')}
+      />
+      <MyText>Hi, I'm Danny, creator of this app!</MyText>
       <MyText>
         Developing a new habit can be difficult, but after I read Atomic Habits
         by James Clear, I decided to make a simple, no-nonsense meditation app
-        applying some of the principles from the book:
+        applying some of the principles from the book to make meditation easy to
+        stick to:
       </MyText>
 
       <MyText header>The 2 Minute Rule</MyText>
@@ -81,6 +88,14 @@ const Intro = ({navigation, route}) => {
 };
 
 const styles = StyleSheet.create({
+  img: {
+    width: 230,
+    height: 230,
+    borderRadius: 115,
+    alignSelf: 'center',
+    marginTop: 16,
+    marginBottom: 32,
+  },
   buttonWrapper: {
     marginTop: 16,
     marginBottom: 32,
