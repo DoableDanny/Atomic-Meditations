@@ -3,6 +3,7 @@ import {StyleSheet, View, Text} from 'react-native';
 import BackgroundTimer from 'react-native-background-timer';
 import KeepAwake from 'react-native-keep-awake';
 import crashlytics from '@react-native-firebase/crashlytics';
+import analytics from '@react-native-firebase/analytics';
 
 import Button from '../../../lib/components/Button';
 import useTrackPlayer from '../../../lib/custom hooks/useTrackPlayer';
@@ -19,7 +20,7 @@ const TimerScreen = ({
   updateMeditationCompletionTime,
   updateAllStats,
 }) => {
-  const [seconds, setSeconds] = useState(117);
+  const [seconds, setSeconds] = useState(118);
   const [showStopSoundBtn, setShowStopSoundBtn] = useState(false);
   // Track length ranges from 26-46 seconds so the time the stopSoundBtn is shown will depend on the track.
   const [trackDuration, setTrackDuration] = useState(40);
@@ -126,6 +127,11 @@ const TimerScreen = ({
             title="Done"
             handlePress={() => {
               crashlytics().log('Done button pressed');
+
+              analytics().logEvent(`Day_${currentMeditation.id}_done`, {
+                alarmRingMins: Math.round(alarmRingSeconds / 60),
+                completionMins: Math.round(seconds / 60),
+              });
 
               updateAllStats(seconds, lastMeditationDateStat);
               updateMeditationCompletionTime(currentMeditation, seconds);
