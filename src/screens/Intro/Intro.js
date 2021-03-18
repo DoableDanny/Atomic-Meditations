@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import {StyleSheet, View} from 'react-native';
 
 import crashlytics from '@react-native-firebase/crashlytics';
 
@@ -19,14 +20,11 @@ const Intro = ({navigation, route}) => {
     <ScreenContainer scrollable>
       <MyText header>Welcome to Atomic Meditation!</MyText>
       <MyText>
-        So, I'm guessing you've heard about the benefits of meditation and want
-        to turn it into a daily habit?
-      </MyText>
-      <MyText>
         Developing a new habit can be difficult, but after I read Atomic Habits
         by James Clear, I decided to make a simple, no-nonsense meditation app
         applying some of the principles from the book:
       </MyText>
+
       <MyText header>The 2 Minute Rule</MyText>
       <MyText>
         Developing a new habit is all about showing up, day after day, until the
@@ -42,38 +40,51 @@ const Intro = ({navigation, route}) => {
         day, every day, until meditation becomes an ingrained, natural part of
         your day.
       </MyText>
-      <MyText header>Pick a Time and Place</MyText>
       <MyText>
         2 mins is easy. Anybody can find at least 2 mins each day to sit alone
         and focus on their breath, or just let everything go.
       </MyText>
+
+      <MyText header>Pick a Time and Place</MyText>
       <MyText>
-        First, decide where you will meditate every day. When developing a
-        habit, it's important to have a specific time and location. If just say
-        you'll meditate every day without specifics, it's all too wishy-washy
-        and you'll be less likely to do it.
+        It's important to have a specific time and location. If just say you'll
+        meditate every day without specifics, it's all too wishy-washy and
+        you'll be less likely to do it.
       </MyText>
       <MyText>
         I personally meditate first thing in the morning in my bedroom.
       </MyText>
-      <MyText>Be sure to set a reminder in Settings.</MyText>
+      <MyText>Be sure to set a reminder in Settings!</MyText>
+
       <MyText header>Lets Go</MyText>
       <MyText>
         Meditate for 2 mins to unlock the next day (a done button will appear
         after 2 mins), but you can meditate for as long as you like after 2 mins
-        is up. Track your stats in the Stats screen. Use this app for every
-        meditation for 60 days. After at least 2 mins per day for 60 days, I
-        guarantee you will have a meditation habit for life!
+        is up.
+      </MyText>
+      <MyText>
+        Use this app for every meditation for 60 days. After at least 2 mins per
+        day for 60 days, I'd find it hard to believe if you didn't have a more
+        peaceful mind, and a seamless daily meditation habit for life!
       </MyText>
 
-      <Button
-        title="Set an Alarm"
-        handlePress={() =>
-          navigation.navigate('Meditation', {currentMeditation})
-        }
-      />
+      <View style={styles.buttonWrapper}>
+        <Button
+          title="Lets Go"
+          handlePress={() =>
+            navigation.navigate('Meditation', {currentMeditation})
+          }
+        />
+      </View>
     </ScreenContainer>
   );
 };
+
+const styles = StyleSheet.create({
+  buttonWrapper: {
+    marginTop: 16,
+    marginBottom: 32,
+  },
+});
 
 export default Intro;

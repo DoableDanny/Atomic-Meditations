@@ -52,15 +52,3 @@ export const configurePushNotification = () => {
     (created) => console.log(`createChannel returned '${created}'`), // (optional) callback returns whether the channel was created, false means it already existed.
   );
 };
-
-// // Set daily reminder
-// export const setLocalNotificationSchedule = (date) => {
-//   PushNotification.localNotificationSchedule({
-//     channelId: '5-min-reminder',
-//     title: `Get ready, it's meditation time`,
-//     message: `It's time to meditate for at least 2 minutes. 2 mins is easy, let's keep this habit going!`,
-//     date: date,
-//     allowWhileIdle: true, // (optional) set notification to work while on doze, default: false
-//     repeatType: 'day',
-//   });
-// };
