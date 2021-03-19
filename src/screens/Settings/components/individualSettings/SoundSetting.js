@@ -12,7 +12,6 @@ import useTrackPlayer, {
 import ThemeContext from '../../../../lib/contexts/ThemeContext';
 
 const ChooseSoundSetting = () => {
-  const [trackNumber, setTrackNumber] = useState(0);
   const [isSoundPlaying, setIsSoundPlaying] = useState(false);
 
   const theme = useContext(ThemeContext);
@@ -24,7 +23,11 @@ const ChooseSoundSetting = () => {
     pauseTrack,
     alarmTrackId,
     setAndStoreAlarmTrackId,
-  } = useTrackPlayer('all');
+
+    trackNumber,
+    addNextTrack,
+    addPrevTrack,
+  } = useTrackPlayer(0);
 
   useEffect(() => {
     if (isSoundPlaying) playTrack();
@@ -34,34 +37,6 @@ const ChooseSoundSetting = () => {
   useEffect(() => {
     return () => setIsSoundPlaying(false);
   }, []);
-
-  const nextTrack = () => {
-    crashlytics().log('nextTrack btn pressed (in SoundSetting)');
-
-    if (trackNumber == TRACKS.length - 1) {
-      setTrackNumber(0);
-      skipTrack(`${TRACKS[0].id}`);
-    } else {
-      setTrackNumber((prev) => {
-        skipTrack(`${TRACKS[prev + 1].id}`);
-        return prev + 1;
-      });
-    }
-  };
-
-  const prevTrack = () => {
-    crashlytics().log('prevTrack btn pressed (in SoundSetting)');
-
-    if (trackNumber == 0) {
-      setTrackNumber(TRACKS.length - 1);
-      skipTrack(`${TRACKS.length - 1}`);
-    } else {
-      setTrackNumber((prev) => {
-        skipTrack(`${TRACKS[prev - 1].id}`);
-        return prev - 1;
-      });
-    }
-  };
 
   const handlePlayOrPauseSound = () => {
     crashlytics().log('Play/Pause btn pressed (in SoundSetting)');
@@ -84,11 +59,23 @@ const ChooseSoundSetting = () => {
       title="Select Alarm Sound"
       description="Sound to be played upon time up.">
       <View style={styles.wrapper}>
-        <ArrowButton direction="left" handlePress={prevTrack} />
+        <ArrowButton
+          direction="left"
+          handlePress={() => {
+            crashlytics().log('prevTrack btn pressed (in SoundSetting)');
+            addPrevTrack();
+          }}
+        />
         <Text style={{...styles.track, color: theme.colors.textPrimary}}>
           {TRACKS[trackNumber].title}
         </Text>
-        <ArrowButton direction="right" handlePress={nextTrack} />
+        <ArrowButton
+          direction="right"
+          handlePress={() => {
+            crashlytics().log('nextTrack btn pressed (in SoundSetting)');
+            addNextTrack();
+          }}
+        />
       </View>
       <Button
         title="Play/Pause"

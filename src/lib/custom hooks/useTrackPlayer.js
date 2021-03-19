@@ -34,32 +34,45 @@ export const TRACKS = [
   },
 ];
 
-const useTrackPlayer = (tracks) => {
+// SETTINGS - add 1 track at a time.
+// Initial load - setupTrackPlayer & add preferred TRACK OR TRACK[0]
+// nextTrack function removes all tracks from player & adds TRACKS[n + 1]
+// Will need check for when last TRACK -> skip back to beginning
+// prevTrack function remove all tracks & add TRACKS[n - 1]
+// check if n === 0 -> skip to last TRACK.
+
+// TIMER SCREEN - add the users preferred track OR TRACK[0] if no preferred
+
+const useTrackPlayer = (initialTrackId = null) => {
+  // alarmTrackId is users selected/saved track for alarm sound. trackNumber is current track for playing in Settings screen.
   const [alarmTrackId, setAlarmTrackId] = useState(0);
+  const [trackNumber, setTrackNumber] = useState(0);
 
   useEffect(() => {
     TrackPlayer.setupPlayer().then(() => {
-      // Get all tracks (for choose sound option in Settings Screen)
-      if (tracks === 'all') TrackPlayer.add([...TRACKS]);
-
       // Get users preferred track (for time up).
       getStringData(STORAGE_KEYS.ALARM_SOUND_ID).then((data) => {
         console.log('trackId data: ', data);
 
+        // If user has preferred track and we aren't on settings screen, set and add to TrackPlayer
         if (data) {
           const id = parseInt(data);
           setAlarmTrackId(id);
 
-          // If on timer screen, add the preferred alarm sound.
-          if (tracks !== 'all') TrackPlayer.add([TRACKS[id]]);
-        } else if (tracks !== 'all') {
+          if (initialTrackId === null) TrackPlayer.add([TRACKS[id]]);
+        } else if (initialTrackId === null) {
+          // Just add TRACK 1
           TrackPlayer.add([TRACKS[0]]);
         }
       });
 
+      // e.g. initialTrackId is 0 in Settings. Nothing passing in for Timer Screen
+      if (initialTrackId !== null) TrackPlayer.add([TRACKS[initialTrackId]]);
+
       console.log('Trackplayer setup');
     });
 
+    // Clean up
     return () => {
       try {
         TrackPlayer.destroy();
@@ -70,6 +83,39 @@ const useTrackPlayer = (tracks) => {
     };
   }, []);
 
+  // For Settings - so can play next track. Have to add 1 track at a time otherwise TrackPlayer will continue playing all songs in the queue.
+  const addNextTrack = () => {
+    // reset -> stops current track and removes all tracks from queue
+    TrackPlayer.reset().then(() => {
+      if (trackNumber == TRACKS.length - 1) {
+        setTrackNumber(0);
+        TrackPlayer.add([TRACKS[0]]);
+      } else {
+        setTrackNumber((prev) => {
+          TrackPlayer.add([TRACKS[prev + 1]]);
+
+          return prev + 1;
+        });
+      }
+    });
+  };
+
+  // For Settings - so can play prev track
+  const addPrevTrack = () => {
+    TrackPlayer.reset().then(() => {
+      if (trackNumber == 0) {
+        setTrackNumber(TRACKS.length - 1);
+        TrackPlayer.add([TRACKS[TRACKS.length - 1]]);
+      } else {
+        setTrackNumber((prev) => {
+          TrackPlayer.add([TRACKS[prev - 1]]);
+          return prev - 1;
+        });
+      }
+    });
+  };
+
+  // User can select their prefered alarm sound from Settings
   const setAndStoreAlarmTrackId = (trackId) => {
     console.log('Saving trackId', trackId);
     setAlarmTrackId(trackId);
@@ -117,6 +163,10 @@ const useTrackPlayer = (tracks) => {
     alarmTrackId,
     setAndStoreAlarmTrackId,
     getTrackDuration,
+
+    trackNumber,
+    addNextTrack,
+    addPrevTrack,
   };
 };
 
