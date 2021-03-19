@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useContext} from 'react';
 import {View, Text, StyleSheet, Alert} from 'react-native';
 import crashlytics from '@react-native-firebase/crashlytics';
 
@@ -6,44 +6,28 @@ import ArrowButton from '../../../../lib/components/ArrowButton';
 import SettingScaffold from '../SettingScaffold';
 import Message from '../Message';
 import Button from '../../../../lib/components/Button';
+import PlayPauseBtn from '../PlayPauseBtn';
+
 import useTrackPlayer, {
   TRACKS,
 } from '../../../../lib/custom hooks/useTrackPlayer';
 import ThemeContext from '../../../../lib/contexts/ThemeContext';
 
 const ChooseSoundSetting = () => {
-  const [isSoundPlaying, setIsSoundPlaying] = useState(false);
-
   const theme = useContext(ThemeContext);
 
   // alarmTrackId is the current saved preferred track. trackNumber is the track currently available to play/pause.
   const {
-    skipTrack,
     playTrack,
     pauseTrack,
     alarmTrackId,
     setAndStoreAlarmTrackId,
-
     trackNumber,
     addNextTrack,
     addPrevTrack,
   } = useTrackPlayer(0);
 
-  useEffect(() => {
-    if (isSoundPlaying) playTrack();
-    else pauseTrack();
-  }, [isSoundPlaying]);
-
-  useEffect(() => {
-    return () => setIsSoundPlaying(false);
-  }, []);
-
-  const handlePlayOrPauseSound = () => {
-    crashlytics().log('Play/Pause btn pressed (in SoundSetting)');
-
-    setIsSoundPlaying((prev) => !prev);
-  };
-
+  // set and save users preferred track
   const handleSelectSound = () => {
     crashlytics().log('Select Sound btn pressed (in SoundSetting)');
 
@@ -77,12 +61,12 @@ const ChooseSoundSetting = () => {
           }}
         />
       </View>
-      <Button
-        title="Play/Pause"
-        btnStyle="secondary"
-        extraStyles={{marginBottom: 16}}
-        handlePress={handlePlayOrPauseSound}
-      />
+
+      <View style={styles.wrapper}>
+        <PlayPauseBtn type="play" handlePress={playTrack} />
+        <PlayPauseBtn type="pause" handlePress={pauseTrack} />
+      </View>
+
       <Button title="Select Sound" handlePress={handleSelectSound} />
       <Message>Current sound: {TRACKS[alarmTrackId].title}</Message>
     </SettingScaffold>
