@@ -29,7 +29,7 @@ const Intro = ({navigation, route}) => {
         Developing a new habit can be difficult, but after I read Atomic Habits
         by James Clear, I decided to make a simple, no-nonsense meditation app
         applying some of the principles from the book to make meditation easy to
-        stick to:
+        stick to, every single day:
       </MyText>
 
       <MyText header>The 2 Minute Rule</MyText>

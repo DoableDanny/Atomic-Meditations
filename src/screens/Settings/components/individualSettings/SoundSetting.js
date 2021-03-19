@@ -27,7 +27,7 @@ const ChooseSoundSetting = () => {
     addPrevTrack,
   } = useTrackPlayer(0);
 
-  // set and save users preferred track
+  // Set and save users preferred track
   const handleSelectSound = () => {
     crashlytics().log('Select Sound btn pressed (in SoundSetting)');
 
