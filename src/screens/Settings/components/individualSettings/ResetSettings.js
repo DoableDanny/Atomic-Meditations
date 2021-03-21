@@ -21,7 +21,7 @@ const ResetSettings = ({navigation, resetAllStats}) => {
           text: `I'm sure`,
           onPress: () => {
             resetAllStats();
-            Alert.alert('Deleted', 'Your stats have all been reset.');
+            Alert.alert('Deleted', 'All your stats have been reset.');
           },
         },
       ],
