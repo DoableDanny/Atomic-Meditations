@@ -67,9 +67,13 @@ const MeditationModule = ({
           <Text style={{...styles.textDay, color: theme.colors.textPrimary}}>
             Day {item.id}
           </Text>
-          <Text style={{...styles.textTime, color: theme.colors.textSecondary}}>
-            {hoursAndMinsString(seconds)}
-          </Text>
+
+          {seconds !== 0 ? (
+            <Text
+              style={{...styles.textTime, color: theme.colors.textSecondary}}>
+              {hoursAndMinsString(seconds)}
+            </Text>
+          ) : null}
         </>
       ) : (
         <Icon name="lock-outline" size={40} color="rgba(255, 255, 255, 0.25)" />
