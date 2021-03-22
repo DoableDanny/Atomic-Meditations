@@ -63,6 +63,26 @@ const Intro = ({navigation, route}) => {
       </MyText>
       <MyText>Be sure to set a reminder in Settings!</MyText>
 
+      <MyText header>Track Your Progress</MyText>
+      <MyText>
+        When you track, for example, how many days in a row you've done
+        something, the perception that you have of yourself changes.
+      </MyText>
+      <MyText>
+        Right now, you may see yourself as someone that struggles to stick to
+        meditation, but after 20 straight days of meditation, you'll begin to
+        perceive yourself as someone that meditates.
+      </MyText>
+      <MyText>
+        Also, if you've recorded that you've meditated for 20 straight days, you
+        will want to protect that streak - making you more determined to keep
+        going.
+      </MyText>
+      <MyText>
+        Tracking your progress is powerful. That's why this app does it for you
+        in the Stats Screen. Keep an eye on your progress!
+      </MyText>
+
       <MyText header>Lets Go</MyText>
       <MyText>
         Meditate for 2 mins to unlock the next day (a done button will appear
