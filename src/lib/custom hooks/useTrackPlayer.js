@@ -40,34 +40,6 @@ const useTrackPlayer = (initialTrackId = null) => {
   const [trackNumber, setTrackNumber] = useState(0);
 
   useEffect(() => {
-    TrackPlayer.setupPlayer().then(() => {
-      // Get users preferred track (for time up).
-      getStringData(STORAGE_KEYS.ALARM_SOUND_ID).then((data) => {
-        console.log('trackId data: ', data);
-
-        // If user has preferred track and we aren't on settings screen, set and add to TrackPlayer
-        if (data) {
-          const id = parseInt(data);
-          setAlarmTrackId(id);
-
-          if (initialTrackId === null) {
-            TrackPlayer.add([TRACKS[id]]);
-          }
-        } else if (initialTrackId === null) {
-          // Just add TRACK 1
-          TrackPlayer.add([TRACKS[0]]);
-        }
-      });
-
-      // e.g. initialTrackId is 0 in Settings. Nothing passing in for Timer Screen
-      if (initialTrackId !== null) {
-        TrackPlayer.add([TRACKS[initialTrackId]]);
-        setTrackNumber(initialTrackId);
-      }
-
-      console.log('Trackplayer setup');
-    });
-
     // Clean up
     return () => {
       try {
@@ -78,6 +50,38 @@ const useTrackPlayer = (initialTrackId = null) => {
       }
     };
   }, []);
+
+  const setUpTrackPlayerAndAddTracks = async () => {
+    try {
+      await TrackPlayer.setupPlayer();
+      // Get users preferred track (for time up).
+      const data = await getStringData(STORAGE_KEYS.ALARM_SOUND_ID);
+      console.log('trackId data: ', data);
+
+      // If user has preferred track and we aren't on settings screen, set and add to TrackPlayer
+      if (data) {
+        const id = parseInt(data);
+        setAlarmTrackId(id);
+
+        if (initialTrackId === null) {
+          TrackPlayer.add([TRACKS[id]]);
+        }
+      } else if (initialTrackId === null) {
+        // Just add TRACK 1
+        TrackPlayer.add([TRACKS[0]]);
+      }
+
+      // e.g. initialTrackId is 0 in Settings. Nothing passing in for Timer Screen
+      if (initialTrackId !== null) {
+        TrackPlayer.add([TRACKS[initialTrackId]]);
+        setTrackNumber(initialTrackId);
+      }
+
+      console.log('Trackplayer setup');
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   // For Settings - so can play next track. Have to add 1 track at a time otherwise TrackPlayer will continue playing all songs in the queue.
   const addNextTrack = () => {
@@ -151,6 +155,7 @@ const useTrackPlayer = (initialTrackId = null) => {
   };
 
   return {
+    setUpTrackPlayerAndAddTracks,
     playTrack,
     pauseTrack,
     stopTrack,

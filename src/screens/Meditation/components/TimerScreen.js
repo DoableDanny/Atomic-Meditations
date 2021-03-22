@@ -25,7 +25,12 @@ const TimerScreen = ({
   // Track length ranges from 26-46 seconds so the time the stopSoundBtn is shown will depend on the track.
   const [trackDuration, setTrackDuration] = useState(40);
 
-  const {playTrack, stopTrack, getTrackDuration} = useTrackPlayer();
+  const {
+    setUpTrackPlayerAndAddTracks,
+    playTrack,
+    stopTrack,
+    getTrackDuration,
+  } = useTrackPlayer();
 
   let headerMsgTimeOut = useRef(null);
 
@@ -44,15 +49,18 @@ const TimerScreen = ({
     if (seconds === alarmRingSeconds) {
       crashlytics().log('Alarm ring time reached');
 
-      playTrack();
+      setUpTrackPlayerAndAddTracks().then(() => {
+        playTrack();
 
-      setShowStopSoundBtn(true);
+        setShowStopSoundBtn(true);
+
+        getTrackDuration().then((duration) => {
+          setTrackDuration(duration);
+        });
+      });
 
       updateHeaderMessages();
 
-      getTrackDuration().then((duration) => {
-        setTrackDuration(duration);
-      });
       // When track ends, remove stopSoundBtn
     } else if (seconds === alarmRingSeconds + trackDuration) {
       crashlytics().log(
