@@ -31,7 +31,7 @@ const NotificationSetting = () => {
 
     Alert.alert(
       'Success!',
-      `You will be sent a reminder at ${displayHours}:${displayMins} every day. Let's build this habit!`,
+      `You will meditate at ${displayHours}:${displayMins} every day. We'll send you a reminder 5 mins before this time each day. Let's build this habit!`,
       [
         {
           text: 'Cool',

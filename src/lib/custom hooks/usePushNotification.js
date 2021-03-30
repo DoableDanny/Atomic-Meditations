@@ -5,7 +5,7 @@ const usePushNotification = () => {
   // Will be populated with all the scheduled notifications (just 1 in this app)
   const [notificationsArray, setNotificationsArray] = useState([]);
 
-  const NOTIFICATION_TITLE = `Get ready, it's meditation time`;
+  const NOTIFICATION_TITLE = `Get ready, it's your meditation time in 5 mins`;
 
   useEffect(() => {
     getAndSetScheduledLocalNotifications();
@@ -28,6 +28,9 @@ const usePushNotification = () => {
 
     const userDateObj = new Date(year, month, day, hours, mins);
 
+    // Reminder will be sent 5 mins before meditation session time
+    userDateObj.setMinutes(userDateObj.getMinutes() - 5);
+
     // Check if that time has already passed today. If has, add 1 to day. getTime() returns the number of millisecs since 1970/01/01.
     if (dateObj.getTime() > userDateObj.getTime()) {
       userDateObj.setDate(userDateObj.getDate() + 1);
@@ -46,8 +49,8 @@ const usePushNotification = () => {
   const setLocalNotificationSchedule = async (date) => {
     await PushNotification.localNotificationSchedule({
       channelId: '5-min-reminder',
-      title: `Get ready, it's meditation time`,
-      message: `It's time to meditate for at least 2 minutes. 2 mins is easy, let's keep this habit going!`,
+      title: NOTIFICATION_TITLE,
+      message: `It's almost time to meditate for at least 2 minutes. 2 mins is easy, let's keep this habit going!`,
       date: date,
       allowWhileIdle: true, // (optional) set notification to work while on doze, default: false
       repeatType: 'day',
