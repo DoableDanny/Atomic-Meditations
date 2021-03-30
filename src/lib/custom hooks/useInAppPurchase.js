@@ -1,6 +1,5 @@
 import {useEffect, useState} from 'react';
 import {requestPurchase, useIAP} from 'react-native-iap';
-import {Alert} from 'react-native';
 
 import {
   STORAGE_KEYS,

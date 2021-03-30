@@ -35,20 +35,18 @@ const PurchaseFullAppSetting = ({
   };
 
   return (
-    <SettingScaffold
-      title="Purchase The Full App"
-      description="The first 3 days are free. The full app only costs a few dollars and helps to support the app's development!">
-      <Button title="Purchase Full App" handlePress={purchaseFullApp} />
-      {isFullAppPurchased && (
-        <Message>
-          You have full access to Atomic Meditations. You made a great decision.
-          Thank you!
-        </Message>
+    <>
+      {!isFullAppPurchased && (
+        <SettingScaffold
+          title="Purchase The Full App"
+          description="The first 3 days are free. The full app only costs a few dollars and helps to support the app's development!">
+          <Button title="Purchase Full App" handlePress={purchaseFullApp} />
+          {connectionErrorMsg !== '' && (
+            <Message danger>{connectionErrorMsg}</Message>
+          )}
+        </SettingScaffold>
       )}
-      {connectionErrorMsg !== '' && (
-        <Message danger>{connectionErrorMsg}</Message>
-      )}
-    </SettingScaffold>
+    </>
   );
 };
 
