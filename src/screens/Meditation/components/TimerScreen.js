@@ -22,10 +22,8 @@ const TimerScreen = ({
 }) => {
   const [seconds, setSeconds] = useState(117);
   const [showStopSoundBtn, setShowStopSoundBtn] = useState(false);
-  // Track length ranges from 26-46 seconds so the time the stopSoundBtn is shown will depend on the track.
-  const [trackDuration, setTrackDuration] = useState(40);
 
-  const {playTrack, stopTrack, getTrackDuration} = useTrackPlayer();
+  const {playTrack, stopTrack, trackDuration} = useTrackPlayer();
 
   let headerMsgTimeOut = useRef(null);
 
@@ -47,10 +45,6 @@ const TimerScreen = ({
       playTrack();
 
       setShowStopSoundBtn(true);
-
-      getTrackDuration().then((duration) => {
-        setTrackDuration(duration);
-      });
 
       updateHeaderMessages();
 

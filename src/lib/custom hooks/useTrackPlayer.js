@@ -40,9 +40,13 @@ const useTrackPlayer = (initialTrackId = null) => {
   // alarmTrackId is users selected/saved track for alarm sound. trackNumber is current track for playing in Settings screen.
   const [alarmTrackId, setAlarmTrackId] = useState(0);
   const [trackNumber, setTrackNumber] = useState(0);
+  const [trackDuration, setTrackDuration] = useState(40);
 
   useEffect(() => {
-    setUpTrackPlayerAndAddTracks();
+    setUpTrackPlayerAndAddTracks().then(() => {
+      // If on timer screen, get & set track duration
+      if (!initialTrackId) getAndSetTrackDuration();
+    });
 
     // Clean up
     return () => {
@@ -155,13 +159,13 @@ const useTrackPlayer = (initialTrackId = null) => {
   };
 
   // Returns track duration in seconds
-  const getTrackDuration = async () => {
+  const getAndSetTrackDuration = async () => {
     return await TrackPlayer.getCurrentTrack().then((idString) => {
       if (idString) {
         const id = parseInt(idString);
 
-        return TRACKS[id].duration;
-      } else return 40;
+        setTrackDuration(TRACKS[id].duration);
+      }
     });
   };
 
@@ -171,7 +175,7 @@ const useTrackPlayer = (initialTrackId = null) => {
     stopTrack,
     alarmTrackId,
     setAndStoreAlarmTrackId,
-    getTrackDuration,
+    trackDuration,
     trackNumber,
     addNextTrack,
     addPrevTrack,
