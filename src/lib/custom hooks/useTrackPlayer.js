@@ -1,5 +1,7 @@
 import {useEffect, useState} from 'react';
 import TrackPlayer from 'react-native-track-player';
+import crashlytics from '@react-native-firebase/crashlytics';
+
 import {
   STORAGE_KEYS,
   getStringData,
@@ -40,6 +42,8 @@ const useTrackPlayer = (initialTrackId = null) => {
   const [trackNumber, setTrackNumber] = useState(0);
 
   useEffect(() => {
+    setUpTrackPlayerAndAddTracks();
+
     // Clean up
     return () => {
       try {
@@ -71,7 +75,7 @@ const useTrackPlayer = (initialTrackId = null) => {
         TrackPlayer.add([TRACKS[0]]);
       }
 
-      // e.g. initialTrackId is 0 in Settings. Nothing passing in for Timer Screen
+      // e.g. initialTrackId is 0 in Settings. Nothing passed in for Timer Screen
       if (initialTrackId !== null) {
         TrackPlayer.add([TRACKS[initialTrackId]]);
         setTrackNumber(initialTrackId);
@@ -130,8 +134,15 @@ const useTrackPlayer = (initialTrackId = null) => {
       TrackPlayer.play();
     } catch (e) {
       console.log(e);
-      await setUpTrackPlayer(tracks);
-      playTrack();
+      try {
+        await setUpTrackPlayerAndAddTracks();
+        TrackPlayer.play();
+      } catch (e) {
+        console.log(e);
+        crashlytics().log(
+          `Couldn't play track (useTrackPlayer custom hook). Error: ${e}`,
+        );
+      }
     }
   };
 
@@ -155,7 +166,6 @@ const useTrackPlayer = (initialTrackId = null) => {
   };
 
   return {
-    setUpTrackPlayerAndAddTracks,
     playTrack,
     pauseTrack,
     stopTrack,

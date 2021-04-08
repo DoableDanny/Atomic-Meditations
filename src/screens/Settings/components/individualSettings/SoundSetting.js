@@ -18,7 +18,6 @@ const ChooseSoundSetting = () => {
 
   // alarmTrackId is the current saved preferred track. trackNumber is the track currently available to play/pause.
   const {
-    setUpTrackPlayerAndAddTracks,
     playTrack,
     pauseTrack,
     alarmTrackId,
@@ -27,10 +26,6 @@ const ChooseSoundSetting = () => {
     addNextTrack,
     addPrevTrack,
   } = useTrackPlayer(0);
-
-  useEffect(() => {
-    setUpTrackPlayerAndAddTracks();
-  }, []);
 
   // Set and save users preferred track
   const handleSelectSound = () => {

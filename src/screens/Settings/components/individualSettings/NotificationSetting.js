@@ -74,7 +74,7 @@ const NotificationSetting = () => {
   return (
     <SettingScaffold
       title="Set a Daily Reminder"
-      description="What time will you meditate? Be sure to give yourself enough time to get ready. We'll send you a daily reminder!">
+      description="What time will you meditate? We'll send you a daily reminder 5 mins before it's time!">
       <View style={{flexDirection: 'row', marginBottom: 16}}>
         <AdjustTimeModule
           time={hours < 10 ? `0${hours}` : hours}
