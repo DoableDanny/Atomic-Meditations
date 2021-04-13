@@ -4,3 +4,4 @@ export {default as useStats} from './useStats';
 export {default as useTheme} from './useTheme';
 export {default as useTrackPlayer} from './useTrackPlayer';
 export {default as usePushNotification} from './usePushNotification';
+export {default as useIsFullAppPurchased} from './useIsFullAppPurchased';

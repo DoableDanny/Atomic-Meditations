@@ -17,7 +17,7 @@ import {
   useTheme,
   useMeditations,
   useStats,
-  useInAppPurchase,
+  useIsFullAppPurchased,
 } from './src/lib/custom hooks';
 
 const App = () => {
@@ -45,12 +45,9 @@ const App = () => {
   } = useStats();
 
   const {
-    connected,
-    products,
-    currentPurchaseError,
-    purchase,
     isFullAppPurchased,
-  } = useInAppPurchase();
+    setAndStoreFullAppPurchase,
+  } = useIsFullAppPurchased();
 
   const Stack = createStackNavigator();
 
@@ -108,11 +105,8 @@ const App = () => {
             {(props) => (
               <SettingsScreen
                 {...props}
-                connected={connected}
-                products={products}
-                purchase={purchase}
-                currentPurchaseError={currentPurchaseError}
                 isFullAppPurchased={isFullAppPurchased}
+                setAndStoreFullAppPurchase={setAndStoreFullAppPurchase}
                 resetAllStats={resetAllStats}
                 meditations={meditations}
                 darkMode={darkMode}

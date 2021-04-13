@@ -1,38 +1,18 @@
-import React, {useEffect, useState} from 'react';
-import crashlytics from '@react-native-firebase/crashlytics';
+import React from 'react';
 
+import {useInAppPurchase} from '../../../../lib/custom hooks';
 import Button from '../../../../lib/components/Button';
-import {itemSKUs} from '../../../../lib/custom hooks/useInAppPurchase';
 import SettingScaffold from '../SettingScaffold';
 import Message from '../Message';
 
 const PurchaseFullAppSetting = ({
-  connected,
   isFullAppPurchased,
-  purchase,
-  currentPurchaseError,
+  setAndStoreFullAppPurchase,
 }) => {
-  const [connectionErrorMsg, setConnectionErrorMsg] = useState('');
-
-  useEffect(() => {
-    return () => setConnectionErrorMsg('');
-  }, []);
-
-  const purchaseFullApp = () => {
-    crashlytics().log('purchaseFullApp btn pressed (PurchaseFullAppSetting)');
-
-    if (
-      !isFullAppPurchased &&
-      ((currentPurchaseError &&
-        currentPurchaseError.code === 'PROMISE_BUY_ITEM') ||
-        !connected)
-    ) {
-      setConnectionErrorMsg(
-        'You need an internet connection to make a purchase.',
-      );
-    }
-    purchase(itemSKUs[0]);
-  };
+  const {purchaseFullApp, connectionErrorMsg} = useInAppPurchase(
+    isFullAppPurchased,
+    setAndStoreFullAppPurchase,
+  );
 
   return (
     <>

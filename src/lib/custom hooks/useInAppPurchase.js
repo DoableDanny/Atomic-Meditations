@@ -1,20 +1,14 @@
 import {useEffect, useState} from 'react';
 import {requestPurchase, useIAP} from 'react-native-iap';
-
-import {
-  STORAGE_KEYS,
-  storeStringData,
-  getStringData,
-} from '../functions/asyncStorage';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 // Play store item Ids
 export const itemSKUs = Platform.select({
   android: ['full_app'],
 });
 
-const {IS_FULL_APP_PURCHASED} = STORAGE_KEYS;
-
-const useInAppPurchase = () => {
+// isFullAppPurchased and setAndStoreFullAppPurchase are required arguments in this hook.
+const useInAppPurchase = (isFullAppPurchased, setAndStoreFullAppPurchase) => {
   const {
     connected,
     products,
@@ -24,13 +18,16 @@ const useInAppPurchase = () => {
     currentPurchaseError,
   } = useIAP();
 
-  const [isFullAppPurchased, setIsFullAppPurchased] = useState(false);
+  const [connectionErrorMsg, setConnectionErrorMsg] = useState('');
 
   useEffect(() => {
-    getProducts(itemSKUs);
-  }, [getProducts]);
+    if (connected) {
+      getProducts(itemSKUs);
+      console.log('Getting products...');
+    }
+  }, [connected, getProducts]);
 
-  // User gets full app access upon purchase, even before purchase is acknowledged. Then if error, app access is removed and alert showed.
+  // User gets full app access upon purchase, even before purchase is acknowledged.
   useEffect(() => {
     const checkCurrentPurchase = async (purchase) => {
       if (purchase) {
@@ -45,7 +42,7 @@ const useInAppPurchase = () => {
             const ackResult = await finishTransaction(purchase);
             console.log('ackResult: ', ackResult);
           } catch (ackErr) {
-            // We would need a backend to validate receipts for purhcases that pended a while and were then declined. So I'll assume most purchase attempts go through successfully (OK ackResult) & take the hit for the ones that don't (user will still have full app access).
+            // We would need a backend to validate receipts for purhcases that pended for a while and were then declined. So I'll assume most purchase attempts go through successfully (OK ackResult) & take the hit for the ones that don't (user will still have full app access).
             console.log('ackErr', ackErr);
           }
         }
@@ -67,30 +64,43 @@ const useInAppPurchase = () => {
     }
   }, [currentPurchaseError]);
 
-  const purchase = (productId) => {
-    requestPurchase(productId);
-  };
-
-  // Load is_full_app_purchased from storage on initial load. true => full app access.
   useEffect(() => {
-    getStringData(IS_FULL_APP_PURCHASED).then((data) => {
-      console.log('data: ', data);
-      setIsFullAppPurchased(data === 'true');
-    });
+    return () => setConnectionErrorMsg('');
   }, []);
 
-  const setAndStoreFullAppPurchase = (boolean) => {
-    setIsFullAppPurchased(boolean);
-    storeStringData(IS_FULL_APP_PURCHASED, boolean.toString());
+  const purchaseFullApp = async () => {
+    crashlytics().log('purchaseFullApp btn pressed (PurchaseFullAppSetting)');
+
+    // I believe "connected" means RNIAP package is setup, not if connected to play store.
+    if (!connected) {
+      setConnectionErrorMsg('Please check your internet connection.');
+      console.log('Not connected to RNIAP');
+    }
+    // If we are connected & have products, purchase the item. Google will handle if user has no internet here.
+    else if (products?.length > 0) {
+      requestPurchase(itemSKUs[0]);
+      console.log('Products.length > 0. Trying to purchasing product...');
+    }
+    // If we are connected but have no products returned, try to get products and purchase.
+    else {
+      console.log('No products. Now trying to get some...');
+      try {
+        await getProducts(itemSKUs);
+        console.log('Products got: ', products);
+        requestPurchase(itemSKUs[0]);
+        console.log('Trying to purchase...');
+      } catch (error) {
+        setConnectionErrorMsg('Please check your internet connection.');
+        console.log('Everything failed :(. Error: ', error);
+      }
+      {
+      }
+    }
   };
 
   return {
-    connected,
-    products,
-    currentPurchase,
-    currentPurchaseError,
-    purchase,
-    isFullAppPurchased,
+    purchaseFullApp,
+    connectionErrorMsg,
   };
 };
 

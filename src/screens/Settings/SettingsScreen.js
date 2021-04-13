@@ -13,10 +13,8 @@ import {
 
 const SettingsScreen = ({
   navigation,
-  connected,
-  purchase,
-  currentPurchaseError,
   isFullAppPurchased,
+  setAndStoreFullAppPurchase,
   resetAllStats,
   resetAllMeditationCompletionTimes,
   meditations,
@@ -40,10 +38,8 @@ const SettingsScreen = ({
       <NotificationSetting />
 
       <PurchaseFullAppSetting
-        connected={connected}
         isFullAppPurchased={isFullAppPurchased}
-        purchase={purchase}
-        currentPurchaseError={currentPurchaseError}
+        setAndStoreFullAppPurchase={setAndStoreFullAppPurchase}
       />
 
       <ResetSettings

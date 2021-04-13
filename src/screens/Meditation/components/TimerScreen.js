@@ -20,7 +20,7 @@ const TimerScreen = ({
   updateMeditationCompletionTime,
   updateAllStats,
 }) => {
-  const [seconds, setSeconds] = useState(117);
+  const [seconds, setSeconds] = useState(0);
   const [showStopSoundBtn, setShowStopSoundBtn] = useState(false);
 
   const {playTrack, stopTrack, trackDuration} = useTrackPlayer();
