@@ -54,9 +54,9 @@ const Intro = ({navigation, route}) => {
 
       <MyText header>Pick a Time and Place</MyText>
       <MyText>
-        It's important to have a specific time and location. If just say you'll
-        meditate every day without specifics, it's all too wishy-washy and
-        you'll be less likely to do it.
+        It's important to have a specific time and location. If you just say
+        you'll meditate every day without specifics, it's all too wishy-washy
+        and you'll be less likely to do it.
       </MyText>
       <MyText>
         I personally meditate first thing in the morning in my bedroom.
