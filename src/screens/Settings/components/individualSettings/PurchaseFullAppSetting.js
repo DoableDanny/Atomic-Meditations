@@ -15,18 +15,20 @@ const PurchaseFullAppSetting = ({
   );
 
   return (
-    <>
-      {!isFullAppPurchased && (
-        <SettingScaffold
-          title="Purchase The Full App"
-          description="The first 3 days are free. The full app only costs a few dollars and helps to support the app's development!">
+    <SettingScaffold
+      title="Purchase The Full App"
+      description="The first 3 days are free. The full app only costs a few dollars and helps to support the app's development!">
+      {!isFullAppPurchased ? (
+        <>
           <Button title="Purchase Full App" handlePress={purchaseFullApp} />
           {connectionErrorMsg !== '' && (
             <Message danger>{connectionErrorMsg}</Message>
           )}
-        </SettingScaffold>
+        </>
+      ) : (
+        <Button title="Purchased" btnStyle="secondary" disabled />
       )}
-    </>
+    </SettingScaffold>
   );
 };
 

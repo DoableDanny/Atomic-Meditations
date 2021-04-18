@@ -3,7 +3,7 @@ import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 
 import ThemeContext from '../contexts/ThemeContext';
 
-const Button = ({title, handlePress, btnStyle, extraStyles}) => {
+const Button = ({title, handlePress, btnStyle, extraStyles, disabled}) => {
   let backgroundColor;
 
   const theme = useContext(ThemeContext);
@@ -27,7 +27,8 @@ const Button = ({title, handlePress, btnStyle, extraStyles}) => {
         ...extraStyles,
         backgroundColor: backgroundColor,
       }}
-      onPress={handlePress}>
+      onPress={handlePress}
+      disabled={disabled}>
       <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>
   );
